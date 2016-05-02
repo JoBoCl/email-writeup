@@ -1,0 +1,15 @@
+[0] Config.pm:327> INFO - This is Biber 2.2
+[0] Config.pm:330> INFO - Logfile is 'writeup.blg'
+[21] biber:286> INFO - === Sun May  1, 2016, 21:26:26
+[21] Biber.pm:334> INFO - Reading 'writeup.bcf'
+[73] Biber.pm:677> INFO - Found 7 citekeys in bib section 0
+[84] Biber.pm:3054> INFO - Processing section 0
+[92] Biber.pm:3193> INFO - Looking for bibtex format file 'references.bib' for section 0
+[92] bibtex.pm:1072> INFO - Decoding LaTeX character macros into UTF-8
+[93] bibtex.pm:935> INFO - Found BibTeX data source 'references.bib'
+[143] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[143] UCollate.pm:66> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[143] Biber.pm:2931> INFO - Sorting list 'nty' of type 'entry' with scheme 'nty' and locale 'en-US'
+[143] Biber.pm:2935> INFO - No sort tailoring available for locale 'en-US'
+[150] bbl.pm:505> INFO - Writing 'writeup.bbl' with encoding 'ascii'
+[151] bbl.pm:596> INFO - Output to writeup.bbl

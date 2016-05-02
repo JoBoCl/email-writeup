@@ -1,0 +1,78 @@
+\chapter{Definitions}
+\section{Parsing}
+In order to aid the parsing of the e-mail header, a combination of regular expressions and context-free grammars are needed, and defined as follows.
+\subsection{Alphabets and Languages}
+A set of symbols, usually denoted as $\Sigma$.  A language is a subset of $\mathcal P (\Sigma)$.
+
+The following special classes are provided as part of the Perl-Compatible Regular Expression library, and are subsets of the alphabet of Unicode characters, defined in \cite{php_group_gutmans_lerdorf_suraski_boerger}.
+\begin{description}
+\item[alnum] -- letters and digits
+\item[alpha] -- letters
+\item[ascii] -- the set of ASCII characters (character codes 0 --- 127)
+\item[blank] -- tabs or blank spaces
+\item[cntrl] -- control characters
+\item[digit] -- decimal digits
+\item[graph] -- printing characters (excluding spaces)
+\item[lower] -- lower-case letters
+\item[print] -- printing characters (including spaces)
+\item[punct] -- punctuation marks (printing characters excluding letters and spaces)
+\item[space] -- white space
+\item[upper] -- upper case letters
+\item[word] -- ``word'' characters (same 
+\item[xdigit] -- hexadecimal digits
+\end{description}
+\subsection{Regular Languages}
+Regular languages are defined as follows:
+\begin{itemize}
+\item $\emptyset$ and $\{\epsilon\}$ are regular languages
+\item for each $a\in\Sigma$, $\{a\}$ is a regular language
+\item if $A$ and $B$ are both regular, $A\cup B$, $A\cdot B$ and $A^*$ are regular languages.
+\subitem $A\cup B$ is the union of two languages.  $A\cup B = \{s : s\in A \lor s \in B\}$
+\subitem $A\cdot B$ is the concatentation of two languages.  $A\cdot B = \{ ab : a \in A, b \in B\}$
+\subitem $A^*$ is the Kleene star of a language. 
+\begin{align*}
+    A_0&=\{\epsilon\}\\
+    A_1&= A\\
+    A_{i+1} &= \{ aa' : a \in A_i, a'\in A\}\\
+    A^* &= \bigcup_{i\in\mathbb N} A_i
+\end{align*}
+\end{itemize}
+
+\subsection{Context-Free Grammars}
+A context-free grammar $G$ is defined as $G=\left(V,\Sigma, R,S\right)$ where:
+\begin{itemize}
+\item $V$ is a variable.
+\item $\Sigma$ is the alphabet of symbols.
+\item $R$ is a relation defined over $V\rightarrow \left(V\cup\Sigma\right)^*$
+\item $S$ is the start symbol
+\end{itemize}
+
+For example, $\langle \text S \rangle$ is the field name with the associated productions $\langle \text T \rangle \, \langle \text U \rangle$, where $T$ and $U$ are productions.
+\begin{bnf*}
+	\bnfprod{S}{\bnfpn{T} \bnfsp \bnfpn{U}}
+\end{bnf*}
+For example, $\langle \text S \rangle$ is the field name with the associated productions $a \, \langle \text U \rangle$, where $a$ is a terminal symbol.
+\begin{bnf*}
+	\bnfprod{S}{\bnftd{a} \bnfsp \bnfpn{U}}
+\end{bnf*}
+This is then extended in the following ways used in the RFC syntax.
+
+The square brackets are used to indicate an optional element.
+\begin{bnf*}
+\bnfprod{field}{\bnfpn{field-name} \bnfts{:} \bnfsp [ \bnfpn{field-body} ]\bnfsp \bnfts{CRLF}}\\
+\end{bnf*}
+
+The asterisk is used to indicate an element that appears 0 or more times. $n*$ is used to indicate a component that repeats $n$ or more times.
+\begin{bnf*}
+\bnfprod{fields}{\bnfpn{dates}\bnfsp \bnfpn{source} \bnfsp 1\!*\bnfpn{destination} \bnfsp * \bnfpn{optional-fields}}\\
+\end{bnf*}
+
+The hash-symbol is used to indicate an element that appears a certain number of times. $m*n$ is used to indicate a component that repeats at least $m$ times and at most $n$ times.
+\begin{bnf*}
+\bnfprod{fields}{\bnfpn{dates}\bnfsp \bnfpn{source} \bnfsp 1\!\#\bnfpn{destination} \bnfsp * \bnfpn{optional-fields}}\\
+\end{bnf*}
+
+The $|$ is used to indicate a selection between a pair of elements.
+\begin{bnf*}
+\bnfprod{fields}{\bnfts{a}\bnfor \bnfts{b}}\\
+\end{bnf*}

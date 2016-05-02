@@ -1,0 +1,84 @@
+\documentclass[10pt]{report}
+
+\title{Full steam ahead(ers), Captain!}
+\author{Joshua Clark}
+
+\usepackage[a4paper, left=1.25in, right=1.25in]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[citestyle=authoryear]{biblatex}
+\usepackage{backnaur}
+\usepackage{url}
+\bibliography{references}
+
+\usepackage{graphicx}
+\usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=true,pdfborder={0 0 0},colorlinks=false]{hyperref}
+\hypersetup{pdftitle={E-Mail Header Information}, pdfauthor={Joshua Clark}}
+
+\allowdisplaybreaks
+\begin{document}
+
+\thispagestyle{empty} 
+
+\begin{center}
+\begin{minipage}[c]{0.75\linewidth}%
+ \centering %University logo
+\includegraphics[width=0.4\linewidth]{oxford} 
+
+\vspace{2cm}
+ %Thesis title 
+{\uppercase{\Large{}E-Mail Header Information}{\Large \par}} \vspace{2cm}
+%Author's name 
+{\Large{}Joshua Clark}{\Large \par}
+
+\vspace{2cm}
+%Degree 
+{\Large{}Fourth Year Project Report for the Final Honour School of Computer Science}{\Large \par}
+
+ \vspace{2cm}
+ %Date 
+{\Large{}May 2016} %
+\end{minipage}
+\par\end{center}
+
+\clearpage{}
+
+
+\chapter*{Abstract}
+After extensive public education, fewer people are now clicking on links in e-mails that are disguised as phishing attacks, though the threat still remains, and considerable amounts of work has gone into exploring the demographics most likely to be targeted.  As the number of technically literate people grows, this sort of attack is increasingly unlikely to be successful.  Therefore, malicious entities are more likely to attempt to attack people based on the information leaked in their emails, and more specifically, the header, which most people are less likely to have some degree of control over.  
+
+This report discusses the existing research into the information leaked by e-mail headers and presents a tool to extract such information.
+
+\chapter*{Acknowledgements}
+I want to thank my supervisor, Jason Nurse for his assistance throughout the year; my tutor, Peter Jeavons, for his unfailing help and support throughout my time at Oxford.  I would like to acknowledge the support from my family and partner, Agata, for encouraging me.
+
+\tableofcontents
+\chapter{Introduction}
+E-mail systems are now so integrated into our modern lives that we struggle to cope without them.  E-mails ubiquity is also one of its largest weaknesses, a fact recognised very early on.  The first spam email was sent in 1978, as documented by \cite{templeton}.  After spam came phishing, first described by \cite{felix1987system}, with the first-real world use being against the customers of America Online, an ISP.  However, this still relies on the targets providing their data for malicious purposes.  One of the first e-mail viruses to spread was the Happy99 virus, which, other than propagating itself, had no other effect on infected systems.  Later viruses would target credit-card and banking information.  However, all of these techniques rely on the malicious email being received and its contents being opened.  There are fewer instances recorded, however, of the information flow being sent the other way.  A more subtle attack will focus on the information being sent from a legitimate user to an attacker.  It is easy enough for an individual to read an e-mail header and identify interesting elements, however, on a large scale, this quickly becomes more difficult.
+
+\section{Typical Use}
+
+On starting the application, the user will provide an e-mail that they wish to have analysed.  This will then be parsed, and relevant information presented in a table and other pictoral based representations.
+
+Lastly, an option is available to view the information about security vulnerabilities in a separate webpage.
+
+\section{Document Conventions}
+
+By convention, when class diagrams are used, ovals will represent
+traits/abstract classes, with rectangles representing concrete implementations.
+Objects are indicated using bold lines in the diagram, and are similar
+in behaviour to statically declared objects in many languages.
+
+Whenever \texttt{this font face} is used, the text is referring to
+either some implementation level object or class, or text entered into the application or used for testing.
+
+\include{existing-research}
+\include{design}
+\include{definitions}
+\include{implementation}
+\chapter{Results}
+
+\chapter{Conclusions}
+
+\printbibliography
+\end{document}

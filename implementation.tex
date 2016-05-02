@@ -1,0 +1,56 @@
+\chapter{Implementation}
+\section{Overview}
+The  analysis is implemented as a series of stages, firstly, the e-mail header is parsed, to extract important information to a predefined set of Java objects.  This is followed by the analysis phase, where the resultant data is passed to a set of analyser modules, each running separately.  Finally, this information is presented to the user.
+
+\section{Parsing}
+The parser's operation completes in a number of stages, following RFC822 (\cite{RFC0822}).  The header is divided up into two disjoint sections, the routing information (\texttt{Received from...}) and the key-value map of other pertinent information.
+\subsection{Received fields}
+The received fields are the most complicated part of the e-mail header to parse, as they are described by a non-trivial grammar, presented below.
+
+\begin{bnf*}
+\bnfprod{message}{\bnfpn{fields}\bnfsp *(\bnfts{CRLF} \bnfsp *\bnftd{text})}\\
+\bnfprod{fields}{\bnfpn{dates}\bnfsp \bnfpn{source} \bnfsp 1\!*\bnfpn{destination} \bnfsp * \bnfpn{optional-fields}}\\
+\bnfprod{field}{\bnfpn{field-name} \bnfts{:} \bnfsp [ \bnfpn{field-body} ]\bnfsp \bnfts{CRLF}}\\
+\bnfprod{field-name}{\bnftd{any word consisting of CHAR, excluding CTLs, SPACE, and ":"}} \\
+\bnfprod{field-body}{\bnfpn{field-body-contents} \bnfsp [\bnfts{CRLF} \bnfsp \bnftd{LWSP-char}\bnfsp  \bnfpn{field-body}]}\\
+\bnfprod{field-body-contents}{\bnftd{ASCII characters}}\\
+\bnfprod{source}{[\bnfpn{trace}] \bnfsp \bnfpn{originator} [\bnfpn{resent}]}\\
+\bnfprod{trace}{\bnfpn{return}\bnfsp 1\!* \bnfpn{received}}\\
+\bnfprod{return}{\bnfts{Return-path:}\bnfsp{} \bnfpn{route-addr}}\\
+\bnfprod{recieved}{\bnfts{Received:}}\\
+\bnfprod{cont.}{[\bnfts{from}\bnfsp\bnfpn{domain}]}\\
+\bnfprod{cont.}{[\bnfts{by}\bnfsp\bnfpn{domain}]}\\
+\bnfprod{cont.}{[\bnfts{via}\bnfsp\bnfpn{atom}]}\\
+\bnfprod{cont.}{*(\bnfts{with}\bnfsp\bnfpn{atom})}\\
+\bnfprod{cont.}{[\bnfts{id}\bnfsp\bnfpn{msg-id}]}\\
+\bnfprod{cont.}{[\bnfts{for}\bnfsp\bnfpn{addr-spec}]}\\
+\bnfprod{cont.}{\bnfts{;}\bnfsp\bnfpn{date-time}}\\
+\bnfprod{msg-id}{\bnfts{$<$}\bnfpn{addr-spec}\bnfts{$>$}}\\
+\bnfprod{addr-spec}{\bnfpn{local-part}\bnfsp\bnfts{@}\bnfsp\bnfpn{domain}}\\
+\bnfprod{local-part}{\bnfpn{word}\bnfsp *(\bnfts{.}\bnfsp\bnfpn{word})}\\
+\bnfprod{word}{\bnfpn{atom}\bnfor\bnfpn{quoted-string}}\\
+\bnfprod{domain}{\bnfpn{sub-domain} *(\bnfts{.}\bnfpn{sub-domain})}\\
+\bnfprod{sub-domain}{\bnfpn{domain-ref}\bnfor\bnfpn{domain-literal}}\\
+\bnfprod{domain-ref}{\bnfpn{atom}}\\
+\bnfprod{date-time}{[ \bnftd{day,} ] \bnfsp \bnftd{date}\bnfsp \bnftd{time}}\\
+\bnfprod{atom}{1\!*\bnftd{any character excluding specials, SPACE and CTLs}}\\
+\end{bnf*}
+
+An example field is as follows:
+\begin{verbatim}
+Received: from relay12.mail.ox.ac.uk (129.67.1.163) 
+    by HUB05.ad.oak.ox.ac.uk (163.1.154.231) 
+    with Microsoft SMTP Server id 14.3.169.1;
+    Sat, 14 Nov 2015 10:55:35 +0000
+\end{verbatim}
+\subsection{Other fields}
+These are read by a Python script and output to \texttt{STDOUT} to be read by the Java parser in a consistent format.  These are then loaded into a hashmap to allow quick lookup.
+
+\section{Analysis}
+After completing the parsing of the field, it is then ready to be analysed for different features.  All of the analysers implement the \texttt{HeaderAnalyser} interface, requiring information about the header to be analysed, and the currently running application.  All of these then implement the \texttt{Runnable} interface, allowing the class to be run asynchronously.
+
+\subsection{Text-Based}
+The fields from the header are analysed in different modules, with searches being performed for specific strings.  Of particular interest to Oxford Nexus users is the ``X-Oxford-Username'' string, containing the username of the individual that sent the message.  As confirming the username is a fairly standard security procedure for an IT support technician, having access to this information could allow a phisher in a later stage of an attack to increase their credibility.
+
+\subsection{Database Queries}
+Using the results gathered from the text-based queries and analysis of the received fields, relevant software configurations are extracted and queried against results in the CVE database.  These are then parsed and collated in preparation for displaying the outputs.
