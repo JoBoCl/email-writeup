@@ -1,4 +1,5 @@
 \chapter{Literature Review}\label{chap:exres}
+\section{General Data Leakage}
 
 \section{Existing Research}
 In \cite{nurse2015investigating}, the idea of using the information available in an email header was mooted, turning the previously standard threat of malware and phishing contained in received e-mails on its head, and instead presenting the threat in outgoing emails, and the personally identifying information (PII) contained therein.  Many emails leaked information about employers, e-mail services and applications used, and IP address.  Initial examination of a variety of e-mail headers found within my own inbox also revealed a plethora of information, including phone carriers, preferred languages, and system usernames.  It is conceivable therefore, that it is possible to automate at least part of this, and present the information that can be extracted, in a white-hat tool to allow people to audit the information that they are revealing.  The obvious malicious use-case involves using such information as part of a spear-phishing exercise.
@@ -36,16 +37,23 @@ The Microsoft Message Header Analyzer \footnote{Fount at \url{https://testconnec
 \subsection{CVE Mitre Lookup}
 There are a number of tools to look up CVEs\footnote{Fount at \url{https://www.cve.mitre.org/find/index.html}} and showing sample results in figure~\ref{fig:cve}.  There are a number of limitations to the results returned by the CVE Mitre tool.  Firstly, little context is returned: information about scores, the impact and access information are omitted, for example.  Additionally, the process of finding relevant vulnerabilities is further slowed down by the necessity to search for specific terms one at a time.  Additionally, automated tools exist at a consumer and enterprise level that will automatically scan a computer or network to detect installed software configurations and show the results.  
 
-For example, the now deprecated Norton Vulnerability, as shown in figure \ref{fig:nort}\footnote{Available at \url{community.norton.com}} lists the programs and the total number of  vulnerabilities found, providing more information on each program.  This method has the advantage of indicating the specific programs that have vulnerabilities, with the aim of allowing a user to update their vulnerable applications, however it does not allow for more fine-grained information.
 \begin{figure}
 \centering 
 \includegraphics[width=0.8\linewidth]{cve-lookup} 
 \label{fig:cve}
 \caption{CVE Search Results}
 \end{figure}
+
+\subsection{Norton Vulnerability Protection}
+
+For example, the now deprecated Norton Vulnerability Protection tool, as shown in figure \ref{fig:nort}\footnote{Available at \url{community.norton.com}} lists the programs and the total number of  vulnerabilities found, providing more information on each program.  This method has the advantage of indicating the specific programs that have vulnerabilities, with the aim of allowing a user to update their vulnerable applications, however it does not allow for more fine-grained information.
+
+
 \begin{figure}
 \centering 
 \includegraphics[width=0.8\linewidth]{norton-cve} 
 \label{fig:nort}
 \caption{Norton Vulnerability Protection Results}
 \end{figure}
+
+\section{Overview}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.5.1)  6 MAY 2016 18:00
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.5.1)  6 MAY 2016 18:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,7 +754,7 @@ LaTeX Info: Redefining \nameref on input line 21.
 \@outlinefile=\write4
 \openout4 = `writeup.out'.
 
- <oxford.png, id=132, 116.1138pt x 138.7584pt>
+ <oxford.png, id=136, 116.1138pt x 138.7584pt>
 File: oxford.png Graphic file (type png)
 
 <use oxford.png>
@@ -801,10 +801,10 @@ chapter 1.
 ]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 93.
+               Default added (so using `tbp') on input line 94.
 
 
-Overfull \hbox (5.22353pt too wide) in paragraph at lines 95--104
+Overfull \hbox (5.22353pt too wide) in paragraph at lines 96--105
  [][] 
  []
 
@@ -813,13 +813,13 @@ Overfull \hbox (5.22353pt too wide) in paragraph at lines 95--104
 
  (./existing-research.tex
 chapter 2.
-<google-header.png, id=237, 1039.885pt x 520.94624pt>
+<google-header.png, id=242, 1039.885pt x 520.94624pt>
 File: google-header.png Graphic file (type png)
  <use google-header.png>
 Package pdftex.def Info: google-header.png used on input line 19.
 (pdftex.def)             Requested size: 333.46758pt x 167.05595pt.
 
-<microsoft-header.png, id=241, 1925.1925pt x 1082.0425pt>
+<microsoft-header.png, id=246, 1925.1925pt x 1082.0425pt>
 File: microsoft-header.png Graphic file (type png)
 
 <use microsoft-header.png>
@@ -829,16 +829,16 @@ Package pdftex.def Info: microsoft-header.png used on input line 31.
 
 
 ]
-<cve-lookup.png, id=260, 1925.1925pt x 1082.0425pt>
+<cve-lookup.png, id=262, 1925.1925pt x 1082.0425pt>
 File: cve-lookup.png Graphic file (type png)
  <use cve-lookup.png>
-Package pdftex.def Info: cve-lookup.png used on input line 42.
+Package pdftex.def Info: cve-lookup.png used on input line 41.
 (pdftex.def)             Requested size: 333.46758pt x 187.41202pt.
 
-<norton-cve.png, id=261, 493.845pt x 373.395pt>
+<norton-cve.png, id=266, 493.845pt x 373.395pt>
 File: norton-cve.png Graphic file (type png)
  <use norton-cve.png>
-Package pdftex.def Info: norton-cve.png used on input line 48.
+Package pdftex.def Info: norton-cve.png used on input line 53.
 (pdftex.def)             Requested size: 333.46758pt x 252.1333pt.
 ) [10 <./google-header.png>] [11 <./microsoft-header.png> <./cve-lookup.png>] [
 12 <./norton-cve.png>]
@@ -1011,23 +1011,23 @@ chapter 6.
 
 
 ]
-Overfull \hbox (0.72112pt too wide) in paragraph at lines 125--125
+Overfull \hbox (0.72112pt too wide) in paragraph at lines 126--126
 []\OT1/cmr/m/n/10 D. Crocker. \OT1/cmr/m/it/10 STAN-DARD FOR THE FOR-MAT OF ARP
 A IN-TER-NET TEXT MES-SAGES\OT1/cmr/m/n/10 .
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 125.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 126.
 [21
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 125.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
  (./writeup.aux (./existing-research.aux) (./definitions.aux)
 (./implementation.aux) (./testing.aux) (./evaluation.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 125.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 125.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 126.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 126.
 Package rerunfilecheck Info: File `writeup.out' has not changed.
-(rerunfilecheck)             Checksum: 3D6D6DBE80D43B857EA183AF4C5F1664;3951.
+(rerunfilecheck)             Checksum: C00B9385626C4990E775063063F6D6D0;4174.
 Package logreq Info: Writing requests to 'writeup.run.xml'.
 \openout1 = `writeup.run.xml'.
 
@@ -1037,10 +1037,10 @@ Package logreq Info: Writing requests to 'writeup.run.xml'.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 18007 strings out of 493054
- 280253 string characters out of 6140587
- 802095 words of memory out of 5000000
- 21234 multiletter control sequences out of 15000+600000
+ 18009 strings out of 493054
+ 280287 string characters out of 6140587
+ 802116 words of memory out of 5000000
+ 21235 multiletter control sequences out of 15000+600000
  12207 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  56i,13n,66p,1233b,10205s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1059,10 +1059,10 @@ mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/
 type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols
 /msbm7.pfb>
-Output written on writeup.pdf (21 pages, 830109 bytes).
+Output written on writeup.pdf (21 pages, 830760 bytes).
 PDF statistics:
- 410 PDF objects out of 1000 (max. 8388607)
- 360 compressed objects within 4 object streams
- 78 named destinations out of 1000 (max. 500000)
- 282 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 416 PDF objects out of 1000 (max. 8388607)
+ 366 compressed objects within 4 object streams
+ 79 named destinations out of 1000 (max. 500000)
+ 290 words of extra memory for PDF output out of 10000 (max. 10000000)
 
