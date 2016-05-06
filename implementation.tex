@@ -1,4 +1,4 @@
-\chapter{Implementation}
+\chapter{Implementation}\label{chap:imp}
 \section{Overview}
 The  analysis is implemented as a series of stages, firstly, the e-mail header is parsed, to extract important information to a predefined set of Java objects.  This is followed by the analysis phase, where the resultant data is passed to a set of analyser modules, each running separately.  Finally, this information is presented to the user.
 
@@ -56,4 +56,10 @@ The fields from the header are analysed in different modules, with searches bein
 Using the results gathered from the text-based queries and analysis of the received fields, relevant software configurations are extracted and queried against results in the CVE database.  These are then parsed and collated in preparation for displaying the outputs.
 
 \section{Visualising the Results}
-Using a pre-existing template, the results from the e-mail analysis will be presented in a temporary webpage.
+Using a pre-existing template, the results from the e-mail analysis will be presented in a temporary webpage, which can then be saved independently.  Other than the referenced JavaScript libraries, the document requires no additional information or database access, allowing it to be quickly shared.
+
+\begin{algorithm}\caption{Words}
+	\KwIn{Input}
+	\KwOut{Output}
+	\ForEach{alkasdfj}{asdkf\;}
+\end{algorithm}

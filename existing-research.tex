@@ -1,6 +1,51 @@
-\chapter{Existing Research}
+\chapter{Literature Review}\label{chap:exres}
+
+\section{Existing Research}
 In \cite{nurse2015investigating}, the idea of using the information available in an email header was mooted, turning the previously standard threat of malware and phishing contained in received e-mails on its head, and instead presenting the threat in outgoing emails, and the personally identifying information (PII) contained therein.  Many emails leaked information about employers, e-mail services and applications used, and IP address.  Initial examination of a variety of e-mail headers found within my own inbox also revealed a plethora of information, including phone carriers, preferred languages, and system usernames.  It is conceivable therefore, that it is possible to automate at least part of this, and present the information that can be extracted, in a white-hat tool to allow people to audit the information that they are revealing.  The obvious malicious use-case involves using such information as part of a spear-phishing exercise.
 
 An alternative vulnerability presents itself in the information about systems that may be revealed.  Many email clients embed identifying information, and there are multiple databases available to allow specific threats to be identified.  This could allow a malicious entity to compromise the security of a target machine, and gain access to the data stored on that machine and available on any connected network devices.  Work started in \cite{joshi2013extracting} discusses the need to aggregate data about vulnerabilities from multiple sources to present a more complete and coherent picture, which is also likely to then contain more accurate data.
 
-\cite{Al-zarouni_tracinge-mail} presents an alternative set of results, describing how an individual can seek to protect themselves against malicious e-mails, using the contents of e-mail headers.  Various discrepancies between forged e-mail addressses and legitimate messages are described.
+\cite{Al-zarouni_tracinge-mail} presents an alternative set of results, describing how an individual can seek to protect themselves against malicious e-mails, using the contents of e-mail headers.  Various discrepancies between forged e-mail addresses and legitimate messages are described.
+
+\section{Existing Tools}
+
+Several tools already exist online to display the information that is found in e-mail headers.  Tools from Microsoft and Google exist to analyse the contents of e-mail headers.  These tools clearly display the information displayed in the header, showing the key-value pairs, and the set of servers the message transferred through and the protocols used.  
+
+\subsection{Google}
+The Google Apps Toolbox features an e-mail header analyser\footnote{Found at \url{https://toolbox.googleapps.com/apps/messageheader/}}. An example of the output of the utility is found in figure~\ref{fig:goo}.
+
+\begin{figure}
+\centering %University logo
+\includegraphics[width=0.8\linewidth]{google-header} 
+\label{fig:goo}
+\caption{Google Apps Toolbox E-mail header output}
+\end{figure}
+
+One of the most useful features from the Google Apps Toolbox is the information provided about the servers the message travelled through.  This tool shows the details of the time taken for each hop, and the protocol used.  
+
+\subsection{Microsoft}
+The Microsoft Message Header Analyzer \footnote{Fount at \url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and showing sample results in figure~\ref{fig:mic}
+
+\begin{figure}
+\centering 
+\includegraphics[width=0.8\linewidth]{microsoft-header} 
+\label{fig:mic}
+\caption{Microsoft E-mail header output}
+\end{figure}
+
+\subsection{CVE Mitre Lookup}
+There are a number of tools to look up CVEs\footnote{Fount at \url{https://www.cve.mitre.org/find/index.html}} and showing sample results in figure~\ref{fig:cve}.  There are a number of limitations to the results returned by the CVE Mitre tool.  Firstly, little context is returned: information about scores, the impact and access information are omitted, for example.  Additionally, the process of finding relevant vulnerabilities is further slowed down by the necessity to search for specific terms one at a time.  Additionally, automated tools exist at a consumer and enterprise level that will automatically scan a computer or network to detect installed software configurations and show the results.  
+
+For example, the now deprecated Norton Vulnerability, as shown in figure \ref{fig:nort}\footnote{Available at \url{community.norton.com}} lists the programs and the total number of  vulnerabilities found, providing more information on each program.  This method has the advantage of indicating the specific programs that have vulnerabilities, with the aim of allowing a user to update their vulnerable applications, however it does not allow for more fine-grained information.
+\begin{figure}
+\centering 
+\includegraphics[width=0.8\linewidth]{cve-lookup} 
+\label{fig:cve}
+\caption{CVE Search Results}
+\end{figure}
+\begin{figure}
+\centering 
+\includegraphics[width=0.8\linewidth]{norton-cve} 
+\label{fig:nort}
+\caption{Norton Vulnerability Protection Results}
+\end{figure}

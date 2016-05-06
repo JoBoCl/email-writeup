@@ -1,4 +1,5 @@
-\chapter{Definitions}
+\chapter{Definitions}\label{chap:def}
+The following covers the essential definitions required for the notation and concepts that will be discussed in this document.
 \section{Parsing}
 In order to aid the parsing of the e-mail header, a combination of regular expressions and context-free grammars are needed, and defined as follows.
 \subsection{Alphabets and Languages}
@@ -49,17 +50,17 @@ A context-free grammar $G$ is defined as $G=\left(V,\Sigma, R,S\right)$ where:
 
 For example, $\langle \text S \rangle$ is the field name with the associated productions $\langle \text T \rangle \, \langle \text U \rangle$, where $T$ and $U$ are productions.
 \begin{bnf*}
-	\bnfprod{S}{\bnfpn{T} \bnfsp \bnfpn{U}}
+	\bnfprod{S}{\bnfpn{T} \bnfsp{} \bnfpn{U}}
 \end{bnf*}
 For example, $\langle \text S \rangle$ is the field name with the associated productions $a \, \langle \text U \rangle$, where $a$ is a terminal symbol.
 \begin{bnf*}
-	\bnfprod{S}{\bnftd{a} \bnfsp \bnfpn{U}}
+	\bnfprod{S}{\bnftd{a} \bnfsp{} \bnfpn{U}}
 \end{bnf*}
 This is then extended in the following ways used in the RFC syntax.
 
 The square brackets are used to indicate an optional element.
 \begin{bnf*}
-\bnfprod{field}{\bnfpn{field-name} \bnfts{:} \bnfsp [ \bnfpn{field-body} ]\bnfsp \bnfts{CRLF}}\\
+\bnfprod{field}{\bnfpn{field-name} \bnfts{:} \bnfsp{}[ \bnfpn{field-body} ]\bnfsp{} \bnfts{CRLF}}\\
 \end{bnf*}
 
 The asterisk is used to indicate an element that appears 0 or more times. $n*$ is used to indicate a component that repeats $n$ or more times.
@@ -76,3 +77,4 @@ The $|$ is used to indicate a selection between a pair of elements.
 \begin{bnf*}
 \bnfprod{fields}{\bnfts{a}\bnfor \bnfts{b}}\\
 \end{bnf*}
+
