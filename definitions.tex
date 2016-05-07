@@ -78,3 +78,17 @@ The $|$ is used to indicate a selection between a pair of elements.
 \bnfprod{fields}{\bnfts{a}\bnfor \bnfts{b}}\\
 \end{bnf*}
 
+\section{Database Queries}
+The following notations will be used for the CVE database queries.
+\subsection{Set-Theoretic Operators}
+The operators $F\cup G$, $F \cap G$, $F\setminus G$ behave as is expected for these operators, resulting in the union, intersection and difference of the sets.  The only proviso being that the atrribute names must match.
+\subsection{Selection}
+\[\sigma_{\text{product}=\text{thunderbird}}D\]
+The above notation is used to indicate a search over the attribute named ``product'' for the string ``thunderbird'' in the database table $D$.  As a single database is only being used, this may be occasionally elided.  The output of this function is another object of the same type as $D$.
+
+\subsection{Projection}
+\[\pi_{\text{product}}D\]
+The above notation is used to indicate a projection on the attribute named ``product'' in the database table $D$.  The output of this function is another object of the same type as $D$.
+
+\subsection{Composition}
+The above functions results can be coposed repeatedly to produce more specific search queries.
