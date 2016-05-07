@@ -1,59 +1,135 @@
 \chapter{Literature Review}\label{chap:exres}
+
 \section{General Data Leakage}
 
-\section{Existing Research}
-In \cite{nurse2015investigating}, the idea of using the information available in an email header was mooted, turning the previously standard threat of malware and phishing contained in received e-mails on its head, and instead presenting the threat in outgoing emails, and the personally identifying information (PII) contained therein.  Many emails leaked information about employers, e-mail services and applications used, and IP address.  Initial examination of a variety of e-mail headers found within my own inbox also revealed a plethora of information, including phone carriers, preferred languages, and system usernames.  It is conceivable therefore, that it is possible to automate at least part of this, and present the information that can be extracted, in a white-hat tool to allow people to audit the information that they are revealing.  The obvious malicious use-case involves using such information as part of a spear-phishing exercise.
+The importance of data leakage is gaining more importance as the amount of
+information stored about entities increases, and the risks are being considered
+more carefully.  From the obvious ramifications for businesses discussed in
+\cite{papadimitriou2011data}: the loss of trust and legal action resulting from
+the discovery of leaking data, to the more personal issues discussed in
+\cite{irani2011modeling}: the possibility of using the discovered data to
+discover passwords or to physically identify them.  53\% of Americans can be
+uniquely identified by their birthdate, gender and location (city/town), with
+the number jumping 87\% when using birthdate, gender and zip code.
 
-An alternative vulnerability presents itself in the information about systems that may be revealed.  Many email clients embed identifying information, and there are multiple databases available to allow specific threats to be identified.  This could allow a malicious entity to compromise the security of a target machine, and gain access to the data stored on that machine and available on any connected network devices.  Work started in \cite{joshi2013extracting} discusses the need to aggregate data about vulnerabilities from multiple sources to present a more complete and coherent picture, which is also likely to then contain more accurate data.
+\subsection{Personal Data Leakage}
 
-\cite{Al-zarouni_tracinge-mail} presents an alternative set of results, describing how an individual can seek to protect themselves against malicious e-mails, using the contents of e-mail headers.  Various discrepancies between forged e-mail addresses and legitimate messages are described.
+From a persona perspective, there are a number of risks.  There are a
+significant number of social networks available, with an estimated 1.65 billion
+monthly active users, with a significantly higher proportion used in developed
+countries.  \cite{irani2011modeling} showed the rate at which the information
+gathered from social networks can be used to uniquely identify anindividual,
+with only 9 sites required before there's approximately a 70\% chance that both
+a person's hometown and name could be recovered.  A similar number of sites can
+give an aggregate normalised attribute leakage of 1, where the leakage is
+defined as \[\Psi(F_a,P)=\frac{\sum_{f_a\in F_a}\phi\left(f_a,
+			P\right)}{|F_a|}\text{ where }\phi\left(f_a, P\right) =
+	\left[f_a\in P\right]\]
+
+\subsection{Corporate Data Leakage}
+
+When companies receive user data, they often have a legal obligation to ensure
+that the data is protected and treated as confidential and sensitive.  When
+this trust is broken, there are often severe consequences, both from regulators
+and consumers moving their business to competitors.
+\cite{squicciarini2010preventing} considers one way that data may be leaked,
+despite care being taken to ensure that it is properly encrypted and stored. By
+failing to protect against the indices for databases being stored insecurely,
+customer data may be leaked.  Order-preserving encryption schemes, as decribed
+in \cite{agrawal2004order}, is one way of solving this problem, to an extent.
+
+\section{Data Leakage from E-Mails}
+
+In \cite{nurse2015investigating}, the idea of using the information available
+in an email header was mooted, turning the previously standard threat of
+malware and phishing contained in received e-mails on its head, and instead
+presenting the threat in outgoing emails, and the personally identifying
+information (PII) contained therein.  Many emails leaked information about
+employers, e-mail services and applications used, and IP address.  Initial
+examination of a variety of e-mail headers found within my own inbox also
+revealed a plethora of information, including phone carriers, preferred
+languages, and system usernames.  It is conceivable therefore, that it is
+possible to automate at least part of this, and present the information that
+can be extracted, in a white-hat tool to allow people to audit the information
+that they are revealing.  The obvious malicious use-case involves using such
+information as part of a spear-phishing exercise.
+
+An alternative vulnerability presents itself in the information about systems
+that may be revealed.  Many email clients embed identifying information, and
+there are multiple databases available to allow specific threats to be
+identified.  This could allow a malicious entity to compromise the security of
+a target machine, and gain access to the data stored on that machine and
+available on any connected network devices.  Work started in
+\cite{joshi2013extracting} discusses the need to aggregate data about
+vulnerabilities from multiple sources to present a more complete and coherent
+picture, which is also likely to then contain more accurate data.
+
+\cite{Al-zarouni_tracinge-mail} presents an alternative set of results,
+describing how an individual can seek to protect themselves against malicious
+e-mails, using the contents of e-mail headers.  Various discrepancies between
+forged e-mail addresses and legitimate messages are described.
 
 \section{Existing Tools}
 
-Several tools already exist online to display the information that is found in e-mail headers.  Tools from Microsoft and Google exist to analyse the contents of e-mail headers.  These tools clearly display the information displayed in the header, showing the key-value pairs, and the set of servers the message transferred through and the protocols used.  
+Several tools already exist online to display the information that is found in
+e-mail headers.  Tools from Microsoft and Google exist to analyse the contents
+of e-mail headers.  These tools clearly display the information displayed in
+the header, showing the key-value pairs, and the set of servers the message
+transferred through and the protocols used.  
 
 \subsection{Google}
-The Google Apps Toolbox features an e-mail header analyser\footnote{Found at \url{https://toolbox.googleapps.com/apps/messageheader/}}. An example of the output of the utility is found in figure~\ref{fig:goo}.
 
-\begin{figure}
-\centering %University logo
-\includegraphics[width=0.8\linewidth]{google-header} 
-\label{fig:goo}
-\caption{Google Apps Toolbox E-mail header output}
-\end{figure}
+The Google Apps Toolbox features an e-mail header analyser\footnote{Found at
+	\url{https://toolbox.googleapps.com/apps/messageheader/}}. An example
+of the output of the utility is found in figure~\ref{fig:goo}.
 
-One of the most useful features from the Google Apps Toolbox is the information provided about the servers the message travelled through.  This tool shows the details of the time taken for each hop, and the protocol used.  
+\begin{figure} \centering %University logo
+	\includegraphics[width=0.8\linewidth]{google-header} \label{fig:goo}
+	\caption{Google Apps Toolbox E-mail header output} \end{figure}
+
+One of the most useful features from the Google Apps Toolbox is the information
+provided about the servers the message travelled through.  This tool shows the
+details of the time taken for each hop, and the protocol used.  
 
 \subsection{Microsoft}
-The Microsoft Message Header Analyzer \footnote{Fount at \url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and showing sample results in figure~\ref{fig:mic}
 
-\begin{figure}
-\centering 
-\includegraphics[width=0.8\linewidth]{microsoft-header} 
-\label{fig:mic}
-\caption{Microsoft E-mail header output}
-\end{figure}
+The Microsoft Message Header Analyzer \footnote{Fount at
+	\url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and
+showing sample results in figure~\ref{fig:mic}
+
+\begin{figure} \centering
+	\includegraphics[width=0.8\linewidth]{microsoft-header} \label{fig:mic}
+	\caption{Microsoft E-mail header output} \end{figure}
 
 \subsection{CVE Mitre Lookup}
-There are a number of tools to look up CVEs\footnote{Fount at \url{https://www.cve.mitre.org/find/index.html}} and showing sample results in figure~\ref{fig:cve}.  There are a number of limitations to the results returned by the CVE Mitre tool.  Firstly, little context is returned: information about scores, the impact and access information are omitted, for example.  Additionally, the process of finding relevant vulnerabilities is further slowed down by the necessity to search for specific terms one at a time.  Additionally, automated tools exist at a consumer and enterprise level that will automatically scan a computer or network to detect installed software configurations and show the results.  
 
-\begin{figure}
-\centering 
-\includegraphics[width=0.8\linewidth]{cve-lookup} 
-\label{fig:cve}
-\caption{CVE Search Results}
-\end{figure}
+There are a number of tools to look up CVEs\footnote{Fount at
+	\url{https://www.cve.mitre.org/find/index.html}} and showing sample
+results in figure~\ref{fig:cve}.  There are a number of limitations to the
+results returned by the CVE Mitre tool.  Firstly, little context is returned:
+information about scores, the impact and access information are omitted, for
+example.  Additionally, the process of finding relevant vulnerabilities is
+further slowed down by the necessity to search for specific terms one at a
+time.  Additionally, automated tools exist at a consumer and enterprise level
+that will automatically scan a computer or network to detect installed software
+configurations and show the results.  
+
+\begin{figure} \centering \includegraphics[width=0.8\linewidth]{cve-lookup}
+	\label{fig:cve} \caption{CVE Search Results} \end{figure}
 
 \subsection{Norton Vulnerability Protection}
 
-For example, the now deprecated Norton Vulnerability Protection tool, as shown in figure \ref{fig:nort}\footnote{Available at \url{community.norton.com}} lists the programs and the total number of  vulnerabilities found, providing more information on each program.  This method has the advantage of indicating the specific programs that have vulnerabilities, with the aim of allowing a user to update their vulnerable applications, however it does not allow for more fine-grained information.
+For example, the now deprecated Norton Vulnerability Protection tool, as shown
+in figure \ref{fig:nort}\footnote{Available at \url{community.norton.com}}
+lists the programs and the total number of  vulnerabilities found, providing
+more information on each program.  This method has the advantage of indicating
+the specific programs that have vulnerabilities, with the aim of allowing a
+user to update their vulnerable applications, however it does not allow for
+more fine-grained information.
 
 
-\begin{figure}
-\centering 
-\includegraphics[width=0.8\linewidth]{norton-cve} 
-\label{fig:nort}
-\caption{Norton Vulnerability Protection Results}
+\begin{figure} \centering \includegraphics[width=0.8\linewidth]{norton-cve}
+	\label{fig:nort} \caption{Norton Vulnerability Protection Results}
 \end{figure}
 
 \section{Overview}
