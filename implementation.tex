@@ -52,6 +52,30 @@ After completing the parsing of the field, it is then ready to be analysed for d
 \subsection{Text-Based}
 The fields from the header are analysed in different modules, with searches being performed for specific strings.  Of particular interest to Oxford Nexus users is the ``X-Oxford-Username'' string, containing the username of the individual that sent the message.  As confirming the username is a fairly standard security procedure for an IT support technician, having access to this information could allow a phisher in a later stage of an attack to increase their credibility.
 
+In some cases, the likely keys that are being searched for are known in advance, and can then be checked against the hash-map of entries.
+
+An example of this approach is for the specific check for an Oxford username:
+
+\begin{algorithm}
+	\KwIn{Header}
+	\KwOut{Any Oxford-based username that is found}
+	\If{\texttt{X-Oxford-Username} $\in$ Header.KvMap}{ \Return{Header.KvMap(X-Oxford-Username)}\; }
+	\caption{Lookup based on a known key}
+\end{algorithm}
+
+Alternatively, we may be interested in properties of the keys, necessitating a search over the keys.
+
+\begin{algorithm}
+	\KwIn{Header}
+	\KwOut{Any information relating to Microsoft Exchange that is found}
+	\ForEach{Key $k\in $ Header.KvMap}{
+		\If{$k$ starts-with \texttt{X-MS-Exchange}}{
+			\Return{Header.KvMap($k$)}\;
+		}
+	}
+	\caption{Lookup based on a key property}
+\end{algorithm}
+
 \subsection{Database Queries}
 Using the results gathered from the text-based queries and analysis of the received fields, relevant software configurations are extracted and queried against results in the CVE database.  These are then parsed and collated in preparation for displaying the outputs.
 
