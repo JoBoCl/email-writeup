@@ -79,6 +79,22 @@ Alternatively, we may be interested in properties of the keys, necessitating a s
 \subsection{Database Queries}
 Using the results gathered from the text-based queries and analysis of the received fields, relevant software configurations are extracted and queried against results in the CVE database.  These are then parsed and collated in preparation for displaying the outputs.
 
+As more information is found, more details of products used will also become available.  These are added asynchronously.
+
+\begin{algorithm}
+	\KwIn{Header product name $p$}
+	\KwOut{CVE Entries}
+	cve-list $\gets\emptyset$\;
+	\ForEach{$s\in\sigma_{\text{vector}\neq\text{LOCAL}}\sigma_{\text{product}=p} D$}{
+		cve-builder$\gets$blank cve\;
+		cve-builder.id$\gets\pi_{\text{CVE-ID}} s$\;
+		$\ldots$ -- extract other features\;
+		cve-list $\gets$ cve-list${}\cup{}$make(cve-builder)\;
+	}
+	\Return{cve-list}\;
+	\caption{Extracting CVE entries}
+\end{algorithm}
+
 \section{Visualising the Results}
 Using a pre-existing template, the results from the e-mail analysis will be presented in a temporary webpage, which can then be saved independently.  Other than the referenced JavaScript libraries, the document requires no additional information or database access, allowing it to be quickly shared.
 
