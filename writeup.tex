@@ -1,128 +1,189 @@
 \documentclass[twoside,10pt]{scrreprt}
 
-\title{Full steam ahead(ers), Captain!}
-\author{Joshua Clark}
+\title{Full steam ahead(ers), Captain!} \author{Joshua Clark}
 
-\usepackage[a4paper, left=1.25in, right=1.25in]{geometry}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage[citestyle=authoryear]{biblatex}
-\usepackage{backnaur}
-\usepackage{url}
-\usepackage{algorithm2e}
-\bibliography{references}
-\usepackage{booktabs}
+\usepackage[a4paper, left=1.25in, right=1.25in]{geometry} \usepackage{amsmath}
+\usepackage{amssymb} \usepackage[citestyle=authoryear]{biblatex}
+\usepackage{backnaur} \usepackage{url} \usepackage{algorithm2e}
+\bibliography{references} \usepackage{booktabs}
 
 \usepackage{graphicx}
-\usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=true,pdfborder={0 0 0},colorlinks=false]{hyperref}
-\hypersetup{pdftitle={E-Mail Header Information}, pdfauthor={Joshua Clark}}
+\usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=true,pdfborder={0
+0 0},colorlinks=false]{hyperref} \hypersetup{pdftitle={E-Mail Header
+Information}, pdfauthor={Joshua Clark}}
 
-\allowdisplaybreaks
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{epigraph}
+\usepackage{framed}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\lstset{basicstyle=\ttfamily, escapeinside=||, columns=flexible}
+
+\allowdisplaybreaks{}
+
 \begin{document}
 
-\thispagestyle{empty} 
+  \thispagestyle{empty}
 
-\begin{center}
-\begin{minipage}[c]{0.75\linewidth}%
- \centering %University logo
-\includegraphics[width=0.4\linewidth]{oxford} 
+  \begin{center} \begin{minipage}[c]{0.75\linewidth} \centering %University
+  \includegraphics[width=0.4\linewidth]{oxford}
 
-\vspace{2cm}
- %Thesis title 
-{\uppercase{\Large{}E-Mail Header Information}{\Large \par}} \vspace{2cm}
-%Author's name 
-{\Large{}Joshua Clark}{\Large \par}
+      \vspace{2cm} %Thesis title
+      {\uppercase{\Large{}E-Mail Header Information}{\Large \par}} \vspace{2cm}
+      %Author's name
+      {\Large{}Joshua Clark}{\Large \par}
 
-\vspace{2cm}
-%Degree 
-{\Large{}Fourth Year Project Report for the Final Honour School of Computer Science}{\Large \par}
+      \vspace{2cm} %Degree
+      {\Large{}Fourth Year Project Report for the Final Honour School of
+      Computer Science}{\Large \par}
 
- \vspace{2cm}
- %Date 
-{\Large{}May 2016} %
-\end{minipage}
-\par\end{center}
+      \vspace{2cm} %Date
+      {\Large{}May 2016} %
+    \end{minipage} \par\end{center}
 
-\clearpage{}
+    \clearpage{}
+
+    \chapter*{Abstract}
+
+    After extensive public education, fewer people are now clicking on links in
+    e-mails that are disguised as phishing attacks, though the threat still
+    remains, and considerable amounts of work has gone into exploring the
+    demographics most likely to be targeted.  As the number of technically
+    literate people grows, this sort of attack is increasingly unlikely to be
+    successful.  Therefore, malicious entities are more likely to attempt to
+    attack people based on the information leaked in their emails, and more
+    specifically, the header, which most people are less likely to have some
+    degree of control over.
+
+    The risks are not just limited to individual users, and at a corporate
+    level, the risks posed by leaking information through e-mails could be even
+    greater: e-mail headers can reveal the internal network structure of a
+    company's computer systems as well as the different pieces of software that
+    are running inside the system.  Extracting the social information could be
+    of great value for executing a phishing atack, however, there is also value
+    in determining the specific weaknesses in a system.  This can be aided
+    through the use of vulnerability databases.
+
+    This report discusses the existing research into the information leaked by
+    e-mail headers and presents a tool to extract such information.
+
+    \chapter*{Acknowledgements}
+
+    I want to thank my supervisor, Dr Jason R.C. Nurse for his assistance
+    throughout the year; my tutor, Professor Peter Jeavons, for his unfailing
+    help and support throughout my time at Oxford.  I would like to acknowledge
+    the support from my family and partner, Agata, for encouraging me.
+
+    \tableofcontents \listoftables \listoffigures \listofalgorithms
+
+    \chapter{Introduction}
+
+    \section{Motivation}
+
+    E-mail systems are now so integrated into our modern lives that we struggle to
+    cope without them.  E-mails ubiquity is also one of its largest weaknesses, a
+    fact recognised very early on.  The first spam email was sent in 1978, as
+    documented by~\cite{templeton}.  After spam came phishing, first described
+    by~\cite{felix1987system}, with the first-real world use being against the
+    customers of America Online, an ISP.\@  However, this still relies on the
+    targets providing their data for malicious purposes. One of the first e-mail
+    viruses to spread was the Happy99 virus, which, other than propagating itself,
+    had no other effect on infected systems. Later viruses would target credit-card
+    and banking information. However, all of these techniques rely on the malicious
+    email being received and its contents being opened.  There are fewer instances
+    recorded, however, of the information flow being sent the other way.  A more
+    subtle attack will focus on the information being sent from a legitimate user to
+    an attacker. It is easy enough for an individual to read an e-mail header and
+    identify interesting elements, however, on a large scale, this quickly becomes
+    more difficult.
+
+    \section{Aims and Objectives}
+
+    This project aims to develop a tool that can be used as described above to
+    automatically extract information from e-mail headers and analyse its results to
+    display the personal information continaed within an e-mail's header, as well as
+    information about the software configurations that may be found on a user's
+    computer, or the servers used to send their e-mail.
+
+    The program would be expected to satisfy the following minimal requirements
+    in order for it to be considered successful: \begin{description} \item
+    [{Accuracy}] --- any information produced by the parser should be reflective
+    of the input e-mail
+
+    \item [{Representation}] --- the produced visualisation should be intuitive
+    to read: each element should be presented separately from the others, and
+    clearly labelled.
+
+    \item [{Portability}] --- the visual output produced by the program should
+    be available to the user in a variety of formats.
+
+    \item [{Interactivity}] --- the program should produce sensible warnings
+    when an e-mail that is not possible to parse has been entered.
+  \end{description}
+
+  \section{Typical Use}
+
+  On starting the application, the user will provide an e-mail that they wish
+  to have analysed.  This will then be parsed, and some relevant information
+  presented in a table.
+
+  Lastly, an option is available to view the information about security
+  vulnerabilities in a separate webpage, forming the main output of the
+  program.
+
+  The resultant webpage will be structured as in table~\ref{tab:format}.  It
+  will then be possible for the user to click on the representations of the
+  devices to find out more information.  It will also be possible to search
+  within the vulnerability list to find more information, as well as filter by
+  impact and availability details.
+
+  \begin{table}[] \centering \begin{tabular}{@{}clllll@{}} \toprule
+    \multicolumn{6}{c}{Email Header Information}                                                                                                                                                                                                                                      \\
+    \midrule \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Information\\
+    (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender
+    Software} & \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Usernames\\
+    (Presented as a list with likely organisation)\end{tabular}} \\
+    \multicolumn{6}{c}{Graphical representation of devices used to deliver the
+    e-mail}                                                                                                                                                                                                \\
+    \multicolumn{6}{c}{List of derived information including found software and
+    similar information}                                                                                                                                                                                  \\
+    \multicolumn{6}{c}{Histograms for vulnerability scores, separated by
+    product}                                                  \\
+    \multicolumn{6}{c}{Searchable and filterable table of discovered CVEs}                                                                                                                                                                                                            \\
+    \bottomrule \end{tabular} \caption{Format of presented data found in e-mail
+    header}\label{tab:format} \end{table}
+
+    \section{Document Conventions}
+
+    By convention, when class diagrams are used, ovals will represent
+    traits/abstract classes, with rectangles representing concrete
+    implementations. Objects are indicated using bold lines in the diagram, and
+    are similar in behaviour to statically declared objects in many languages.
+
+    Whenever \texttt{this font face} is used, the text is referring to either
+    some implementation level object or class, or text entered into the
+    application or used for testing.
 
 
-\chapter*{Abstract}
-After extensive public education, fewer people are now clicking on links in e-mails that are disguised as phishing attacks, though the threat still remains, and considerable amounts of work has gone into exploring the demographics most likely to be targeted.  As the number of technically literate people grows, this sort of attack is increasingly unlikely to be successful.  Therefore, malicious entities are more likely to attempt to attack people based on the information leaked in their emails, and more specifically, the header, which most people are less likely to have some degree of control over.  
+    \section{Structure}
 
-This report discusses the existing research into the information leaked by e-mail headers and presents a tool to extract such information.
+    Chapter~\ref{chap:exres} begins by discussing the existing research on
+    the subject as well as existing publicly-available tools to analyse
+    headers.  I then use these as a basis to discuss features that would be
+    expected to appear in a header analyser looking for leaked information
+    and vulnerabilities.
 
-\chapter*{Acknowledgements}
-I want to thank my supervisor, Jason Nurse for his assistance throughout the year; my tutor, Peter Jeavons, for his unfailing help and support throughout my time at Oxford.  I would like to acknowledge the support from my family and partner, Agata, for encouraging me.
+    The implementation's high-level structure and details will be discussed in
+    Chapter~\ref{chap:imp}, and algorithms presented in pseudo-code where
+    necessary.  A full listing will be presented at the end of this document in
+    an appendix. The results of the analysis of the headers will be discussed in
+    Chapter~\ref{chap:test}, beginning with the methodology used, and presenting
+    a number of results. Finally, Chapter~\ref{chap:conc} will discuss my
+    conclusions and areas of further improvement.
 
-\tableofcontents
-\listoftables
-\listoffigures
-\listofalgorithms
+    \include{existing-research} \include{implementation}
+    \include{testing} \include{evaluation}
 
-\chapter{Introduction}
-E-mail systems are now so integrated into our modern lives that we struggle to cope without them.  E-mails ubiquity is also one of its largest weaknesses, a fact recognised very early on.  The first spam email was sent in 1978, as documented by \cite{templeton}.  After spam came phishing, first described by \cite{felix1987system}, with the first-real world use being against the customers of America Online, an ISP.  However, this still relies on the targets providing their data for malicious purposes.  One of the first e-mail viruses to spread was the Happy99 virus, which, other than propagating itself, had no other effect on infected systems.  Later viruses would target credit-card and banking information.  However, all of these techniques rely on the malicious email being received and its contents being opened.  There are fewer instances recorded, however, of the information flow being sent the other way.  A more subtle attack will focus on the information being sent from a legitimate user to an attacker.  It is easy enough for an individual to read an e-mail header and identify interesting elements, however, on a large scale, this quickly becomes more difficult.
-
-\section{Motivation}
-This project aims to develop a tool that can be used as described above to automatically extract information from e-mail headers and analyse its results to display the personal information continaed within an e-mail's header, as well as information about the software configurations that may be found on a user's computer, or the servers used to send their e-mail.
-
-\section{Structure}
-Chapter~\ref{chap:exres} begins by discussing the existing research on the subject as well as existing publicly-available tools to analyse headers.  I then use these as a basis to discuss features that would be expected to appear in a header analyser looking for leaked information and vulnerabilities.
-
-Chapter~\ref{chap:def} sets out essential terminology that will be used in this report and is of particular relevance when discussing the implementation, which is covered in chapter~\ref{chap:imp}.  The implementation's high-level structure and details will be discussed, and algorithms presented in pseudo-code where necessary.  A full listing will be presented at the end of this document in an appendix.
-
-The results of the analysis of the headers will be discussed in~\ref{chap:test}, beginning with the methodology used, and presenting a number of results.
-
-Finally, chapter~\ref{chap:conc} will discuss my conclusions and areas of further improvement.
-
-\section{Aims and Objectives}
-
-The program would be expected to satisfy the following minimal requirements in order for it to be considered successful: 
-\begin{description}
-\item [{Accuracy}]  -- any information produced by the parser should be reflective of the input e-mail
-\item [{Representation}] -- the produced visualisation should be intuitive to read: each element should be presented separately from the others, and clearly labelled. 
-\item [{Portability}] -- the visual output produced by the program should be available to the user in a variety of formats. 
-\item [{Interactivity}] the program should produce sensible warnings when
-an e-mail that is not possible to parse has been entered. 
-\end{description}
-
-\section{Typical Use}
-
-On starting the application, the user will provide an e-mail that they wish to have analysed.  This will then be parsed, and some relevant information presented in a table. 
-
-Lastly, an option is available to view the information about security vulnerabilities in a separate webpage, forming the main output of the program.
-
-The resultant webpage will be structured as in table~\ref{tab:format}.  It will then be possible for the user to click on the representations of the devices to find out more information.  It will also be possible to search within the vulnerability list to find more information, as well as filter by impact and availability details.
-
-\begin{table}[]
-\centering
-\begin{tabular}{@{}clllll@{}}
-\toprule
-\multicolumn{6}{c}{Email Header Information}                                                                                                                                                                                                                                      \\ \midrule
-\multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Information\\ (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender Software} & \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Usernames\\ (Presented as a list with likely organisation)\end{tabular}} \\
-\multicolumn{6}{c}{Graphical representation of devices used to deliver the e-mail}                                                                                                                                                                                                \\
-\multicolumn{6}{c}{List of derived information including found software and similar information}                                                                                                                                                                                  \\
-\multicolumn{6}{c}{Histograms for vulnerability scores, separated by product}                                                  \\
-\multicolumn{6}{c}{Searchable and filterable table of discovered CVEs}                                                                                                                                                                                                            \\ \bottomrule
-\end{tabular}
-\caption{Format of presented data found in e-mail header}
-\label{tab:format}
-\end{table}
-
-\section{Document Conventions}
-
-By convention, when class diagrams are used, ovals will represent
-traits/abstract classes, with rectangles representing concrete implementations.
-Objects are indicated using bold lines in the diagram, and are similar
-in behaviour to statically declared objects in many languages.
-
-Whenever \texttt{this font face} is used, the text is referring to
-either some implementation level object or class, or text entered into the application or used for testing.
-
-\include{existing-research}
-\include{definitions}
-\include{implementation}
-\include{testing}
-\include{evaluation}
-
-\printbibliography
-\end{document}
+    \printbibliography{} \end{document}
