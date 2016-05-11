@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.5.1)  6 MAY 2016 18:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2016.5.1)  9 MAY 2016 15:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -754,7 +754,7 @@ LaTeX Info: Redefining \nameref on input line 21.
 \@outlinefile=\write4
 \openout4 = `writeup.out'.
 
- <oxford.png, id=136, 116.1138pt x 138.7584pt>
+ <oxford.png, id=172, 116.1138pt x 138.7584pt>
 File: oxford.png Graphic file (type png)
 
 <use oxford.png>
@@ -775,84 +775,91 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 ] [3
 
-] (./writeup.toc)
+] (./writeup.toc [4
+
+])
 \tf@toc=\write5
 \openout5 = `writeup.toc'.
 
- [4
-
-]
+ [5]
 (./writeup.lot)
 \tf@lot=\write6
 \openout6 = `writeup.lot'.
 
- [5
+ [6
 
 ] (./writeup.lof)
 \tf@lof=\write7
 \openout7 = `writeup.lof'.
 
- [6
+ [7
+
+] (./writeup.loa)
+\tf@loa=\write8
+\openout8 = `writeup.loa'.
+
+ [8
 
 ]
 chapter 1.
-[7
+[9
 
 ]
 
 LaTeX Warning: No positions in optional float specifier.
-               Default added (so using `tbp') on input line 94.
+               Default added (so using `tbp') on input line 96.
 
 
-Overfull \hbox (5.22353pt too wide) in paragraph at lines 96--105
+Overfull \hbox (5.22353pt too wide) in paragraph at lines 98--107
  [][] 
  []
 
-[8]
+[10]
 \openout2 = `existing-research.aux'.
 
  (./existing-research.tex
 chapter 2.
-<google-header.png, id=242, 1039.885pt x 520.94624pt>
+[11
+
+
+] <google-header.png, id=325, 1039.885pt x 520.94624pt>
 File: google-header.png Graphic file (type png)
- <use google-header.png>
-Package pdftex.def Info: google-header.png used on input line 19.
+
+<use google-header.png>
+Package pdftex.def Info: google-header.png used on input line 87.
 (pdftex.def)             Requested size: 333.46758pt x 167.05595pt.
 
-<microsoft-header.png, id=246, 1925.1925pt x 1082.0425pt>
+<microsoft-header.png, id=329, 1925.1925pt x 1082.0425pt>
 File: microsoft-header.png Graphic file (type png)
 
 <use microsoft-header.png>
-Package pdftex.def Info: microsoft-header.png used on input line 31.
+Package pdftex.def Info: microsoft-header.png used on input line 101.
 (pdftex.def)             Requested size: 333.46758pt x 187.41202pt.
- [9
-
-
-]
-<cve-lookup.png, id=262, 1925.1925pt x 1082.0425pt>
+ [12 <./google-header.png>]
+<cve-lookup.png, id=344, 1925.1925pt x 1082.0425pt>
 File: cve-lookup.png Graphic file (type png)
  <use cve-lookup.png>
-Package pdftex.def Info: cve-lookup.png used on input line 41.
+Package pdftex.def Info: cve-lookup.png used on input line 117.
 (pdftex.def)             Requested size: 333.46758pt x 187.41202pt.
 
-<norton-cve.png, id=266, 493.845pt x 373.395pt>
+<norton-cve.png, id=348, 493.845pt x 373.395pt>
 File: norton-cve.png Graphic file (type png)
  <use norton-cve.png>
-Package pdftex.def Info: norton-cve.png used on input line 53.
+Package pdftex.def Info: norton-cve.png used on input line 131.
 (pdftex.def)             Requested size: 333.46758pt x 252.1333pt.
-) [10 <./google-header.png>] [11 <./microsoft-header.png> <./cve-lookup.png>] [
-12 <./norton-cve.png>]
+) [13 <./microsoft-header.png>] [14 <./cve-lookup.png> <./norton-cve.png>]
 \openout2 = `definitions.aux'.
 
- (./definitions.tex
+
+(./definitions.tex
 chapter 3.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 28.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 29.
 (/usr/share/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 28.
- [13
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 29.
+ [15
 
 
 
@@ -869,9 +876,9 @@ Class scrreprt Warning: Usage of deprecated font command `\it'!
 (scrreprt)              Note also, that KOMA-Script will remove the definition
 (scrreprt)              of `\it' anytime until release of about version 3.20.
 (scrreprt)              But for now, KOMA-Script will replace deprecated `\it'
-(scrreprt)              by `\normalfont \itshape ' on input line 57.
+(scrreprt)              by `\normalfont \itshape ' on input line 58.
 
-[14]) [15]
+[16]) [17]
 \openout2 = `implementation.aux'.
 
  (./implementation.tex
@@ -988,16 +995,16 @@ Class scrreprt Warning: Usage of deprecated font command `\it'!
 (scrreprt)              But for now, KOMA-Script will replace deprecated `\it'
 (scrreprt)              by `\normalfont \itshape ' on input line 36.
 
-[16
+[18
 
 
 
-] [17]) [18]
+] [19]) [20]
 \openout2 = `testing.aux'.
 
  (./testing.tex
 chapter 5.
-) [19
+) [21
 
 
 
@@ -1006,28 +1013,23 @@ chapter 5.
 
  (./evaluation.tex
 chapter 6.
-) [20
+) [22
 
 
 
 ]
-Overfull \hbox (0.72112pt too wide) in paragraph at lines 126--126
-[]\OT1/cmr/m/n/10 D. Crocker. \OT1/cmr/m/it/10 STAN-DARD FOR THE FOR-MAT OF ARP
-A IN-TER-NET TEXT MES-SAGES\OT1/cmr/m/n/10 .
- []
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 126.
-[21
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 128.
+ [23
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 126.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 128.
  (./writeup.aux (./existing-research.aux) (./definitions.aux)
 (./implementation.aux) (./testing.aux) (./evaluation.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 126.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 126.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 128.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 128.
 Package rerunfilecheck Info: File `writeup.out' has not changed.
-(rerunfilecheck)             Checksum: C00B9385626C4990E775063063F6D6D0;4174.
+(rerunfilecheck)             Checksum: 8AAB5F12910F4002D3CD9F08851614F5;5481.
 Package logreq Info: Writing requests to 'writeup.run.xml'.
 \openout1 = `writeup.run.xml'.
 
@@ -1037,32 +1039,34 @@ Package logreq Info: Writing requests to 'writeup.run.xml'.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 18009 strings out of 493054
- 280287 string characters out of 6140587
- 802116 words of memory out of 5000000
- 21235 multiletter control sequences out of 15000+600000
- 12207 words of font info for 47 fonts, out of 8000000 for 9000
+ 18049 strings out of 493054
+ 280946 string characters out of 6140587
+ 802207 words of memory out of 5000000
+ 21249 multiletter control sequences out of 15000+600000
+ 12375 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 56i,13n,66p,1233b,10205s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 56i,13n,66p,1233b,10207s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pf
 b></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/publ
-ic/amsfonts/cm/cmmi7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmr10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
-/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm
-/cmssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/
-type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmtt8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/symbols
-/msbm7.pfb>
-Output written on writeup.pdf (21 pages, 830760 bytes).
+nts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmmi5.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
+sr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmr6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
+usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/share/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmt
+i7.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/s
+hare/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
+Output written on writeup.pdf (23 pages, 870947 bytes).
 PDF statistics:
- 416 PDF objects out of 1000 (max. 8388607)
- 366 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
- 290 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 505 PDF objects out of 1000 (max. 8388607)
+ 449 compressed objects within 5 object streams
+ 101 named destinations out of 1000 (max. 500000)
+ 362 words of extra memory for PDF output out of 10000 (max. 10000000)
 

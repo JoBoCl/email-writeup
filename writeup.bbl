@@ -19,6 +19,30 @@
 
 \refsection{0}
   \sortlist{nty}{nty}
+    \entry{agrawal2004order}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=4b876a40aac16cd3d6b0278b1154b9da}{Agrawal}{A\bibinitperiod}{Rakesh}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=24e35a871f26429e4cf78c765a9d6758}{Kiernan}{K\bibinitperiod}{Jerry}{J\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=1fa67215136cecbea67259a51ba99774}{Srikant}{S\bibinitperiod}{Ramakrishnan}{R\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=e82fe92ff0eed016b78d124cba2330db}{Xu}{X\bibinitperiod}{Yirong}{Y\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {ACM}%
+      }
+      \strng{namehash}{c99bf57af0ab83b3cddb6137a89d1363}
+      \strng{fullhash}{06abfcf5d8dfe50b9ca85a9166c7386f}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelyear}{2004}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the 2004 ACM SIGMOD international conference on Management of data}
+      \field{title}{Order preserving encryption for numeric data}
+      \field{year}{2004}
+      \field{pages}{563\bibrangedash 574}
+      \range{pages}{12}
+    \endentry
     \entry{RFC0822}{report}{}
       \name{author}{1}{}{%
         {{uniquename=0,hash=002ae2c14832261e08416ab7ef97d008}{Crocker}{C\bibinitperiod}{D.}{D\bibinitperiod}{}{}{}{}}%
@@ -86,6 +110,32 @@
       \verb https://secure.php.net/manual/en/regexp.reference.character-classes.php
       \endverb
     \endentry
+    \entry{irani2011modeling}{article}{}
+      \name{author}{4}{}{%
+        {{uniquename=0,hash=c6827acb360048718e8d3a19d2d5ec62}{Irani}{I\bibinitperiod}{Danesh}{D\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=9d2450b038cc4cab7ccee30fea4237ab}{Webb}{W\bibinitperiod}{Steve}{S\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=10ca8a887c5327fcb621a49ea0455d79}{Pu}{P\bibinitperiod}{Calton}{C\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=f32edc767f7574ca356c7480491fa999}{Li}{L\bibinitperiod}{Kang}{K\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{5c31b8ca34705878ae878afa44a4440c}
+      \strng{fullhash}{94d4564c6863931eac54618671484dbe}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Internet Computing, IEEE}
+      \field{number}{3}
+      \field{title}{Modeling unintended personal-information leakage from multiple online social networks}
+      \field{volume}{15}
+      \field{year}{2011}
+      \field{pages}{13\bibrangedash 19}
+      \range{pages}{7}
+    \endentry
     \entry{joshi2013extracting}{inproceedings}{}
       \name{author}{3}{}{%
         {{uniquename=0,hash=cdc8331487ade4fe67715a439a90f33d}{Joshi}{J\bibinitperiod}{Akanksha}{A\bibinitperiod}{}{}{}{}}%
@@ -131,6 +181,53 @@
       \field{year}{2015}
       \field{pages}{70\bibrangedash 84}
       \range{pages}{15}
+    \endentry
+    \entry{papadimitriou2011data}{article}{}
+      \name{author}{2}{}{%
+        {{uniquename=0,hash=4e0e4a1192d51c57aa6f59fbf62c01bb}{Papadimitriou}{P\bibinitperiod}{Panagiotis}{P\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=7b6f78bee4d74fb4edb7a42ad7e3c2ad}{Garcia-Molina}{G\bibinithyphendelim M\bibinitperiod}{Hector}{H\bibinitperiod}{}{}{}{}}%
+      }
+      \list{publisher}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{8fc19c40f08a04d9441a0858283b6028}
+      \strng{fullhash}{8fc19c40f08a04d9441a0858283b6028}
+      \field{sortinit}{P}
+      \field{sortinithash}{c0a4896d0e424f9ca4d7f14f2b3428e7}
+      \field{labelyear}{2011}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Knowledge and Data Engineering, IEEE Transactions on}
+      \field{number}{1}
+      \field{title}{Data leakage detection}
+      \field{volume}{23}
+      \field{year}{2011}
+      \field{pages}{51\bibrangedash 63}
+      \range{pages}{13}
+    \endentry
+    \entry{squicciarini2010preventing}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{uniquename=0,hash=7fbe61d074003dbe089be2d3e43a17cb}{Squicciarini}{S\bibinitperiod}{Anna}{A\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=0ae233b912326e7e96905b03816b7cbc}{Sundareswaran}{S\bibinitperiod}{Smitha}{S\bibinitperiod}{}{}{}{}}%
+        {{uniquename=0,hash=b67d9e997548d8b8b1465321e1d2b6ff}{Lin}{L\bibinitperiod}{Dan}{D\bibinitperiod}{}{}{}{}}%
+      }
+      \list{organization}{1}{%
+        {IEEE}%
+      }
+      \strng{namehash}{afe8d4a815fec93953f8ea3446c19255}
+      \strng{fullhash}{afe8d4a815fec93953f8ea3446c19255}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelyear}{2010}
+      \field{datelabelsource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Cloud Computing (CLOUD), 2010 IEEE 3rd International Conference on}
+      \field{title}{Preventing information leakage from indexing in the cloud}
+      \field{year}{2010}
+      \field{pages}{188\bibrangedash 195}
+      \range{pages}{8}
     \endentry
     \entry{templeton}{misc}{}
       \name{author}{1}{}{%
