@@ -7,6 +7,26 @@ This is followed by the analysis phase, where the resultant data is passed to a
 set of analyser modules, each running separately.  Finally, this information is
 presented to the user.  This chapter presents each of these stages in detail.
 
+\subsection{Program Overview}
+
+The program is split up into three main stages: textual analysis and parsing; header contents analysis, and visualisation, as shown in Figure~\ref{fig:con}.
+
+\begin{figure}
+	\centering
+\resizebox{0.9\textwidth}{!}{
+\begin{tikzpicture}
+	\draw [->] (-3,1.5) -- (0,1.5) node [above, text width=2.5cm, align=center, midway] { Plaintext Header };
+	\draw (0,0) rectangle node {Parsing} (4,3);
+	\draw [->] (4,1.5) -- (7,1.5) node [above, text width=2.5cm, align=center, midway] { Header Representation };
+	\draw (7,0) rectangle node {Analysis} (11,3);
+	\draw [->] (11,1.5) -- (14,1.5) node [above, text width=2.5cm, align=center, midway] { Device/User Representation };
+	\draw (14,0) rectangle node {Visualisation} (18,3);
+	\draw [->] (18,1.5) -- (21,1.5) node [above, text width=2.5cm, align=center, midway] { Visualisation as web page };
+\end{tikzpicture}}
+\caption{Simplified Control Flow of Application}
+\label{fig:con}
+\end{figure}
+
 \section{Definitions}
 
 The following covers the essential definitions required for the notation and
@@ -204,7 +224,7 @@ allow quick lookup.
 
 \section{Analysis}
 
-After completing the parsing of the field, it is then ready to be analysed for
+After completing the parsing of the fields, it is then ready to be analysed for
 different features.  All of the analysers implement the \texttt{HeaderAnalyser}
 interface, requiring information about the header to be analysed, and the
 currently running application.  All of these then implement the
@@ -223,16 +243,17 @@ their credibility.
 In some cases, the likely keys that are being searched for are known in advance,
 and can then be checked against the hash-map of entries.
 
-An example of this approach is for the specific check for an Oxford username:
+An example of this approach is for the specific check for an Oxford username, as shown in Algorithm~\ref{alg:oxf}.
 
 \begin{algorithm}
 	\KwIn{Header}
 	\KwOut{Any Oxford-based username that is found}
 	\If{\texttt{X-Oxford-Username} $\in$ Header.KvMap}{ \Return{Header.KvMap(X-Oxford-Username)}\; }
 	\caption{Lookup based on a known key}
+	\label{alg:oxf}
 \end{algorithm}
 
-Alternatively, we may be interested in properties of the keys, necessitating a search over the keys.
+Alternatively, we may be interested in properties of the keys, necessitating a search over the keys, as shown in Algorithm~\ref{alg:exc}.
 
 \begin{algorithm}
 	\KwIn{Header}
@@ -243,14 +264,49 @@ Alternatively, we may be interested in properties of the keys, necessitating a s
 		}
 	}
 	\caption{Lookup based on a key property}
+	\label{alg:exc}
 \end{algorithm}
+
+\subsection{Client Inferrence}
+
+In \cite{nurse2015investigating}, a number of different e-mail clients were identified based on the header tags that were present. By identifiying these pieces of software likely to be found on a user's machine, we gain a significant amount of information from them, and should therefore devote some effort to correctly identifying them.  Using a number of e-mail samples provided, I have been able to extract examples for a number of different e-mail clients, and use them to infer the client being used.  Using a sample of e-mails, it is possible to find information for additional e-mail clients and senders, such as (but not limited to) PHPMailer and Foxmail.  A number of these approaches are shown in Algorithm~\ref{alg:inf}.
+
+\begin{algorithm}
+	\KwIn{Header}
+	\KwOut{The name of the software that is likely being used, and necessary CVE Product name (elided for brevity)}
+	\uIf{``Message-ID''${}\in{}$Header.KvMap}{
+		\If{Header.KvMap(``Message-ID'') contains ``email.android.com''}{
+			\Return{``Android Device''}\;
+		}
+	}
+	\uElseIf{``X-Mailer''${}\in{}$Header.KvMap}{
+		\Switch{Header.KvMap(``X-Mailer'') contains}{
+			\Case{``iPhone''}{\Return{``iPhone''}}
+			\Case{``Outlook Express''}{\Return{``Microsoft Outlook Express''}}
+			\ldots
+		}
+	}
+	\uElseIf{``User-Agent''${}\in{}$Header.KvMap}{
+		\Return{``Thunderbird''}\;
+
+	}
+	\ElseIf{Header.KvMap${}\cap{}$OutlookKeywords${}\neq\emptyset$}{
+		\eIf{``X-Mailer''${}\in{}$Header.KvMap}{ \Return{Apple Mail}}{ \Return{Outlook}}
+
+	}
+	\caption{Client Inferrence Technique}
+	\label{alg:inf}
+\end{algorithm}
+
 
 \subsection{Database Queries}
 
 Using the results gathered from the text-based queries and analysis of the
 received fields, relevant software configurations are extracted and queried
 against results in the CVE database.  These are then parsed and collated in
-preparation for displaying the outputs.
+preparation for displaying the outputs. Specifically, the queries are limited
+to those matching the product name, and vulnerabilities that can be remotely
+executed. 
 
 As more information is found, more details of products used will also become
 available.  These are added asynchronously.

@@ -1,3 +1,18 @@
 \chapter{Evaluation}\label{chap:test}
+After producing the application described in Chapter~\ref{chap:imp}, referring back to the design specifications to determine its performance against the stated criteria was the next step.
 \section{Methodology}
+Using a sample of e-mails provided by my supervisor, each of them was run through the final version of the program, and scored based on the following attributes:
+
+\begin{itemize}
+\item Let $M$ be the total number of received fields.
+\item Let $N$ be the total number of other fields.
+\item 1 point is added to the total $R$ for each piece of information found in a Received field for the following:
+\subitem One of device name \emph{or} IP address
+\subitem Software \emph{or} protocol used
+\subitem Vulnerabilities found for the relevant piece of software
+\item 1 point is addded to $F$ for each piece of information found in other fields.
+\end{itemize}
+
+The final score for an e-mail is given as \[\frac12\left(\frac R{3M}+\frac FN\right)\]to give a value between 0 and 1 for each e-mail.
+
 \section{Results}
