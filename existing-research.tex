@@ -165,11 +165,15 @@ of e-mail headers.  These tools clearly display the information displayed in
 the header, showing the key-value pairs, and the set of servers the message
 transferred through and the protocols used.
 
-\subsection{Google}
+\subsection{Google}\label{sec:goo}
 
 The Google Apps Toolbox features an e-mail header analyser\footnote{Found at
 	\url{https://toolbox.googleapps.com/apps/messageheader/}}. An example
-of the output of the utility is found in figure~\ref{fig:goo}.
+of the output of the utility is found in Figure~\ref{fig:goo}.
+
+One of the most useful features from the Google Apps Toolbox is the information
+provided about the servers the message travelled through.  This tool shows the
+details of the time taken for each hop, and the protocol used.
 
 \begin{figure}
 	\begin{framed}
@@ -178,15 +182,13 @@ of the output of the utility is found in figure~\ref{fig:goo}.
 \end{framed}
 	\caption{Google Apps Toolbox E-mail header output} \end{figure}
 
-One of the most useful features from the Google Apps Toolbox is the information
-provided about the servers the message travelled through.  This tool shows the
-details of the time taken for each hop, and the protocol used.
-
 \subsection{Microsoft}
 
 The Microsoft Message Header Analyzer\footnote{Fount at
 	\url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and
-showing sample results in figure~\ref{fig:mic}
+showing sample results in Figure~\ref{fig:mic} is of a similar nature to the Google tool, discussed in Subsection~\ref{sec:goo}.  
+
+In addition to the information presented by Google, this tool also produces a set of ``Other Headers'', highlighting fields that may be of interest.  However, little additional context is provided as to their relevance.
 
 \begin{figure}
 \begin{framed}
