@@ -1,4 +1,5 @@
 \chapter{Implementation}\label{chap:imp}
+
 \section{Overview}
 
 The  analysis is implemented as a series of stages, firstly, the e-mail header
@@ -11,7 +12,7 @@ presented to the user.  This chapter presents each of these stages in detail.
 
 The program is split up into three main stages: textual analysis and parsing; header contents analysis, and visualisation, as shown in Figure~\ref{fig:con}.
 
-\begin{figure}
+\begin{figure}[!ht]
 	\centering
 \resizebox{0.9\textwidth}{!}{
 \begin{tikzpicture}
@@ -168,6 +169,14 @@ object of the same type as $D$.
 The above functions results can be coposed repeatedly to produce more specific
 search queries.
 
+\subsection{Data Structures}
+These wil be drawn using square boxes to represent single objets that are encapsulated
+within an object.  Square boxes with an inner square box indicate some collection
+of objects.
+
+Thin arrows will be used to denote the encapsulation relation, with thicker
+arrows being used to list relevant public methods.
+
 \section{Data Extraction and Parsing}
 
 The parser's operation completes in a number of stages, following RFC822
@@ -230,6 +239,30 @@ interface, requiring information about the header to be analysed, and the
 currently running application.  All of these then implement the
 \texttt{Runnable} interface, allowing the class to be run asynchronously.
 
+\subsection{Input Data Structures}
+The data structure presented in Figure~\ref{fig:hea} shows the output of the
+parsing and textual analysis module, which is then provided as an input to the
+analysis modules.
+
+\begin{figure}[!ht]
+\centering
+\resizebox{0.9\textwidth}{!}{
+	\begin{tikzpicture}
+		\draw (0,0) rectangle node {Header} (4,2);
+		\draw (0,3) rectangle node [text width = 3.5cm, align=center] {Start Device\\Type: Device} (4,5);
+		\draw (5,0) rectangle node [text width = 3.5cm, align=center]
+		{Other fields\\String $\rightarrow$ String HashMap} (9,2);
+		\draw [->] (2,2) -- (2,3);
+		\draw [->] (4,1) -- (5,1);
+		\draw [->] (4,4) -- (5,4) node [right, text width = 4cm,align=center] { Name, Software, Latitude, Longitude, Next Device (of type Device), Received Time, Owner};
+		\draw [->,thick] (0,1.5) -- (-1,1.5) node [left, text width = 2.5cm,align=center] { Getter/Setter for Device};
+		\draw [->,thick] (0,0.5) -- (-1,0.5) node [left, text width = 2.5cm, align=center] { Getter/Setter for K/V Map};
+\end{tikzpicture}
+	}
+	\caption{Header Data Structure Format}
+	\label{fig:hea}
+\end{figure}
+
 \subsection{Text-Based}
 
 The fields from the header are analysed in different modules, with searches
@@ -245,7 +278,7 @@ and can then be checked against the hash-map of entries.
 
 An example of this approach is for the specific check for an Oxford username, as shown in Algorithm~\ref{alg:oxf}.
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\KwIn{Header}
 	\KwOut{Any Oxford-based username that is found}
 	\If{\texttt{X-Oxford-Username} $\in$ Header.KvMap}{ \Return{Header.KvMap(X-Oxford-Username)}\; }
@@ -255,7 +288,7 @@ An example of this approach is for the specific check for an Oxford username, as
 
 Alternatively, we may be interested in properties of the keys, necessitating a search over the keys, as shown in Algorithm~\ref{alg:exc}.
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\KwIn{Header}
 	\KwOut{Any information relating to Microsoft Exchange that is found}
 	\ForEach{Key $k\in $ Header.KvMap}{
@@ -271,7 +304,7 @@ Alternatively, we may be interested in properties of the keys, necessitating a s
 
 In \cite{nurse2015investigating}, a number of different e-mail clients were identified based on the header tags that were present. By identifiying these pieces of software likely to be found on a user's machine, we gain a significant amount of information from them, and should therefore devote some effort to correctly identifying them.  Using a number of e-mail samples provided, I have been able to extract examples for a number of different e-mail clients, and use them to infer the client being used.  Using a sample of e-mails, it is possible to find information for additional e-mail clients and senders, such as (but not limited to) PHPMailer and Foxmail.  A number of these approaches are shown in Algorithm~\ref{alg:inf}.
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\KwIn{Header}
 	\KwOut{The name of the software that is likely being used, and necessary CVE Product name (elided for brevity)}
 	\uIf{``Message-ID''${}\in{}$Header.KvMap}{
@@ -306,12 +339,12 @@ received fields, relevant software configurations are extracted and queried
 against results in the CVE database.  These are then parsed and collated in
 preparation for displaying the outputs. Specifically, the queries are limited
 to those matching the product name, and vulnerabilities that can be remotely
-executed. 
+executed.
 
 As more information is found, more details of products used will also become
 available.  These are added asynchronously.
 
-\begin{algorithm}
+\begin{algorithm}[!ht]
 	\KwIn{Header product name $p$}
 	\KwOut{CVE Entries}
 	cve-list $\gets\emptyset$\;
