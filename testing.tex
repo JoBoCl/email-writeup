@@ -7,12 +7,76 @@ Using a sample of e-mails provided by my supervisor, each of them was run throug
 \item Let $M$ be the total number of received fields.
 \item Let $N$ be the total number of other fields.
 \item 1 point is added to the total $R$ for each piece of information found in a Received field for the following:
-\subitem One of device name \emph{or} IP address
-\subitem Software \emph{or} protocol used
-\subitem Vulnerabilities found for the relevant piece of software
+\subitem{One of device name \emph{or} IP address}
+\subitem{Software \emph{or} protocol used}
+\subitem{Vulnerabilities found for the relevant piece of software}
+\subitem{Location Data}
 \item 1 point is addded to $F$ for each piece of information found in other fields.
 \end{itemize}
 
-The final score for an e-mail is given as \[\frac12\left(\frac R{3M}+\frac FN\right)\]to give a value between 0 and 1 for each e-mail.
+The final score for an e-mail is given as \[\frac12\left(\frac R{4M}+\frac FN\right)\]to give a value between 0 and 1 for each e-mail.
+
+The e-mails received have been numbered from 1 up to 70, and a random sample of size 30 was selected using the following code:
+
+\begin{verbatim}
+>>> random.seed()
+>>> random.sample(list(range(1,70)), 30)
+[64, 48, 11, 21, 63, 68, 27, 69, 29,  8, 28,
+ 34, 13, 57, 10,  3, 22, 32, 23, 49, 26, 45,
+ 19,  1, 36, 46, 41, 18, 20, 17]
+\end{verbatim}
+
+Thus giving a sorted list of the following e-mails: 1, 3, 8, 10, 11, 13, 17, 18, 19, 20, 21, 22, 23, 26, 27, 28, 29, 32, 34, 36, 41, 45, 46, 48, 49, 57, 63, 64, 68, 69.
 
 \section{Results}
+
+Table~\ref{tab:sammn} gives the $M$ and $N$ values for the different sampled e-mails.  These were sampled using standard Unix tools: \texttt{grep}ping for fields and counting the output.
+
+\begin{table}
+\centering
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Header & Total Fields & Received Fields ($M$) & Other Fields ($N$) \\ \midrule
+1.txt  & 26           & 7                     & 19                 \\
+3.txt  & 32           & 6                     & 26                 \\
+8.txt  & 34           & 8                     & 26                 \\
+10.txt & 22           & 3                     & 19                 \\
+11.txt & 29           & 6                     & 23                 \\
+13.txt & 17           & 4                     & 13                 \\
+17.txt & 27           & 6                     & 21                 \\
+18.txt & 20           & 6                     & 14                 \\
+19.txt & 20           & 6                     & 14                 \\
+20.txt & 22           & 7                     & 15                 \\
+21.txt & 22           & 6                     & 16                 \\
+22.txt & 22           & 6                     & 16                 \\
+23.txt & 26           & 6                     & 20                 \\
+26.txt & 19           & 6                     & 13                 \\
+27.txt & 21           & 1                     & 20                 \\
+28.txt & 22           & 6                     & 16                 \\
+29.txt & 20           & 6                     & 14                 \\
+32.txt & 24           & 6                     & 18                 \\
+34.txt & 23           & 5                     & 18                 \\
+36.txt & 26           & 6                     & 20                 \\
+41.txt & 21           & 6                     & 15                 \\
+45.txt & 23           & 6                     & 17                 \\
+46.txt & 26           & 5                     & 21                 \\
+48.txt & 25           & 6                     & 19                 \\
+49.txt & 21           & 6                     & 15                 \\
+57.txt & 28           & 6                     & 22                 \\
+63.txt & 23           & 5                     & 18                 \\
+64.txt & 36           & 9                     & 27                 \\
+68.txt & 21           & 6                     & 15                 \\
+69.txt & 22           & 6                     & 16                 \\
+\bottomrule
+\end{tabular}
+\caption{$M$ and $N$ values for chosen headers}
+\label{tab:sammn}
+\end{table}
+
+The results of the testing are contained within Table~\ref{tab:res}, and give a breakdown for each e-mail's values of $R$ and $F$, as well as the final score.
+
+During the testing, the following trends were noticed.  As many of the e-mails passed through the same set of servers, as they had been received by an Oxford e-mail address, the same set of servers were frequently seen, all of which had associated IP addresses, geolocation data and (except for one server running Microsoft SMTP Server) CVE data for the running software.  For an e-mail sent within the University Nexus system, this gives an inflated score, as very few of the servers are missing information.
+
+	The score for the information gathered from fields does not take into account the number of fields needed to determine or infer a piece of information. For example, the presence, or absence of multiple fields is required to determine a piece of information.  Nor does it consider the relative value of a piece of information, failing to rate the presence of a username above the presence of a particular piece of software also giving false positives.
+
+	However, very few e-mails in the testing population contained fields relating to usernames (\texttt{X-Oxford-Username}, \texttt{X-}$\ldots$\texttt{-User}, \texttt{X-Authenticated-User}) compared to the result in~\cite{nurse2015investigating}, which found 14\% of e-mails to contain usernames as opposed to the 8\% found in the population.
