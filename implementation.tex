@@ -38,7 +38,11 @@ presented to the user.  This chapter presents each of these stages in detail.
 
   \paragraph{Google and Microsoft Header Analysers} Both of the tools discussed in Sections~\ref{sec:goo} and~\ref{sec:mic} produced detailed information on the servers that are being used to send and received messages, with Google's tool also clearly reporting when its own servers were used to send a message.  The software should mimic this by providing a similar level of detail on the devices being used to send information, and extend this by looking up information on the device's owning organisation.  Additionally, a more exhaustive search of the other fields should be conducted, so more information about the sender can be provided than the immediately available details such as time, sender's e-mail and recipient.
 
-  \paragraph{MITRE CVE Lookup and Norton Vulnerability Protection}
+  \paragraph{MITRE CVE Lookup and Norton Vulnerability Protection} The tools discussed in Sections~\ref{sec:mit} and~\ref{sec:nor} are both targeted at very different demographics.  The MITRE CVE Lookup is designed for IT progressionals and system administrators wishing to gather more information about specific vulnerabilities and software, requiring knowledge of the software present on a network or device.  The information presented is also not structured or sorted in a clear fashion.
+
+  Norton's tool, on the other hand, is focused on individual users who administer their own systems.  The information is presented in such a way as to warn them as to which software needs updating or patching against a vulnerability, but provides few details on the nature of the vulnerabilities.
+
+  The tool that is described in this report ought to be able to bridge the gap between these two tools, providing a useful and relevant list of vulnerabilities, without overloading the information provided, or requiring complex search terms to be crafted. 
 
   \section{Typical Use}
 
@@ -74,7 +78,7 @@ presented to the user.  This chapter presents each of these stages in detail.
 
 \section{Program Overview}
 
-The program is split up into three main stages: textual analysis and parsing; header contents analysis, and visualisation, as shown in Figure~\ref{fig:con}.
+The program is split up into three main stages: textual analysis and parsing; header contents analysis, and visualisation, as shown in Figure~\ref{fig:con}.  The relevant data is often stored in a central \texttt{MainWindow} class, rather than passed as a parameter, as the composition would indicate, allowing clear references to be maintained.
 
 \begin{figure}[!ht]
 	\centering
@@ -93,6 +97,8 @@ The program is split up into three main stages: textual analysis and parsing; he
 \end{figure}
 
 \subsection{Parsing}
+
+This module receives the plain-text of the e-mail as an input, splitting it into two sections, fields with the ``Received'' tag, and all other fields.  These are then parsed separately.  The other fields are easier to parse, as they can be loaded into a hashmap, split by the colon.  The trace fields require a more complex parsing strategy, fully described in Section~\ref{sec:par}.  This information is then extracted to more abstract Java objects, allowing the relevant information to be queried on a device-by-device basis, rather than constantly referring back to the source text.
 
 \subsection{Analysis}
 
@@ -261,7 +267,7 @@ The parser's operation completes in a number of stages, following RFC822
 routing information (\texttt{Received from...}) and the key-value map of other
 pertinent information.
 
-\subsection{Received fields}
+\subsection{Received fields}\label{sec:par}
 
 The received fields are the most complicated part of the e-mail header to parse,
 as they are described by a non-trivial grammar, presented below.
@@ -523,10 +529,10 @@ The output of the analysis modules is compiled into the \texttt{FoundInformation
 	\centering
 \begin{tikzpicture}
 \draw (0,0) rectangle node {Device Info} (4,2);
-\draw (0,3) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software} (4,5);
+\draw (0,3) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (4,5);
 \draw [->] (2,2) -- (2,3);
 \end{tikzpicture}
-\caption{Device Info Data Structure}
+\caption{Device Information Data Structure}
 \end{figure}
 
 \section{Visualising the Results}
