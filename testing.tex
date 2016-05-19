@@ -107,3 +107,33 @@ to usernames (\texttt{X-Oxford-Username}, \texttt{X-}$\ldots$\texttt{-User},
 \texttt{X-Authenticated-User}) compared to the result
 in~\cite{nurse2015investigating}, which found 14\% of e-mails to contain
 usernames as opposed to the 8\% found in the population.
+
+\section{Conclusions}
+
+\section{Future Work}
+
+During the late stages of development and testing, a number of missing features
+quickly became apparent. Due to the limited information available, and the
+differences in version numbering, a decision was made to search for all
+available vulnerabilities for an application, allowing the user to discern
+which were most relevant.  Subsequent versions could focus on the different
+pieces of version data available.  For example, \texttt{esmtp} frequently
+references its version number in the ``Received'' field frequently.
+
+Alternatively, a better picture may be presented by accumulating multiple
+e-mails. For example, using the information provided from multiple members of
+single organisation, a better picture may be built up of the software used by
+the servers, as well as the network configuration.
+
+Additionally, future testing should take place on a larger dataset, using
+e-mails from a wider variety of sources sent to a number of different
+recipients.  
+
+Finally, it should be possible for an updated version of this application to
+determine which header fields have been added by mail servers within one's own
+organisation.  For example, e-mail header fields beginning with
+\texttt{X-MS-Exchange} are seen within almost all e-mail messages sent to
+recipients within the Oxford domain, adding more false positives to the test
+results. While it is possible that other preceding e-mail servers have added
+similar fields, in most cases, these entries yielded little useful data.
+

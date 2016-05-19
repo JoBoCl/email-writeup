@@ -25,7 +25,7 @@ $\mathcal P (\Sigma)$.
 The following special classes are provided as part of the Perl-Compatible
 Regular Expression library, and are subsets of the alphabet of Unicode
 characters, defined in~\cite{php_group_gutmans_lerdorf_suraski_boerger}.
-
+\begin{multicols}{2}
 \begin{description}
 
 \item[alnum] --- letters and digits
@@ -57,31 +57,38 @@ characters, defined in~\cite{php_group_gutmans_lerdorf_suraski_boerger}.
 \item[xdigit] --- hexadecimal digits
 
 \end{description}
+\end{multicols}
 \subsubsection{Regular Languages}
 Regular languages are defined as follows:
+\begin{multicols}{2}
 \begin{itemize}
 \item $\emptyset$ and $\{\epsilon\}$ are regular languages
 \item for each $a\in\Sigma$, $\{a\}$ is a regular language
 \item if $A$ and $B$ are both regular, $A\cup B$, $A\cdot B$ and $A^*$ are regular languages.
-\subitem{ $A\cup B$ is the union of two languages.  $A\cup B = \{s : s\in A \lor s \in B\}$}
-\subitem{ $A\cdot B$ is the concatenation of two languages.  $A\cdot B = \{ ab : a \in A, b \in B\}$}
-\subitem{ $A^*$ is the Kleene star of a language.}
+	\begin{itemize}
+\item $A\cup B$ is the union of two languages.  $A\cup B = \{s : s\in A \lor s \in B\}$
+\item $A\cdot B$ is the concatenation of two languages.  $A\cdot B = \{ ab : a \in A, b \in B\}$
+\item $A^*$ is the Kleene star of a language.
 \begin{align*}
     A_0&=\{\epsilon\}\\
     A_1&= A\\
     A_{i+1} &= \{ aa' : a \in A_i, a'\in A\}\\
     A^* &= \bigcup_{i\in\mathbb N} A_i
 \end{align*}
+	\end{itemize}
 \end{itemize}
+\end{multicols}
 
 \subsubsection{Context-Free Grammars}
 A context-free grammar $G$ is defined as $G=\left(V,\Sigma, R,S\right)$ where:
+\begin{multicols}{2}
 \begin{itemize}
 \item $V$ is a variable.
 \item $\Sigma$ is the alphabet of symbols.
 \item $R$ is a relation defined over $V\rightarrow \left(V\cup\Sigma\right)^*$
 \item $S$ is the start symbol
 \end{itemize}
+\end{multicols}
 
 For example, $\langle \text S \rangle$ is the field name with the associated
 productions $\langle \text T \rangle \, \langle \text U \rangle$, where $T$ and
@@ -304,6 +311,7 @@ In \cite{nurse2015investigating}, a number of different e-mail clients were iden
 \begin{algorithm}
 	\KwIn{Header}
 	\KwOut{The name of the software that is likely being used, and necessary CVE Product name (elided for brevity)}
+    OutlookKeywords ${}\gets\{ \text{Accept-Language}, \text{Content-Language}, \text{Threat-Index}, \text{Threat-Topic} \}$\;
 	\uIf{``Message-ID''${}\in{}$Header.KvMap}{
 		\If{Header.KvMap(``Message-ID'') contains ``email.android.com''}{
 			\Return{``Android Device''}\;
@@ -481,17 +489,25 @@ displayed, some computational steps are required to render the histograms and
 map, which are detailed in Algorithm~\ref{alg:vjs}
 
 \begin{algorithm}
-	\KwIn{Found Information Object}
-	\KwOut{Webpage}
-	$\textit{lines}\gets\text{read-lines(webpage-template)}$\;
-	\ForEach{$l\in\text{lines}$}{
-		\eIf{$l$ contains keyword}{
-		$\textit{webpage}\gets_+ l[\text{field from FoundInformation}/\text{keyword}]$\;
-		}{
-		$\textit{webpage}\gets_+ l$\;
+	\KwIn{Webpage text}
+	\KwOut{Visualisation of Webpage}
+	\lForEach{$u\in\text{userentries}$}{find HTML list of usernames and append $u$}
+	\lForEach{$f\in\text{factentries}$}{find HTML table of facts and append $f$}
+	\ForEach{$c\in\text{cveentries}$}{
+		\If{$c\text{ matches search string}\lor\text{search string}\stackrel{?}{=}\epsilon$}{
+			\If{$\langle c_\text{impact}, c_\text{access}\rangle$ matches filters}{ 
+				find HTML table of facts and append $f$\;
+			}
 		}
 	}
+	\lForEach{$c\in\text{cveentries}$}{
+		$\text{distributions}\left[c_\text{software}\right]\gets_\cup c_\text{score}$
+	}
+	\lForEach{$d\in\text{distributions}$}{draw histogram for $d$}
+	\lForEach{$s_i\in\text{servers}$}{project $s_i$ onto map}
+	\lForEach{$s_i\in\text{servers}$}{draw link between $s_i$ and $s_{i+1}$ onto map}
+
 	\Return{webpage}\;
-	\caption{Exporting the Found Information to Visualisations}
+	\caption{Rendering the Visualisation}
 	\label{alg:vjs}
 \end{algorithm}

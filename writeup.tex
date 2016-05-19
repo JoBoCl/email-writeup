@@ -1,4 +1,4 @@
-\documentclass[a4paper,DIV=11,BCOR=7mm,abstract=yes,twoside,10pt]{scrreprt}
+\documentclass[a4paper,DIV=12,BCOR=7mm,abstract=yes,twoside,10pt]{scrreprt}
 
 \author{Joshua Clark}
 
@@ -11,11 +11,13 @@
 \bibliography{references}
 \usepackage{booktabs}
 \usepackage{tikz}
+\usepackage{multicol}
 
 \usepackage{graphicx}
 \usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=true,pdfborder={0 0 0},colorlinks=false]{hyperref}
 \hypersetup{pdftitle={E-Mail Header Information}, pdfauthor={Joshua Clark}}
 
+\usepackage{fancyvrb}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{epigraph}
@@ -26,9 +28,17 @@
 
 \lstset{basicstyle=\ttfamily, escapeinside=||, columns=flexible}
 
+\usepackage{listings}
+\lstnewenvironment{example}[1][]{
+    \renewcommand*{\lstlistingname}{E-Mail Header Fragment}
+    \lstset{fancyvrb=true,basicstyle=\ttfamily,captionpos=b,#1}
+}{}
+
+
 \allowdisplaybreaks{}
 
 \counterwithout{figure}{chapter}
+\counterwithout{table}{chapter}
 
 \pagenumbering{roman}
 \begin{document}
@@ -155,14 +165,12 @@ Chapter~\ref{chap:imp}, and algorithms presented in pseudo-code where
 necessary.  A full listing will be presented at the end of this document in
 an appendix. The results of the analysis of the headers will be discussed in
 Chapter~\ref{chap:test}, beginning with the methodology used, and presenting
-a number of results. Finally, Chapter~\ref{chap:conc} will discuss my
-conclusions and areas of further improvement.
+a number of results, finishing with conclusions and areas of further improvement.
 
 \cleardoublepage \include{existing-research} 
 \cleardoublepage \include{design} 
 \cleardoublepage \include{implementation}
 \cleardoublepage \include{testing} 
-\cleardoublepage \include{evaluation}
 \cleardoublepage \printbibliography{} 
 
 \end{document}

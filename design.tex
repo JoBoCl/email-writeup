@@ -74,7 +74,7 @@ Lastly, an option is available to view the information about security
 vulnerabilities in a separate webpage, forming the main output of the
 program.
 
-The resultant webpage will be structured as in table~\ref{tab:format}.  It
+The resultant webpage will be structured as in Table~\ref{tab:format}.  It
 will then be possible for the user to click on the representations of the
 devices to find out more information.  It will also be possible to search
 within the vulnerability list to find more information, as well as filter by
@@ -86,13 +86,17 @@ impact and availability details.
     (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender
     Software} & \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Usernames\\
     (Presented as a list with likely organisation)\end{tabular}} \\
+    \midrule
     \multicolumn{6}{c}{Graphical representation of devices used to deliver the
     e-mail}                                                                                                                                                                                                \\
+    \midrule
     \multicolumn{6}{c}{List of derived information including found software and
     similar information}                                                                                                                                                                                  \\
+    \midrule
     \multicolumn{6}{c}{Histograms for vulnerability scores, separated by
     product}                                                  \\
-    \multicolumn{6}{c}{Search-able and filterable table of discovered CVEs}                                                                                                                                                                                                            \\
+    \midrule
+    \multicolumn{6}{c}{Table of discovered CVEs that can be searched and filtered}                                                                                                                                                                                                            \\
     \bottomrule \end{tabular} \caption{Format of presented data found in e-mail
     header}\label{tab:format} \end{table}
 
@@ -159,4 +163,15 @@ configurations containing that string.
 
 \subsection{Visualisation}
 
+Once the header has been analysed, it is then necessary to present the
+information that has been found in a useful and informative manner. Firstly,
+the information about the individual sender, such as their name, organisation,
+software and usernames, should be presented (where it exists).  The information
+about the servers that the e-mail has passed through should then be detailed, 
+their address, location and software, as well as relevant vulnerabilities.
 
+Once this has been listed, information about the scores of the vulnerabilities
+for each piece of found software, and a listing of the available
+vulnerabilities should be made.  By providing a visualisation of the
+distribution of the scores assigned to each piece of software conclusions can 
+be drawn about the expected severity of future vulnerabilities.

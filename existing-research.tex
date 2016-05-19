@@ -1,8 +1,8 @@
 \chapter{Literature Review}\label{chap:exres}
 
-In this chapter, we will discuss the nature of existing threats to data, and the
-ongoing research in this area.  We will then consider the specific threats posed
-by e-mail.
+In this chapter, we will discuss the nature of existing threats to data, and
+the ongoing research in this area.  We will then consider the specific threats
+posed by e-mail.
 
 \section{General Data Leakage}
 
@@ -22,14 +22,18 @@ From a personal perspective, there are a number of risks.  There are a
 significant number of social networks available, with an estimated 1.65 billion
 monthly active users, with a significantly higher proportion used in developed
 countries.  \cite{irani2011modeling} showed the rate at which the information
-gathered from social networks can be used to uniquely identify an individual,
-with only 9 sites required before there's approximately a 70\% chance that both
-a person's hometown and name could be recovered.  A similar number of sites can
-give an aggregate normalised attribute leakage of 1, where the leakage is
-defined as \[\Psi(F_a,P)=\frac{\sum_{f_a\in F_a}\phi\left(f_a,
-			P\right)}{|F_a|}\text{ where }\phi\left(f_a, P\right) =
-	\left[f_a\in P\right]\]
+gathered from social networks can be used to uniquely identify an individual.
 
+\cite{irani2011modeling} defines the aggregate normalised attribute leakage as 
+\[\Psi(F_a,P)=\frac{\sum_{f_a\in F_a}\phi\left(f_a, P\right)}{|F_a|}
+\text{ where }\phi\left(f_a, P\right) = \left[f_a\in P\right]\]
+for a user's social footprint $P$, and attributes are referenced as $f_a$.
+
+Only 9 sites are required before there is approximately a 0.7 attribute
+leakage, corresponding to a 70\% probability that both a person's hometown and
+name could be recovered.  A similar number of sites can give an aggregate
+normalised attribute leakage of 1, where it becomes almost certain that an
+individual may be uniquely identified.
 
 \subsection{Corporate Data Leakage}
 
@@ -37,8 +41,18 @@ When companies receive user data, they often have a legal obligation to ensure
 that the data is protected and treated as confidential and sensitive.  When
 this trust is broken, there are often severe consequences, both from regulators
 and consumers moving their business to competitors.
+
+In addition to ensuring that human procedures are present to ensure the
+integrity and confidentiality of data, it is also necessary to ensure that
+robust technical measures are in place to prevent data breaches. 
+\cite{2016_data_breach_category_summary_2016} lists a total of 12 million data
+records from 399 breaches as having been illegitimately accessed in 2016 to date.
+Two fifths of these data records are connected to government or military data breaches,
+with a third linked to medical and healthcare data, and a further fifth connected
+to business data.
+
 \cite{squicciarini2010preventing} considers one way that data may be leaked,
-despite care being taken to ensure that it is properly encrypted and stored. By
+despite care being taken to ensure that it is properly encrypted and stored: by
 failing to protect against the indices for databases being stored insecurely,
 customer data may be leaked.  Order-preserving encryption schemes, as described
 in~\cite{agrawal2004order}, is one way of solving this problem, to an extent.
@@ -50,17 +64,17 @@ in~\cite{agrawal2004order}, is one way of solving this problem, to an extent.
 All e-mails include additional information about the sender and receiver, some
 of which is used by an e-mail client in order to display more information about
 the message that is currently being viewed, such as its original sender,
-reply-to addresses and the time it was sent.  Additional fields allow senders to
-authenticate themselves using public-key methods.
+reply-to addresses and the time it was sent.  Additional fields allow senders
+to authenticate themselves using public-key methods.
 
-The format of e-mail headers was first defined in RFC~822, and further refined in
-subsequent RFCs.  The standard for e-mails was then formalised precisely in
+The format of e-mail headers was first defined in RFC~822, and further refined
+in subsequent RFCs.  The standard for e-mails was then formalised precisely in
 RFC~5322.
 
 \subsection{Example Header and Pertinent Data}
 
-In the example below, and text highlighted with red, \colorbox{red!30}{like
-so} is information about the receiver.  Information about the sender, their
+In the example below, and text highlighted with red, \colorbox{red!30}{like so}
+is information about the receiver.  Information about the sender, their
 hardware or software is highlighted in green, \colorbox{green!30}{like so}; and
 information gathered about intervening devices is highlighted in blue,
 \colorbox{blue!30}{like so}.
@@ -82,7 +96,7 @@ Received-SPF: pass (google.com: domain of agatabor@poczta.onet.pl designates
 Authentication-Results: mx.google.com;
 spf=pass (google.com: domain of agatabor@poczta.onet.pl designates 141.105.16.25
 		as permitted sender) smtp.mailfrom=agatabor@poczta.onet.pl
-Received: from [10.26.196.156] (client-8-32.eduroam.oxuni.org.uk [|\colorbox{green!30}{192.76.8.32}|])
+Received: from |\colorbox{green!30}{[10.26.196.156]}| (|\colorbox{green!30}{client-8-32.eduroam.oxuni.org.uk}| [|\colorbox{green!30}{192.76.8.32}|])
 (Authenticated sender: |\colorbox{green!30}{agatabor@poczta.onet.pl}|)
 by |\colorbox{blue!30}{smtp.poczta.onet.pl}| (Onet) with |\colorbox{blue!30}{ESMTPA}| id 3pyKNH4ffyzT6tkv8
 for <joshuaclark94@gmail.com>; Sat,  6 Feb 2016 17:49:50 +0100 (CET)
@@ -121,11 +135,31 @@ the protocol being used and the software being run allows for anyone with access
 to mail headers to find more information about the attacks a device and its
 software may be vulnerable to.
 
-Further examples from headers that may be particularly interesting include the following examples:
+In Example~\ref{eg:smtp}, indicates that a server with an internal IP address
+of \texttt{10.25.150.146} in the Pacific Seaboard Timezone received the e-mail
+using the SMTP protocol.
 
-\begin{lstlisting}
+\begin{example}[caption=E-Mail Server configuration information,label=eg:smtp]
+Received: by 10.25.150.146 with SMTP id y140csp543137lfd;
+	Sat, 6 Feb 2016 08:49:56 -0800 (PST)
+\end{example}
 
-\end{lstlisting}
+In Example~\ref{eg:ip}, a number of pieces of information can be extracted: the
+hostname of the sending device is \texttt{client-8-32.eduroam.oxuni.org.uk} with associated
+\texttt{192.76.8.32} is on the eduroam network, with a local IP address of
+\texttt{10.26.196.156}.
+
+\begin{example}[caption=Information revealed in Received field,label=eg:ip]
+Received: from [10.26.196.156] (client-8-32.eduroam.oxuni.org.uk [192.76.8.32])
+\end{example}
+
+Further examples from headers that may be particularly interesting include the following examples.
+
+Many Apple iOS devices will include hardware and version names in the \texttt{X-Mailer} field.
+
+\begin{example}[caption=Apple iPhone version,label=eg:app]
+X-Mailer: Zimbra 8.6.0_GA_1153 (MobileSync - Apple-iPhone7C2/1305.238)
+\end{example}
 
 \subsection{Existing Research}
 
@@ -240,5 +274,5 @@ more fine-grained information.
 	 \caption{Norton Vulnerability Protection Results}\label{fig:nort}
 \end{figure}
 
-\section{Overview}
+\section{Summary}
 
