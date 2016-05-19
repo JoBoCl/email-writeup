@@ -4,11 +4,6 @@
 
 This chapter discusses the requirements of the software intended to analyse e-mails, the design of the program and its specifications, and finally the implementation itself.
 
-The  analysis is implemented as a series of stages, firstly, the e-mail header
-is parsed, to extract important information to a predefined set of Java objects.
-This is followed by the analysis phase, where the resultant data is passed to a
-set of analyser modules, each running separately.  Finally, this information is
-presented to the user.  This chapter presents each of these stages in detail.
 
     \section{Aims and Objectives}
 
@@ -80,7 +75,14 @@ presented to the user.  This chapter presents each of these stages in detail.
 
 The program is split up into three main stages: textual analysis and parsing; header contents analysis, and visualisation, as shown in Figure~\ref{fig:con}.  The relevant data is often stored in a central \texttt{MainWindow} class, rather than passed as a parameter, as the composition would indicate, allowing clear references to be maintained.
 
-\begin{figure}[!ht]
+The  analysis is implemented as a series of stages, firstly, the e-mail header
+is parsed, to extract important information to a predefined set of Java objects.
+This is followed by the analysis phase, where the resultant data is passed to a
+set of analyser modules, each running separately.  Finally, this information is
+presented to the user.  After discussing an overview of each module, this chapter 
+presents each of these stages in detail.
+
+\begin{figure}
 	\centering
 \resizebox{0.9\textwidth}{!}{
 \begin{tikzpicture}
@@ -101,6 +103,11 @@ The program is split up into three main stages: textual analysis and parsing; he
 This module receives the plain-text of the e-mail as an input, splitting it into two sections, fields with the ``Received'' tag, and all other fields.  These are then parsed separately.  The other fields are easier to parse, as they can be loaded into a hashmap, split by the colon.  The trace fields require a more complex parsing strategy, fully described in Section~\ref{sec:par}.  This information is then extracted to more abstract Java objects, allowing the relevant information to be queried on a device-by-device basis, rather than constantly referring back to the source text.
 
 \subsection{Analysis}
+
+The analysis of the e-mail headers is handled independently by a number of small classes, each running asynchronously.  The decision was made to structure the program in such a way that concurrent operaton was possible in order to prevent blocking operations from limiting the progress of other operations. This also required care to ensure the separation between the model of the header and the model of the available information was maintained, as no guarantees could be placed on which thread was modifying data.
+
+It is in this part of the program that the automated discovery of vulnerabilities takes place.  An example software configuration string is \texttt{cpe:/a:cloudbees:jenkins:2.2}, so it is necessary to attempt to convert found software information.  For example, \texttt{Apple Mail} would become \texttt{apple:mail} and a search would be performed over the database for configurations containing that string.
+
 
 \subsection{Visualisation}
 
@@ -308,6 +315,9 @@ Received: from relay12.mail.ox.ac.uk (129.67.1.163)
     with Microsoft SMTP Server id 14.3.169.1;
     Sat, 14 Nov 2015 10:55:35 +0000
 \end{verbatim}
+
+Of particular interest is the pair of hostnames (both are needed as each line is analysed independently, therefore it is not necessary to treat the last line as a special case) and their associated IP addresses.  The hostname is of more interest, as performing an IP address lookup is less complicated than determining a hostname.  The software used is identified by the \texttt{with} field, and is also of interest, however, is insufficient in most cases to produce meaningful CVE data.
+
 \subsection{Other fields}
 
 These are read by a Python script and output to \texttt{STDOUT} to be read by
@@ -323,7 +333,7 @@ The data structure presented in Figure~\ref{fig:hea} shows the output of the
 parsing and textual analysis module, which is then provided as an input to the
 analysis modules.
 
-\begin{figure}[!ht]
+\begin{figure}
 \centering
 \resizebox{0.9\textwidth}{!}{
 	\begin{tikzpicture}
@@ -366,17 +376,20 @@ and can then be checked against the hash-map of entries.
 
 An example of this approach is for the specific check for an Oxford username, as shown in Algorithm~\ref{alg:oxf}.
 
-\begin{algorithm}[!ht]
+\begin{algorithm}
 	\KwIn{Header}
-	\KwOut{Any Oxford-based username that is found}
-	\If{\texttt{X-Oxford-Username} $\in$ Header.KvMap}{ \Return{Header.KvMap(X-Oxford-Username)}\; }
+	\KwOut{Any username that is found}
+$kws \gets \{\texttt{X-Oxford-Username}, \texttt{X-Username}, \texttt{X-Authenticated-User}\}$\;
+\ForEach{$kw\in kws$}{
+	\If{$kw\in$ Header.KvMap}{ \Return{Header.KvMap(kw)}\; }
+}
 	\caption{Lookup based on a known key}
 	\label{alg:oxf}
 \end{algorithm}
 
 Alternatively, we may be interested in properties of the keys, necessitating a search over the keys, as shown in Algorithm~\ref{alg:exc}.
 
-\begin{algorithm}[!ht]
+\begin{algorithm}
 	\KwIn{Header}
 	\KwOut{Any information relating to Microsoft Exchange that is found}
 	\ForEach{Key $k\in $ Header.KvMap}{
@@ -392,7 +405,7 @@ Alternatively, we may be interested in properties of the keys, necessitating a s
 
 In \cite{nurse2015investigating}, a number of different e-mail clients were identified based on the header tags that were present. By identifiying these pieces of software likely to be found on a user's machine, we gain a significant amount of information from them, and should therefore devote some effort to correctly identifying them.  Using a number of e-mail samples provided, I have been able to extract examples for a number of different e-mail clients, and use them to infer the client being used.  Using a sample of e-mails, it is possible to find information for additional e-mail clients and senders, such as (but not limited to) PHPMailer and Foxmail.  A number of these approaches are shown in Algorithm~\ref{alg:inf}.
 
-\begin{algorithm}[!ht]
+\begin{algorithm}
 	\KwIn{Header}
 	\KwOut{The name of the software that is likely being used, and necessary CVE Product name (elided for brevity)}
 	\uIf{``Message-ID''${}\in{}$Header.KvMap}{
@@ -432,7 +445,7 @@ executed.
 As more information is found, more details of products used will also become
 available.  These are added asynchronously.
 
-\begin{algorithm}[!ht]
+\begin{algorithm}
 	\KwIn{Header product name $p$}
 	\KwOut{CVE Entries}
 	cve-list $\gets\emptyset$\;
@@ -456,7 +469,7 @@ The following modules are used in the analysis of e-mail headers. Via \texttt{He
 	\item[DeviceAnalyser] --- Extracts the hostname, and then IP address, or IP address for each device, allowing a lookup of its co-ordinates.
 	\item[ExchangeHeaderAnalyser] --- determines if a Microsoft Exchange server has handled the message.
 	\item[GeoIPAnalyser] --- Given an IP address, this module looks up the latitude and longitude for said IP address.  This search will fail for local IP addresses (commonly found in the 192.168.0.0/16 subnet).
-	\item[OxfordHeaderAnalyser] --- This module searches for the specific \texttt{X-Oxford-Username} field, one of the most common fields in my collection of e-mail headers.
+	\item[UsernameHeaderAnalyser] --- This module searches for the specific \texttt{X-Oxford-Username} field, one of the most common fields in my collection of e-mail headers, as well as a number of more generic username fields.
 	\item[SenderInformationExtractor] --- This is used to lookup an individual's name from the set of fields, if it is available.
 	\item[VulnerabilityAnalyser] --- For each entry from the database as a \texttt{String}, this analyser returns a \texttt{VulnerabilityDisclosure} object.
 	\item[VulnerabilityFinderManager] --- this is an interface for other classes to implement. A reference implementation is provided in \texttt{VulnerabilityFinderManagerImpl}, with a simple implementation found in \texttt{NoopVulnerabilityFinderManager} for systems that lack the CVE database.
@@ -500,7 +513,7 @@ Figure~\ref{fig:flo} shows the direct interaction of the analysis modules.  Unle
 
 The output of the analysis modules is compiled into the \texttt{FoundInformation} class, which represents the list of facts, servers and other information that has been gathered from an e-mail.
 
-\begin{figure}[!ht]
+\begin{figure}
 	\centering
 \resizebox{0.9\textwidth}{!}{%
 \begin{tikzpicture}
@@ -525,8 +538,8 @@ The output of the analysis modules is compiled into the \texttt{FoundInformation
 \label{fig:fou}
 \end{figure}
 
-\begin{figure}[!ht]
-	\centering
+\begin{figure}
+\centering
 \begin{tikzpicture}
 \draw (0,0) rectangle node {Device Info} (4,2);
 \draw (0,3) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (4,5);
@@ -542,3 +555,21 @@ presented in a temporary webpage, which can then be saved independently.  Other
 than the referenced JavaScript libraries, and a freely available set of country 
 borders, the document requires no additional information or database access, 
 allowing it to be quickly shared.
+
+In order to export the results, the process described in Algorithm~\ref{alg:vis} are taken.  The \textit{keyword} objects refered to are one of a number of specific strings representing one of the sender's name, organisation, client or usernames; CVE entries, fact entries, products that have been found, or servers that have been found.
+
+\begin{algorithm}
+	\KwIn{Found Information Object}
+	\KwOut{Webpage}
+	$\textit{lines}\gets\text{read-lines(webpage-template)}$\;
+	\ForEach{$l\in\text{lines}$}{
+		\eIf{$l$ contains keyword}{
+		$\textit{webpage}\gets_+ l[\text{field from FoundInformation}/\text{keyword}]$\;
+		}{
+		$\textit{webpage}\gets_+ l$\;
+		}
+	}
+	\Return{webpage}\;
+	\caption{Exporting the Found Information to Visualisations}
+	\label{alg:vis}
+\end{algorithm}
