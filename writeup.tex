@@ -1,8 +1,9 @@
-\documentclass[twoside,10pt]{scrreprt}
+\documentclass[a4paper,DIV=13,BCOR=7mm,abstract=yes,twoside,10pt]{scrreprt}
 
 \title{Full steam ahead(ers), Captain!} \author{Joshua Clark}
 
-\usepackage[a4paper, left=1.25in, right=1.25in]{geometry} \usepackage{amsmath}
+%\usepackage[a4paper, left=1.25in, right=1.25in]{geometry} 
+\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[citestyle=authoryear]{biblatex}
 \usepackage{backnaur}
@@ -49,7 +50,7 @@
 
     \clearpage{}
 
-    \chapter*{Abstract}
+    \begin{abstract}
 
     After extensive public education, fewer people are now clicking on links in
     e-mails that are disguised as phishing attacks, though the threat still
@@ -72,6 +73,8 @@
 
     This report discusses the existing research into the information leaked by
     e-mail headers and presents a tool to extract such information.
+
+    \end{abstract}
 
     \chapter*{Acknowledgements}
 

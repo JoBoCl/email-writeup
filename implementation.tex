@@ -1,6 +1,8 @@
-\chapter{Implementation}\label{chap:imp}
+\chapter{Design and Implementation}\label{chap:imp}
 
 \section{Overview}
+
+This chapter discusses the requirements of the software intended to analyse e-mails, the design of the program and its specifications, and finally the implementation itself.
 
 The  analysis is implemented as a series of stages, firstly, the e-mail header
 is parsed, to extract important information to a predefined set of Java objects.
@@ -8,7 +10,69 @@ This is followed by the analysis phase, where the resultant data is passed to a
 set of analyser modules, each running separately.  Finally, this information is
 presented to the user.  This chapter presents each of these stages in detail.
 
-\subsection{Program Overview}
+    \section{Aims and Objectives}
+
+    The software should
+    automatically extract information from e-mail headers and analyse its results to
+    display the personal information continaed within an e-mail's header, as well as
+    information about the software configurations that may be found on a user's
+    computer, or the servers used to send their e-mail.
+
+    The program would be expected to satisfy the following minimal requirements
+    in order for it to be considered successful: \begin{description} \item
+    [{Accuracy}] --- any information produced by the parser should be reflective
+    of the input e-mail
+
+    \item [{Representation}] --- the produced visualisation should be intuitive
+    to read: each element should be presented separately from the others, and
+    clearly labelled.
+
+    \item [{Portability}] --- the visual output produced by the program should
+    be available to the user in a variety of formats.
+
+    \item [{Interactivity}] --- the program should produce sensible warnings
+    when an e-mail that is not possible to parse has been entered.
+  \end{description}
+
+  \section{Comparisons to Existing Software}
+
+  \paragraph{Google and Microsoft Header Analysers} Both of the tools discussed in Sections~\ref{sec:goo} and~\ref{sec:mic} produced detailed information on the servers that are being used to send and received messages, with Google's tool also clearly reporting when its own servers were used to send a message.  The software should mimic this by providing a similar level of detail on the devices being used to send information, and extend this by looking up information on the device's owning organisation.  Additionally, a more exhaustive search of the other fields should be conducted, so more information about the sender can be provided than the immediately available details such as time, sender's e-mail and recipient.
+
+  \paragraph{MITRE CVE Lookup and Norton Vulnerability Protection}
+
+  \section{Typical Use}
+
+  On starting the application, the user will provide an e-mail that they wish
+  to have analysed.  This will then be parsed, and some relevant information
+  presented in a table.
+
+  Lastly, an option is available to view the information about security
+  vulnerabilities in a separate webpage, forming the main output of the
+  program.
+
+  The resultant webpage will be structured as in table~\ref{tab:format}.  It
+  will then be possible for the user to click on the representations of the
+  devices to find out more information.  It will also be possible to search
+  within the vulnerability list to find more information, as well as filter by
+  impact and availability details.
+
+  \begin{table}[] \centering \begin{tabular}{@{}clllll@{}} \toprule
+    \multicolumn{6}{c}{Email Header Information}                                                                                                                                                                                                                                      \\
+    \midrule \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Information\\
+    (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender
+    Software} & \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Usernames\\
+    (Presented as a list with likely organisation)\end{tabular}} \\
+    \multicolumn{6}{c}{Graphical representation of devices used to deliver the
+    e-mail}                                                                                                                                                                                                \\
+    \multicolumn{6}{c}{List of derived information including found software and
+    similar information}                                                                                                                                                                                  \\
+    \multicolumn{6}{c}{Histograms for vulnerability scores, separated by
+    product}                                                  \\
+    \multicolumn{6}{c}{Searchable and filterable table of discovered CVEs}                                                                                                                                                                                                            \\
+    \bottomrule \end{tabular} \caption{Format of presented data found in e-mail
+    header}\label{tab:format} \end{table}
+
+\section{Program Overview}
 
 The program is split up into three main stages: textual analysis and parsing; header contents analysis, and visualisation, as shown in Figure~\ref{fig:con}.
 
@@ -27,6 +91,12 @@ The program is split up into three main stages: textual analysis and parsing; he
 \caption{Simplified Control Flow of Application}
 \label{fig:con}
 \end{figure}
+
+\subsection{Parsing}
+
+\subsection{Analysis}
+
+\subsection{Visualisation}
 
 \section{Definitions}
 
@@ -463,5 +533,6 @@ The output of the analysis modules is compiled into the \texttt{FoundInformation
 
 Using a pre-existing template, the results from the e-mail analysis will be
 presented in a temporary webpage, which can then be saved independently.  Other
-than the referenced JavaScript libraries, the document requires no additional
-information or database access, allowing it to be quickly shared.
+than the referenced JavaScript libraries, and a freely available set of country 
+borders, the document requires no additional information or database access, 
+allowing it to be quickly shared.
