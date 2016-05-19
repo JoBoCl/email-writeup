@@ -1,8 +1,7 @@
-\documentclass[a4paper,DIV=13,BCOR=7mm,abstract=yes,twoside,10pt]{scrreprt}
+\documentclass[a4paper,DIV=11,BCOR=7mm,abstract=yes,twoside,10pt]{scrreprt}
 
-\title{Full steam ahead(ers), Captain!} \author{Joshua Clark}
+\author{Joshua Clark}
 
-%\usepackage[a4paper, left=1.25in, right=1.25in]{geometry} 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[citestyle=authoryear]{biblatex}
@@ -23,115 +22,147 @@
 \usepackage{framed}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
+\usepackage{chngcntr}
 
 \lstset{basicstyle=\ttfamily, escapeinside=||, columns=flexible}
 
 \allowdisplaybreaks{}
 
+\counterwithout{figure}{chapter}
+
+\pagenumbering{roman}
 \begin{document}
 
-  \thispagestyle{empty}
+\thispagestyle{empty}
 
-  \begin{center} \begin{minipage}[c]{0.75\linewidth} \centering %University
-  \includegraphics[width=0.4\linewidth]{oxford}
+\begin{center} \begin{minipage}[c]{0.75\linewidth} \centering %University
+\includegraphics[width=0.4\linewidth]{oxford}
 
-      \vspace{2cm} %Thesis title
-      {\uppercase{\Large{}E-Mail Header Information}{\Large \par}} \vspace{2cm}
-      %Author's name
-      {\Large{}Joshua Clark}{\Large \par}
+\vspace{2cm} %Thesis title
+{\uppercase{\Large{}Understanding Information\\Leakage in E-Mail Headers}{\Large \par}} \vspace{2cm}
+%Author's name
+{\Large{}Joshua Clark}{\Large \par}
 
-      \vspace{2cm} %Degree
-      {\Large{}Fourth Year Project Report for the Final Honour School of
-      Computer Science}{\Large \par}
+\vspace{2cm} %Degree
+{\Large{}Fourth Year Project Report for the Final Honour School of
+Computer Science}{\Large \par}
 
-      \vspace{2cm} %Date
-      {\Large{}May 2016} %
-    \end{minipage} \par\end{center}
+\vspace{2cm} %Date
+{\Large{}May 2016} %
+\end{minipage} \par\end{center}
 
-    \clearpage{}
+\clearpage{}
 
-    \begin{abstract}
+\chapter*{Abstract}
 
-    After extensive public education, fewer people are now clicking on links in
-    e-mails that are disguised as phishing attacks, though the threat still
-    remains, and considerable amounts of work has gone into exploring the
-    demographics most likely to be targeted.  As the number of technically
-    literate people grows, this sort of attack is increasingly unlikely to be
-    successful.  Therefore, malicious entities are more likely to attempt to
-    attack people based on the information leaked in their emails, and more
-    specifically, the header, which most people are less likely to have some
-    degree of control over.
+After extensive public education, fewer people are now clicking on links in
+e-mails that are disguised as phishing attacks, though the threat still
+remains, and considerable amounts of work has gone into exploring the
+demographics most likely to be targeted.  As the number of technically
+literate people grows, this sort of attack is increasingly unlikely to be
+successful.  Therefore, malicious entities are more likely to attempt to
+attack people based on the information leaked in their emails, and more
+specifically, the header, which most people are less likely to have some
+degree of control over.
 
-    The risks are not just limited to individual users, and at a corporate
-    level, the risks posed by leaking information through e-mails could be even
-    greater: e-mail headers can reveal the internal network structure of a
-    company's computer systems as well as the different pieces of software that
-    are running inside the system.  Extracting the social information could be
-    of great value for executing a phishing atack, however, there is also value
-    in determining the specific weaknesses in a system.  This can be aided
-    through the use of vulnerability databases.
+The risks are not just limited to individual users, and at a corporate
+level, the risks posed by leaking information through e-mails could be even
+greater: e-mail headers can reveal the internal network structure of a
+company's computer systems as well as the different pieces of software that
+are running inside the system.  Extracting the social information could be
+of great value for executing a phishing attack, however, there is also value
+in determining the specific weaknesses in a system.  This can be aided
+through the use of vulnerability databases.
 
-    This report discusses the existing research into the information leaked by
-    e-mail headers and presents a tool to extract such information.
+This report discusses the existing research into the information leaked by
+e-mail headers and presents a tool to extract such information.
 
-    \end{abstract}
+\chapter*{Acknowledgements}
 
-    \chapter*{Acknowledgements}
+I want to thank my supervisor, Dr Jason R.C. Nurse for his assistance
+throughout the year; my tutor, Professor Peter Jeavons, for his unfailing
+help and support throughout my time at Oxford.  I would like to thank the
+residents and chaplains of the Oxford University Catholic Chaplaincy.
+Finally, I would like to acknowledge the support from my family and
+partner, Agata Borkowska, for encouraging me.
 
-    I want to thank my supervisor, Dr Jason R.C. Nurse for his assistance
-    throughout the year; my tutor, Professor Peter Jeavons, for his unfailing
-    help and support throughout my time at Oxford.  I would like to acknowledge
-    the support from my family and partner, Agata, for encouraging me.
-
-    \tableofcontents 
+\tableofcontents 
 \let\LaTeXStandardClearpage\clearpage
 \let\clearpage\relax  % Do nothing when a \clearpage command appears 
 
-    \listoftables \listoffigures \listofalgorithms
+\listoftables \listoffigures \listofalgorithms
 
-    \let\clearpage\LaTeXStandardClearpage % Return to the old definition
+\let\clearpage\LaTeXStandardClearpage % Return to the old definition
 
 
-    \chapter{Introduction}
+\chapter{Introduction}
+\pagenumbering{arabic}
+\setcounter{page}{1}
 
-    \section{Motivation}
+\section{Motivation}
 
-    E-mail systems are now so integrated into our modern lives that we struggle to
-    cope without them.  E-mails ubiquity is also one of its largest weaknesses, a
-    fact recognised very early on.  The first spam email was sent in 1978, as
-    documented by~\cite{templeton}.  After spam came phishing, first described
-    by~\cite{felix1987system}, with the first-real world use being against the
-    customers of America Online, an ISP.\@  However, this still relies on the
-    targets providing their data for malicious purposes. One of the first e-mail
-    viruses to spread was the Happy99 virus, which, other than propagating itself,
-    had no other effect on infected systems. Later viruses would target credit-card
-    and banking information. However, all of these techniques rely on the malicious
-    email being received and its contents being opened.  There are fewer instances
-    recorded, however, of the information flow being sent the other way.  A more
-    subtle attack will focus on the information being sent from a legitimate user to
-    an attacker. It is easy enough for an individual to read an e-mail header and
-    identify interesting elements, however, on a large scale, this quickly becomes
-    more difficult.
+E-mail systems are now so integrated into our modern lives that we struggle to
+cope without them.  E-mails ubiquity is also one of its largest weaknesses, a
+fact recognised very early on.  The first spam email was sent in 1978, as
+documented by~\cite{templeton}.  After spam came phishing, first described
+by~\cite{felix1987system}, with the first-real world use being against the
+customers of America Online, an ISP.\@  However, this still relies on the
+targets providing their data for malicious purposes. One of the first e-mail
+viruses to spread was the Happy99 virus, which, other than propagating itself,
+had no other effect on infected systems. Later viruses would target credit-card
+and banking information. However, all of these techniques rely on the malicious
+email being received and its contents being opened.  There are fewer instances
+recorded, however, of the information flow being sent the other way.  A more
+subtle attack will focus on the information being sent from a legitimate user to
+an attacker. It is easy enough for an individual to read an e-mail header and
+identify interesting elements, however, on a large scale, this quickly becomes
+more difficult.
 
-    \section{Structure}
+\section{Aims and Objectives}
 
-    Chapter~\ref{chap:exres} begins by discussing the existing research on
-    the subject as well as existing publicly-available tools to analyse
-    headers.  I then use these as a basis to discuss features that would be
-    expected to appear in a header analyser looking for leaked information
-    and vulnerabilities.
+This project aims to  support a better understanding of the data that may leaked
+when e-mails are sent, both from a personal perspective, as well as the corporate
+data that is leaked concern network configurations and software installations.
 
-    The implementation's high-level structure and details will be discussed in
-    Chapter~\ref{chap:imp}, and algorithms presented in pseudo-code where
-    necessary.  A full listing will be presented at the end of this document in
-    an appendix. The results of the analysis of the headers will be discussed in
-    Chapter~\ref{chap:test}, beginning with the methodology used, and presenting
-    a number of results. Finally, Chapter~\ref{chap:conc} will discuss my
-    conclusions and areas of further improvement.
+To support this, I will develop a tool that can be used as described above to
+automatically extract information from e-mail headers and analyse its results to
+display the personal information contained within an e-mail's header, as well as
+information about the software configurations that may be found on a user's
+computer, or the servers used to send their e-mail.
 
-    \cleardoublepage \include{existing-research} 
-    \cleardoublepage \include{implementation}
-    \cleardoublepage \include{testing} 
-    \cleardoublepage \include{evaluation}
+The tool's objectives will be to parse, analyse and visualise the contents of
+any e-mail header that it is given.  The parsing process should correctly and
+efficiently convert the plaintext of an e-mail header into an abstract
+representation.  In the analysis section, the representation of the header
+should be searched to find information out about the sender, their software and
+device, and information for any servers that the e-mail message passes through.
+Finally, the visualisation produced should clearly show the information that is
+available about the sender of an e-mail and the path the e-mail took in order to
+arrive at its final destination.
 
-    \printbibliography{} \end{document}
+\section{Structure}
+
+Chapter~\ref{chap:exres} begins by discussing the existing research on
+the subject as well as existing publicly-available tools to analyse
+headers.  I then use these as a basis to discuss features that would be
+expected to appear in a header analyser looking for leaked information
+and vulnerabilities.
+
+The specification and design of a program to support the understanding of the
+information leaked in e-mail headers is discussed in Chapter~\ref{chap:des}.
+The implementation's high-level structure and details will be discussed in
+Chapter~\ref{chap:imp}, and algorithms presented in pseudo-code where
+necessary.  A full listing will be presented at the end of this document in
+an appendix. The results of the analysis of the headers will be discussed in
+Chapter~\ref{chap:test}, beginning with the methodology used, and presenting
+a number of results. Finally, Chapter~\ref{chap:conc} will discuss my
+conclusions and areas of further improvement.
+
+\cleardoublepage \include{existing-research} 
+\cleardoublepage \include{design} 
+\cleardoublepage \include{implementation}
+\cleardoublepage \include{testing} 
+\cleardoublepage \include{evaluation}
+\cleardoublepage \printbibliography{} 
+
+\end{document}
