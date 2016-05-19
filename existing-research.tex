@@ -13,22 +13,23 @@ more carefully.  From the obvious ramifications for businesses discussed in
 the discovery of leaking data, to the more personal issues discussed in
 \cite{irani2011modeling}: the possibility of using the discovered data to
 discover passwords or to physically identify them.  53\% of Americans can be
-uniquely identified by their birthdate, gender and location (city/town), with
-the number jumping 87\% when using birthdate, gender and zip code.
+uniquely identified by their birth date, gender and location (city/town), with
+the number jumping 87\% when using birth date, gender and zip code.
 
 \subsection{Personal Data Leakage}
 
-From a persona perspective, there are a number of risks.  There are a
+From a personal perspective, there are a number of risks.  There are a
 significant number of social networks available, with an estimated 1.65 billion
 monthly active users, with a significantly higher proportion used in developed
 countries.  \cite{irani2011modeling} showed the rate at which the information
-gathered from social networks can be used to uniquely identify anindividual,
+gathered from social networks can be used to uniquely identify an individual,
 with only 9 sites required before there's approximately a 70\% chance that both
 a person's hometown and name could be recovered.  A similar number of sites can
 give an aggregate normalised attribute leakage of 1, where the leakage is
 defined as \[\Psi(F_a,P)=\frac{\sum_{f_a\in F_a}\phi\left(f_a,
 			P\right)}{|F_a|}\text{ where }\phi\left(f_a, P\right) =
 	\left[f_a\in P\right]\]
+
 
 \subsection{Corporate Data Leakage}
 
@@ -39,7 +40,7 @@ and consumers moving their business to competitors.
 \cite{squicciarini2010preventing} considers one way that data may be leaked,
 despite care being taken to ensure that it is properly encrypted and stored. By
 failing to protect against the indices for databases being stored insecurely,
-customer data may be leaked.  Order-preserving encryption schemes, as decribed
+customer data may be leaked.  Order-preserving encryption schemes, as described
 in~\cite{agrawal2004order}, is one way of solving this problem, to an extent.
 
 \section{Data Leakage from E-Mails}
@@ -114,7 +115,7 @@ bWFydHBob25lLjxicj48L2Rpdj48L2JvZHk+PC9odG1sPg==
 \end{lstlisting}
 
 The particularly interesting portions of the e-mail header include the IP
-adresses of the various servers the message has travelled through, allowing
+addresses of the various servers the message has travelled through, allowing
 their approximate location to be determined.  Additionally, the information on
 the protocol being used and the software being run allows for anyone with access
 to mail headers to find more information about the attacks a device and its
@@ -176,25 +177,25 @@ provided about the servers the message travelled through.  This tool shows the
 details of the time taken for each hop, and the protocol used.
 
 \begin{figure}
-	\begin{framed}
+	
 	\centering
-	\includegraphics[width=0.9\linewidth]{google-header}\label{fig:goo}
-\end{framed}
-	\caption{Google Apps Toolbox E-mail header output} \end{figure}
+	\includegraphics[width=0.9\linewidth]{google-header}
+
+	\caption{Google Apps Toolbox E-mail header output} \label{fig:goo}\end{figure}
 
 \subsection{Microsoft}\label{sec:mic}
 
-The Microsoft Message Header Analyzer\footnote{Fount at
+The Microsoft Message Header Analyser\footnote{Fount at
 	\url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and
 showing sample results in Figure~\ref{fig:mic} is of a similar nature to the Google tool, discussed in Subsection~\ref{sec:goo}.  
 
 In addition to the information presented by Google, this tool also produces a set of ``Other Headers'', highlighting fields that may be of interest.  However, little additional context is provided as to their relevance.
 
 \begin{figure}
-\begin{framed}
-	\centering \includegraphics[width=0.9\linewidth]{microsoft-header}\label{fig:mic}
-\end{framed}
-\caption{Microsoft E-mail header output} \end{figure}
+
+	\centering \includegraphics[width=0.9\linewidth]{microsoft-header}
+
+\caption{Microsoft E-mail header output} \label{fig:mic}\end{figure}
 
 \section{Vulnerabilities}
 
@@ -221,7 +222,7 @@ time.  Additionally, automated tools exist at a consumer and enterprise level
 that will automatically scan a computer or network to detect installed software
 configurations and show the results.
 
-\begin{figure} \begin{framed}\centering \includegraphics[width=0.9\linewidth]{cve-lookup}\label{fig:cve}\end{framed} \caption{CVE Search Results} \end{figure}
+\begin{figure} \centering \includegraphics[width=0.9\linewidth]{cve-lookup} \caption{CVE Search Results}\label{fig:cve} \end{figure}
 
 \subsection{Norton Vulnerability Protection}\label{sec:nor}
 
@@ -234,9 +235,9 @@ user to update their vulnerable applications, however it does not allow for
 more fine-grained information.
 
 
-\begin{figure} \begin{framed} \centering \includegraphics[width=0.9\linewidth]{norton-cve}
-\end{framed}
-	\label{fig:nort} \caption{Norton Vulnerability Protection Results}
+\begin{figure}  \centering \includegraphics[width=0.9\linewidth]{norton-cve}
+
+	 \caption{Norton Vulnerability Protection Results}\label{fig:nort}
 \end{figure}
 
 \section{Overview}
