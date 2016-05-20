@@ -6,7 +6,7 @@ In order to satisfy the aims of this project, and building on the presented
 objectives, this chapter discusses the requirements of the software intended to
 analyse e-mails and the design of the program and its specifications.
 
-\section{Aims and Objectives}
+\section{Program Specification}
 
 The software should automatically extract information from e-mail headers and
 analyse its results to display the personal information contained within an
@@ -32,73 +32,6 @@ order for it to be considered successful:
 	an e-mail that is not possible to parse has been entered.
 
 \end{description}
-
-\section{Comparisons to Existing Software}
-
-\paragraph{Google and Microsoft Header Analysers} Both of the tools discussed
-in Sections~\ref{sec:goo} and~\ref{sec:mic} produced detailed information on
-the servers that are being used to send and received messages, with Google's
-tool also clearly reporting when its own servers were used to send a message.
-The software should mimic this by providing a similar level of detail on the
-devices being used to send information, and extend this by looking up
-information on the device's owning organisation.  Additionally, a more
-exhaustive search of the other fields should be conducted, so more information
-about the sender can be provided than the immediately available details such as
-time, sender's e-mail and recipient.
-
-\paragraph{MITRE CVE Lookup and Norton Vulnerability Protection} The tools
-discussed in Sections~\ref{sec:mit} and~\ref{sec:nor} are both targeted at very
-different demographics.  The MITRE CVE Lookup is designed for IT professionals
-and system administrators wishing to gather more information about specific
-vulnerabilities and software, requiring knowledge of the software present on a
-network or device.  The information presented is also not structured or sorted
-in a clear fashion.
-
-Norton's tool, on the other hand, is focused on individual users who administer
-their own systems.  The information is presented in such a way as to warn them
-as to which software needs updating or patching against a vulnerability, but
-provides few details on the nature of the vulnerabilities.
-
-The tool that is described in this report ought to be able to bridge the gap
-between these two tools, providing a useful and relevant list of
-vulnerabilities, without overloading the information provided, or requiring
-complex search terms to be crafted. 
-
-\section{Typical Use}
-
-On starting the application, the user will provide an e-mail that they wish
-to have analysed.  This will then be parsed, and some relevant information
-presented in a table.
-
-Lastly, an option is available to view the information about security
-vulnerabilities in a separate webpage, forming the main output of the
-program.
-
-The resultant webpage will be structured as in Table~\ref{tab:format}.  It
-will then be possible for the user to click on the representations of the
-devices to find out more information.  It will also be possible to search
-within the vulnerability list to find more information, as well as filter by
-impact and availability details.
-
-  \begin{table}[] \centering \begin{tabular}{@{}clllll@{}} \toprule
-    \multicolumn{6}{c}{Email Header Information}                                                                                                                                                                                                                                      \\
-    \midrule \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Information\\
-    (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender
-    Software} & \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Usernames\\
-    (Presented as a list with likely organisation)\end{tabular}} \\
-    \midrule
-    \multicolumn{6}{c}{Graphical representation of devices used to deliver the
-    e-mail}                                                                                                                                                                                                \\
-    \midrule
-    \multicolumn{6}{c}{List of derived information including found software and
-    similar information}                                                                                                                                                                                  \\
-    \midrule
-    \multicolumn{6}{c}{Histograms for vulnerability scores, separated by
-    product}                                                  \\
-    \midrule
-    \multicolumn{6}{c}{Table of discovered CVEs that can be searched and filtered}                                                                                                                                                                                                            \\
-    \bottomrule \end{tabular} \caption{Format of presented data found in e-mail
-    header}\label{tab:format} \end{table}
 
 \section{Program Overview}
 
@@ -175,3 +108,71 @@ for each piece of found software, and a listing of the available
 vulnerabilities should be made.  By providing a visualisation of the
 distribution of the scores assigned to each piece of software conclusions can 
 be drawn about the expected severity of future vulnerabilities.
+
+\section{Comparisons to Existing Software}
+
+\paragraph{Google and Microsoft Header Analysers} Both of the tools discussed
+in Sections~\ref{sec:goo} and~\ref{sec:mic} produced detailed information on
+the servers that are being used to send and received messages, with Google's
+tool also clearly reporting when its own servers were used to send a message.
+The software should mimic this by providing a similar level of detail on the
+devices being used to send information, and extend this by looking up
+information on the device's owning organisation.  Additionally, a more
+exhaustive search of the other fields should be conducted, so more information
+about the sender can be provided than the immediately available details such as
+time, sender's e-mail and recipient.
+
+\paragraph{MITRE CVE Lookup and Norton Vulnerability Protection} The tools
+discussed in Sections~\ref{sec:mit} and~\ref{sec:nor} are both targeted at very
+different demographics.  The MITRE CVE Lookup is designed for IT professionals
+and system administrators wishing to gather more information about specific
+vulnerabilities and software, requiring knowledge of the software present on a
+network or device.  The information presented is also not structured or sorted
+in a clear fashion.
+
+Norton's tool, on the other hand, is focused on individual users who administer
+their own systems.  The information is presented in such a way as to warn them
+as to which software needs updating or patching against a vulnerability, but
+provides few details on the nature of the vulnerabilities.
+
+The tool that is described in this report ought to be able to bridge the gap
+between these two tools, providing a useful and relevant list of
+vulnerabilities, without overloading the information provided, or requiring
+complex search terms to be crafted. 
+
+\section{Typical Use}
+
+On starting the application, the user will provide an e-mail that they wish
+to have analysed.  This will then be parsed, and some relevant information
+presented in a table.
+
+Lastly, an option is available to view the information about security
+vulnerabilities in a separate webpage, forming the main output of the
+program.
+
+The resultant webpage will be structured as in Table~\ref{tab:format}.  It
+will then be possible for the user to click on the representations of the
+devices to find out more information.  It will also be possible to search
+within the vulnerability list to find more information, as well as filter by
+impact and availability details.
+
+  \begin{table}[] \centering \begin{tabular}{@{}clllll@{}} \toprule
+    \multicolumn{6}{c}{Email Header Information}                                                                                                                                                                                                                                      \\
+    \midrule \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Information\\
+    (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender
+    Software} & \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Usernames\\
+    (Presented as a list with likely organisation)\end{tabular}} \\
+    \midrule
+    \multicolumn{6}{c}{Graphical representation of devices used to deliver the
+    e-mail}                                                                                                                                                                                                \\
+    \midrule
+    \multicolumn{6}{c}{List of derived information including found software and
+    similar information}                                                                                                                                                                                  \\
+    \midrule
+    \multicolumn{6}{c}{Histograms for vulnerability scores, separated by
+    product}                                                  \\
+    \midrule
+    \multicolumn{6}{c}{Table of discovered CVEs that can be searched and filtered}                                                                                                                                                                                                            \\
+    \bottomrule \end{tabular} \caption{Format of presented data found in e-mail
+    header}\label{tab:format} \end{table}
+

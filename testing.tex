@@ -12,10 +12,12 @@ attributes:
 \item Let $M$ be the total number of received fields.
 \item Let $N$ be the total number of other fields.
 \item 1 point is added to the total $R$ for each piece of information found in a Received field for the following:
-\subitem{One of device name \emph{or} IP address}
-\subitem{Software \emph{or} protocol used}
-\subitem{Vulnerabilities found for the relevant piece of software}
-\subitem{Location Data}
+\begin{itemize}
+\item{One of device name \emph{or} IP address}
+\item{Software \emph{or} protocol used}
+\item{Vulnerabilities found for the relevant piece of software}
+\item{Location Data}
+\end{itemize}
 \item 1 point is addded to $F$ for each piece of information found in other fields.
 \end{itemize}
 
@@ -100,50 +102,78 @@ Return-Path: ahayes@mays.tamu.edu
 
 Table~\ref{tab:sammn} gives the $M$ and $N$ values for the different sampled
 e-mails.  These were sampled using standard Unix tools: \texttt{grep}ping for
-fields and counting the output.
+fields and counting the output. The results for $R$ and $F$ have been listed
+after completing the testing, after counting the number of entries in the final
+visualisation.
 
-\begin{table}[]
+\begin{table}
 \centering
-\begin{tabular}{@{}lccclll@{}}
+\begin{tabular}{@{}lrrrrrr@{}}
 \toprule
 Header & Total Fields &                  $M$  & $N$  & $R$ & $F$ & $S$ \\ \midrule
-1.txt  & 26           & 7                     & 19   & 23  & 7   &     \\
-3.txt  & 32           & 6                     & 26   & 16  & 6   &     \\
-8.txt  & 34           & 8                     & 26   & 30  & 6   &     \\
-10.txt & 22           & 3                     & 19   & 9   & 7   &     \\
-11.txt & 29           & 6                     & 23   & 23  & 6   &     \\
-13.txt & 17           & 4                     & 13   & 13  & 5   &     \\
-17.txt & 27           & 6                     & 21   & 22  & 6   &     \\
-18.txt & 20           & 6                     & 14   & 23  & 5   &     \\
-19.txt & 20           & 6                     & 14   & 21  & 4   &     \\
-20.txt & 22           & 7                     & 15   & 25  & 7   &     \\
-21.txt & 22           & 6                     & 16   & 23  & 5   &     \\
-22.txt & 22           & 6                     & 16   & 22  & 6   &     \\
-23.txt & 26           & 6                     & 20   & 20  & 7   &     \\
-26.txt & 19           & 6                     & 13   & 21  & 5   &     \\
-27.txt & 21           & 1                     & 20   & 2   & 8   &     \\
-28.txt & 22           & 6                     & 16   &     &     &     \\
-29.txt & 20           & 6                     & 14   &     &     &     \\
-32.txt & 24           & 6                     & 18   &     &     &     \\
-34.txt & 23           & 5                     & 18   &     &     &     \\
-36.txt & 26           & 6                     & 20   &     &     &     \\
-41.txt & 21           & 6                     & 15   &     &     &     \\
-45.txt & 23           & 6                     & 17   &     &     &     \\
-46.txt & 26           & 5                     & 21   &     &     &     \\
-48.txt & 25           & 6                     & 19   &     &     &     \\
-49.txt & 21           & 6                     & 15   &     &     &     \\
-57.txt & 28           & 6                     & 22   &     &     &     \\
-63.txt & 23           & 5                     & 18   &     &     &     \\
-64.txt & 36           & 9                     & 27   & 31  & 6   &     \\
-68.txt & 21           & 6                     & 15   &     &     &     \\
-69.txt & 22           & 6                     & 16   &     &     &     \\ \bottomrule
+1.txt  & 26           & 7                     & 19   & 23  & 7   & 0.594924812    \\
+3.txt  & 32           & 6                     & 26   & 16  & 6   & 0.4487179487   \\
+8.txt  & 34           & 8                     & 26   & 30  & 6   & 0.5841346154   \\
+10.txt & 22           & 3                     & 19   & 9   & 7   & 0.5592105263   \\
+11.txt & 29           & 6                     & 23   & 23  & 6   & 0.6096014493   \\
+13.txt & 17           & 4                     & 13   & 13  & 5   & 0.5985576923   \\
+17.txt & 27           & 6                     & 21   & 22  & 6   & 0.6011904762   \\
+18.txt & 20           & 6                     & 14   & 23  & 5   & 0.6577380952   \\
+19.txt & 20           & 6                     & 14   & 21  & 4   & 0.5803571429   \\
+20.txt & 22           & 7                     & 15   & 25  & 7   & 0.6797619048   \\
+21.txt & 22           & 6                     & 16   & 23  & 5   & 0.6354166667   \\
+22.txt & 22           & 6                     & 16   & 22  & 6   & 0.6458333333   \\
+23.txt & 26           & 6                     & 20   & 20  & 7   & 0.5373563218   \\
+26.txt & 19           & 6                     & 13   & 21  & 5   & 0.6298076923   \\
+27.txt & 21           & 1                     & 20   & 2   & 8   & 0.45           \\
+28.txt & 22           & 6                     & 16   & 23  & 4   & 0.6041666667   \\
+29.txt & 20           & 6                     & 14   & 21  & 6   & 0.6517857143   \\
+32.txt & 24           & 6                     & 18   & 20  & 3   & 0.5            \\
+34.txt & 23           & 5                     & 18   & 19  & 4   & 0.586111111    \\
+36.txt & 26           & 6                     & 20   & 21  & 4   & 0.5375         \\
+41.txt & 21           & 6                     & 15   & 20  & 5   & 0.5833333333   \\
+45.txt & 23           & 6                     & 17   & 22  & 5   & 0.6053921569   \\
+46.txt & 26           & 5                     & 21   & 15  & 7   & 0.5416666667   \\
+48.txt & 25           & 6                     & 19   & 22  & 6   & 0.6162280702   \\
+49.txt & 21           & 6                     & 15   & 22  & 3   & 0.5583333333   \\
+57.txt & 28           & 6                     & 22   & 21  & 4   & 0.5284090909   \\
+63.txt & 23           & 5                     & 18   & 18  & 5   & 0.5888888889   \\
+64.txt & 36           & 9                     & 27   & 31  & 6   & 0.5416666667   \\
+68.txt & 21           & 6                     & 15   & 20  & 5   & 0.5833333333   \\
+69.txt & 22           & 6                     & 16   & 21  & 5   & 0.59375        \\ \midrule
+\emph{Average} & 24.3 & 5.8                   & 18.5 & 20.3& 5.4 & 0.582916135    \\ \bottomrule
 \end{tabular}
 \caption{$M$, $N$, $R$, $F$ and score values for chosen headers}
 \label{tab:sammn}
 \end{table}
 
-The results of the testing are contained within Table~\ref{tab:res}, and give a
-breakdown for each e-mail's values of $R$ and $F$, as well as the final score.
+\begin{figure}
+	\centering\resizebox{0.75\textwidth}{!}{
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    ymin=0
+]
+\addplot +[
+    hist={
+        bins=10,
+        data min=0.4,
+        data max=0.7
+    }   
+] table [y index=0] {data.csv};
+\end{axis}
+\end{tikzpicture}}
+\caption{Distribution of scores from e-mails}\label{fig:dis}
+\end{figure}
+
+The final score for the e-mails gives a minimum value of 0.449 and a maximum
+value of 0.680, with an average of 0.583 and standard deviation of 0.0540. The
+histogram in Figure~\ref{fig:dis} shows the distribution of scores from the
+e-mails, showing a skew towards higher scores.  This is a promising result,
+however, most of the score is contributed to by the trace-fields, with the 
+value of $R/4N$ being consistently around 0.85.  As the aim of this project
+jas both focused on the disclosure of individual's data and of network
+vulnerabilities, the high score from the trace-fields is a positive result.
 
 During the testing, the following trends were noticed.  As many of the e-mails
 passed through the same set of servers, as they had been received by an Oxford
