@@ -12,6 +12,7 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{multicol}
+\usepackage{pdfpages}
 
 \usepackage{graphicx}
 \usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=true,pdfborder={0 0 0},colorlinks=false]{hyperref}
@@ -26,12 +27,12 @@
 \usepackage[T1]{fontenc}
 \usepackage{chngcntr}
 
-\lstset{basicstyle=\ttfamily, escapeinside=||, columns=flexible}
+\lstset{basicstyle=\small\ttfamily, escapeinside=||, columns=flexible}
 
 \usepackage{listings}
 \lstnewenvironment{example}[1][]{
     \renewcommand*{\lstlistingname}{E-Mail Header Fragment}
-    \lstset{fancyvrb=true,basicstyle=\ttfamily,captionpos=b,#1}
+    \lstset{fancyvrb=true,basicstyle=\small\ttfamily,captionpos=b,columns=flexible,escapeinside=||,#1}
 }{}
 
 
@@ -172,5 +173,8 @@ a number of results, finishing with conclusions and areas of further improvement
 \cleardoublepage \include{implementation}
 \cleardoublepage \include{testing} 
 \cleardoublepage \printbibliography{} 
+
+\appendix
+\chapter{Code Listings}
 
 \end{document}

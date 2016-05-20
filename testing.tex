@@ -37,50 +37,108 @@ Thus giving a sorted list of the following e-mails: 1, 3, 8, 10, 11, 13, 17,
 18, 19, 20, 21, 22, 23, 26, 27, 28, 29, 32, 34, 36, 41, 45, 46, 48, 49, 57, 63,
 64, 68, 69.
 
+\section{Sample Output}
+
+The following pages show the results of running the completed software on the
+e-mail labelled \texttt{11.txt}, the contents of which is listed in
+Fragment~\ref{eg:11}.  The full table of CVE entries is elided for brevity.  
+The entries in \colorbox{red!30}{this colour} are associated with points scored
+for $R$, and the entries in \colorbox{blue!30}{this colour} are associated with
+points scored for $F$.
+
+\begin{example}[caption=Email \texttt{11.txt},label=eg:11]
+Received: from relay13.mail.ox.ac.uk (129.67.1.163) by HUB01.ad.oak.ox.ac.uk 
+ (|\colorbox{red!30}{163.1.154.218}|) with |\colorbox{red!30}{Microsoft SMTP Server}| id 14.3.169.1; Wed, 1 Apr 2015 
+ 11:06:18 +0100 
+Received: from postie2.cs.ox.ac.uk ([129.67.151.44])	by |\colorbox{red!30}{relay12.mail.ox.ac.uk }|
+ with |\colorbox{red!30}{esmtp (Exim 4.80}|)	(envelope-from <ahayes@mays.tamu.edu>)	id 
+ 1YdFXO-0008P8-de	for cccc1111@nexus.ox.ac.uk; Wed, 01 Apr 2015 11:06:18 +0100 
+Received: from mailer.cs.ox.ac.uk ([129.67.151.81]:36787)	by 
+ |\colorbox{red!30}{postie2.cs.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.72)}|	(envelope-from 
+ <ahayes@mays.tamu.edu>)	id 1YdFWT-0004Fk-DZ	for jason.nurse@cs.ox.ac.uk; Wed, 
+ 01 Apr 2015 11:05:21 +0100 
+Received: from relay11.mail.ox.ac.uk ([129.67.1.162]:57950)	by 
+|\colorbox{red!30}{mailer.cs.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.72)}|	(envelope-from 
+ <ahayes@mays.tamu.edu>)	id 1YdFWS-0003OY-6C	for jason.nurse@cs.ox.ac.uk; Wed, 
+ 01 Apr 2015 11:05:20 +0100 
+Received: from mailbox2.mbs.tamu.edu ([128.194.216.125])	by 
+|\colorbox{red!30}{relay11.mail.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.80)}|	(envelope-from 
+ <ahayes@mays.tamu.edu>)	id 1YdFWS-0000Ck-Zf	for jason.nurse@cs.ox.ac.uk; Wed, 
+ 01 Apr 2015 11:05:20 +0100 
+Received: from MAILBOX1.mbs.tamu.edu ([|\colorbox{red!30}{169.254.2.132}|]) by
+MAILBOX2.mbs.tamu.edu ([|\colorbox{red!30}{169.254.1.80}|]) with |\colorbox{red!30}{mapi}| id 14.03.0224.002; Wed, 1
+Apr 2015 05:05:00 -0500
+From: |\colorbox{blue!30}{"Hayes, Allison" <ahayes@mays.tamu.edu>}|
+To: "Hayes, Allison" <ahayes@mays.tamu.edu>
+Subject: RE: ITS HELP DESK
+Thread-Topic: ITS HELP DESK
+Thread-Index: AdBsXNo2iPt2JIAvQzCkSflypfIvlgABOhlv
+Date: Wed, 1 Apr 2015 10:04:57 +0000 
+Message-ID: <3AC6BF6FEAFA734A8A0397E31CB7AD009B695F@MAILBOX1.mbs.tamu.edu> 
+References: <3AC6BF6FEAFA734A8A0397E31CB7AD009A5A35@MAILBOX1.mbs.tamu.edu> 
+In-Reply-To: <3AC6BF6FEAFA734A8A0397E31CB7AD009A5A35@MAILBOX1.mbs.tamu.edu> 
+|\colorbox{blue!30}{Accept-Language: en-US }|
+Content-Language: en-US 
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [208.76.111.246] 
+Content-Type: multipart/alternative; 
+	boundary="_000_3AC6BF6FEAFA734A8A0397E31CB7AD009B695FMAILBOX1mbstamued_" 
+MIME-Version: 1.0 
+X-Oxmail-Spam-Status: score=2.9 tests=HTML_MESSAGE,SUBJ_ALL_CAPS,T_RP_MATCHES_RCVD,URI_HEX 
+X-Oxmail-Spam-Level: ** 
+Return-Path: ahayes@mays.tamu.edu 
+|\colorbox{blue!30}{X-MS-Exchange-Organization-AuthSource: HUB01.ad.oak.ox.ac.uk }|
+|\colorbox{blue!30}{X-MS-Exchange-Organization-AuthAs: Anonymous }|
+|\colorbox{blue!30}{X-MS-Exchange-Organization-AVStamp-Mailbox: Sophos;-2052447998;0;PM }|
+|\colorbox{blue!30}{X-MS-Exchange-Organization-SCL: 2 }|
+\end{example}
+
+\includepdf[pages={1,2,3}]{11_results.pdf}
+
 \section{Results}
 
 Table~\ref{tab:sammn} gives the $M$ and $N$ values for the different sampled
 e-mails.  These were sampled using standard Unix tools: \texttt{grep}ping for
 fields and counting the output.
 
-\begin{table}
+\begin{table}[]
 \centering
-\begin{tabular}{@{}cccc@{}}
+\begin{tabular}{@{}lccclll@{}}
 \toprule
-Header & Total Fields & $M$ & $N$ \\ \midrule
-1.txt  & 26           & 7                     & 19                 \\
-3.txt  & 32           & 6                     & 26                 \\
-8.txt  & 34           & 8                     & 26                 \\
-10.txt & 22           & 3                     & 19                 \\
-11.txt & 29           & 6                     & 23                 \\
-13.txt & 17           & 4                     & 13                 \\
-17.txt & 27           & 6                     & 21                 \\
-18.txt & 20           & 6                     & 14                 \\
-19.txt & 20           & 6                     & 14                 \\
-20.txt & 22           & 7                     & 15                 \\
-21.txt & 22           & 6                     & 16                 \\
-22.txt & 22           & 6                     & 16                 \\
-23.txt & 26           & 6                     & 20                 \\
-26.txt & 19           & 6                     & 13                 \\
-27.txt & 21           & 1                     & 20                 \\
-28.txt & 22           & 6                     & 16                 \\
-29.txt & 20           & 6                     & 14                 \\
-32.txt & 24           & 6                     & 18                 \\
-34.txt & 23           & 5                     & 18                 \\
-36.txt & 26           & 6                     & 20                 \\
-41.txt & 21           & 6                     & 15                 \\
-45.txt & 23           & 6                     & 17                 \\
-46.txt & 26           & 5                     & 21                 \\
-48.txt & 25           & 6                     & 19                 \\
-49.txt & 21           & 6                     & 15                 \\
-57.txt & 28           & 6                     & 22                 \\
-63.txt & 23           & 5                     & 18                 \\
-64.txt & 36           & 9                     & 27                 \\
-68.txt & 21           & 6                     & 15                 \\
-69.txt & 22           & 6                     & 16                 \\
-\bottomrule
+Header & Total Fields &                  $M$  & $N$  & $R$ & $F$ & $S$ \\ \midrule
+1.txt  & 26           & 7                     & 19   & 23  & 7   &     \\
+3.txt  & 32           & 6                     & 26   & 16  & 6   &     \\
+8.txt  & 34           & 8                     & 26   & 30  & 6   &     \\
+10.txt & 22           & 3                     & 19   & 9   & 7   &     \\
+11.txt & 29           & 6                     & 23   & 23  & 6   &     \\
+13.txt & 17           & 4                     & 13   & 13  & 5   &     \\
+17.txt & 27           & 6                     & 21   & 22  & 6   &     \\
+18.txt & 20           & 6                     & 14   & 23  & 5   &     \\
+19.txt & 20           & 6                     & 14   & 21  & 4   &     \\
+20.txt & 22           & 7                     & 15   & 25  & 7   &     \\
+21.txt & 22           & 6                     & 16   & 23  & 5   &     \\
+22.txt & 22           & 6                     & 16   & 22  & 6   &     \\
+23.txt & 26           & 6                     & 20   & 20  & 7   &     \\
+26.txt & 19           & 6                     & 13   & 21  & 5   &     \\
+27.txt & 21           & 1                     & 20   & 2   & 8   &     \\
+28.txt & 22           & 6                     & 16   &     &     &     \\
+29.txt & 20           & 6                     & 14   &     &     &     \\
+32.txt & 24           & 6                     & 18   &     &     &     \\
+34.txt & 23           & 5                     & 18   &     &     &     \\
+36.txt & 26           & 6                     & 20   &     &     &     \\
+41.txt & 21           & 6                     & 15   &     &     &     \\
+45.txt & 23           & 6                     & 17   &     &     &     \\
+46.txt & 26           & 5                     & 21   &     &     &     \\
+48.txt & 25           & 6                     & 19   &     &     &     \\
+49.txt & 21           & 6                     & 15   &     &     &     \\
+57.txt & 28           & 6                     & 22   &     &     &     \\
+63.txt & 23           & 5                     & 18   &     &     &     \\
+64.txt & 36           & 9                     & 27   & 31  & 6   &     \\
+68.txt & 21           & 6                     & 15   &     &     &     \\
+69.txt & 22           & 6                     & 16   &     &     &     \\ \bottomrule
 \end{tabular}
-\caption{$M$ and $N$ values for chosen headers}
+\caption{$M$, $N$, $R$, $F$ and score values for chosen headers}
 \label{tab:sammn}
 \end{table}
 
