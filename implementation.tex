@@ -446,19 +446,12 @@ and other information that has been gathered from an e-mail.
 \draw [->, ultra thick] (2,0) -- (2,-1) node [below, text width = 4.75cm, align = center] {Getters for name, software, User ID, device, fact lists};
 \draw [->] (4,0) -> (5,-1);
 \draw (5,-1) rectangle node [align=center] {User name,\\ software} (9,-3);
+\draw (1+10,0-1.5) rectangle node {Device Info} (1+14,2-1.5);
+\draw (1+10,3-1.5) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (1+14,5-1.5);
+\draw [->] (1+12,2-1.5) -- (1+12,3-1.5);
 \end{tikzpicture}}
 \caption{Found Information Data Structure Format}
 \label{fig:fou}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{tikzpicture}
-\draw (0,0) rectangle node {Device Info} (4,2);
-\draw (0,3) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (4,5);
-\draw [->] (2,2) -- (2,3);
-\end{tikzpicture}
-\caption{Device Information Data Structure}
 \end{figure}
 
 \section{Visualising the Results}
