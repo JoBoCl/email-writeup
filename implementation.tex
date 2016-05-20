@@ -382,14 +382,15 @@ The following modules are used in the analysis of e-mail headers. Via \texttt{He
 
 Figure~\ref{fig:flo} shows the direct interaction of the analysis modules.  Unless noted, if an arrow goes from $\alpha$ to $\beta$, it is used to indicate that $\alpha$ calls $\beta$, passing data from $\alpha$, and/or receiving data from $\beta$.
 
+Where possible, these requests are non-blocking, that is run asynchronously, while waiting for other results to be computed.  THe biggest delay is caused by the CVE Database lookup, followed by the WhoIs lookup and then the GeoIP lookup.  The CVE database lookups require the most time as they are often consuming large amounts of data, and searching over specific fields.  The WhoIs lookup takes place over the network, causing its response time to be unpredictable, however, its relatively small response size reduces the time needed.  Finally, the GeoIP lookup takes place locally, with a relatively small response, allowing it to complete quickly.
+
 \begin{figure}
 	\resizebox{0.9\textwidth}{!}{
 \begin{tikzpicture}
 \tikzset{every node/.style={align=center, text width = 3.5cm, font = \ttfamily}}
-
 \draw (0,0) rectangle node {Main Window} (4,2);
 \draw [->] (4,1) -- (5,1);
-\draw (5,0) rectangle node {Oxford Analyser} (9,2);
+\draw (5,0) rectangle node {Username Analyser} (9,2);
 \draw [->] (4,2) -- (5,3);
 \draw (5,3) rectangle node {Client Inferrer} (9,5);
 \draw (0,-1) rectangle node {Exchange Header Analyser} (4,-3);
@@ -407,8 +408,14 @@ Figure~\ref{fig:flo} shows the direct interaction of the analysis modules.  Unle
 \draw [->] (0,1)  -- (-1,1);
 \draw (-1,6) rectangle node {Who-Is Analyser} (-5,8);
 \draw [->] (0,5) -- (-1,6);
-\end{tikzpicture}	
-	}
+\draw [->] (-3,2) -- (-3,6);
+\draw [->] (-3,8) -- (-3,9);
+\draw [->] (2,8) -- (2,9);
+\draw [->] (7,8) -- (7,9);
+\draw (-1,9) [dashed] rectangle node {External Lookup} (-5,11);
+\draw (0,9) [dashed] rectangle node {External Lookup} (4,11);
+\draw (5,9) [dashed] rectangle node {External Lookup} (9,11);
+\end{tikzpicture}}
 \caption{Information flow between analysis modules}
 \label{fig:flo}
 \end{figure}
@@ -439,19 +446,12 @@ and other information that has been gathered from an e-mail.
 \draw [->, ultra thick] (2,0) -- (2,-1) node [below, text width = 4.75cm, align = center] {Getters for name, software, User ID, device, fact lists};
 \draw [->] (4,0) -> (5,-1);
 \draw (5,-1) rectangle node [align=center] {User name,\\ software} (9,-3);
+\draw (1+10,0-1.5) rectangle node {Device Info} (1+14,2-1.5);
+\draw (1+10,3-1.5) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (1+14,5-1.5);
+\draw [->] (1+12,2-1.5) -- (1+12,3-1.5);
 \end{tikzpicture}}
 \caption{Found Information Data Structure Format}
 \label{fig:fou}
-\end{figure}
-
-\begin{figure}
-\centering
-\begin{tikzpicture}
-\draw (0,0) rectangle node {Device Info} (4,2);
-\draw (0,3) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (4,5);
-\draw [->] (2,2) -- (2,3);
-\end{tikzpicture}
-\caption{Device Information Data Structure}
 \end{figure}
 
 \section{Visualising the Results}

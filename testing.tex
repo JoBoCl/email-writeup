@@ -103,12 +103,24 @@ information, failing to rate the presence of a username above the presence of a
 particular piece of software also giving false positives.
 
 However, very few e-mails in the testing population contained fields relating
-to usernames (\texttt{X-Oxford-Username}, \texttt{X-}$\ldots$\texttt{-User},
+to usernames (for example, \texttt{X-}$\ldots$\texttt{-User}, \texttt{X-Oxford-Username},
 \texttt{X-Authenticated-User}) compared to the result
 in~\cite{nurse2015investigating}, which found 14\% of e-mails to contain
 usernames as opposed to the 8\% found in the population.
 
 \section{Conclusions}
+
+As described in Chapter~\ref{chap:int}, the aim of this project is to support a
+better understanding of the data that may leaked when e-mails are sent, both
+from a personal perspective, as well as the corporate data that is leaked
+concern network configurations and software installations.
+
+To support this, I have developed a tool that can be used to automatically
+extract information from e-mail headers and analyse its results to display the
+personal information contained within an e-mail's header, as well as
+information about the software configurations that may be found on a user's
+computer, or the servers used to send their e-mail.
+
 
 \section{Future Work}
 
@@ -124,6 +136,10 @@ Alternatively, a better picture may be presented by accumulating multiple
 e-mails. For example, using the information provided from multiple members of
 single organisation, a better picture may be built up of the software used by
 the servers, as well as the network configuration.
+
+The application's response times may also be improved by caching some data in
+memory, such as WhoIs responses and GeoIP lookups, so that frequently accessed
+lookups can be completed more quickly.
 
 Additionally, future testing should take place on a larger dataset, using
 e-mails from a wider variety of sources sent to a number of different
