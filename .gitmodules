@@ -1,0 +1,3 @@
+[submodule "emailheaderinformation"]
+	path = emailheaderinformation
+	url = git://www.github.com/jClark94/emailheaderinformation
