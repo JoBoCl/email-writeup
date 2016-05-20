@@ -365,7 +365,9 @@ available.  These are added asynchronously.
 
 \subsection{Analysis Modules and Data Flow}
 
-The following modules are used in the analysis of e-mail headers. Via \texttt{HeaderAnalyser}, they all subclass \texttt{Callable<Object>}, allowing them to return values to calling classes when side-effects are undesirable.
+The following modules are used in the analysis of e-mail headers. Via
+\texttt{HeaderAnalyser}, they all subclass \texttt{Callable<Object>}, allowing
+them to return values to calling classes when side-effects are undesirable.
 
 \begin{description}
 	\item[HeaderAnalyser] --- the base interface for all analysis modules.
@@ -382,7 +384,15 @@ The following modules are used in the analysis of e-mail headers. Via \texttt{He
 
 Figure~\ref{fig:flo} shows the direct interaction of the analysis modules.  Unless noted, if an arrow goes from $\alpha$ to $\beta$, it is used to indicate that $\alpha$ calls $\beta$, passing data from $\alpha$, and/or receiving data from $\beta$.
 
-Where possible, these requests are non-blocking, that is run asynchronously, while waiting for other results to be computed.  THe biggest delay is caused by the CVE Database lookup, followed by the WhoIs lookup and then the GeoIP lookup.  The CVE database lookups require the most time as they are often consuming large amounts of data, and searching over specific fields.  The WhoIs lookup takes place over the network, causing its response time to be unpredictable, however, its relatively small response size reduces the time needed.  Finally, the GeoIP lookup takes place locally, with a relatively small response, allowing it to complete quickly.
+Where possible, these requests are non-blocking, that is run asynchronously,
+while waiting for other results to be computed.  THe biggest delay is caused by
+the CVE Database lookup, followed by the WhoIs lookup and then the GeoIP
+lookup.  The CVE database lookups require the most time as they are often
+consuming large amounts of data, and searching over specific fields.  The WhoIs
+lookup takes place over the network, causing its response time to be
+unpredictable, however, its relatively small response size reduces the time
+needed.  Finally, the GeoIP lookup takes place locally, with a relatively small
+response, allowing it to complete quickly.
 
 \begin{figure}
 	\resizebox{0.9\textwidth}{!}{
