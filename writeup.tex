@@ -1,4 +1,4 @@
-\documentclass[a4paper,DIV=12,BCOR=7mm,abstract=yes,twoside,10pt]{scrreprt}
+\documentclass[a4paper,DIV=12,BCOR=7mm,abstract=yes,twoside,11pt]{scrreprt}
 
 \author{Joshua Clark}
 
@@ -13,6 +13,7 @@
 \usepackage{tikz}
 \usepackage{multicol}
 \usepackage{pdfpages}
+\usepackage[kerning=true,tracking=true]{microtype}
 
 \usepackage{graphicx}
 \usepackage[unicode=true,bookmarks=true,bookmarksnumbered=false,bookmarksopen=false,breaklinks=true,pdfborder={0 0 0},colorlinks=false]{hyperref}
@@ -26,12 +27,14 @@
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
 \usepackage{chngcntr}
+\usepackage{lscape}
 
 \usepackage{filecontents}
 \usepackage{pgfplots, pgfplotstable}
 \usepgfplotslibrary{statistics}
+\usetikzlibrary{arrows.meta}
 
-\lstset{basicstyle=\small\ttfamily, escapeinside=||, columns=flexible}
+\lstset{basicstyle=\small\ttfamily,  columns=flexible}
 
 \usepackage{listings}
 \lstnewenvironment{example}[1][]{
@@ -122,7 +125,9 @@ in determining the specific weaknesses in a system.  This can be aided
 through the use of vulnerability databases.
 
 This report discusses the existing research into the information leaked by
-e-mail headers and presents a tool to extract such information.
+e-mail headers and presents a tool to extract such information.  The tool's
+design and implementation is discussed, followed by the results of its testing.
+
 \cleardoublepage 
 \chapter*{Acknowledgements}
 
@@ -135,6 +140,7 @@ partner, Agata Borkowska, for encouraging me.
 
 \cleardoublepage 
 \tableofcontents 
+\clearpage
 \let\LaTeXStandardClearpage\clearpage
 \let\clearpage\relax  % Do nothing when a \clearpage command appears 
 
@@ -143,6 +149,7 @@ partner, Agata Borkowska, for encouraging me.
 \let\clearpage\LaTeXStandardClearpage % Return to the old definition
 
 
+\cleardoublepage 
 \chapter{Introduction}\label{chap:int}
 \pagenumbering{arabic}
 \setcounter{page}{1}
@@ -210,8 +217,44 @@ a number of results, finishing with conclusions and areas of further improvement
 \cleardoublepage \include{implementation}
 \cleardoublepage \include{testing} 
 \cleardoublepage \printbibliography{} 
-
+\cleardoublepage 
 \appendix
+\begin{landscape}\begin{multicols}{2}
 \chapter{Code Listings}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/com/devdaily/system/SystemCommandExecutor.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/com/devdaily/system/ThreadedStreamHandler.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/ClientInferrer.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/DeviceAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/ExchangeHeaderAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/GeoIPAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/HeaderAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/NoopVulnerabilityFinderManager.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/SenderInformationExtractor.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/UsernameHeaderAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/VulnerabilityAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/VulnerabilityFinderManager.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/VulnerabilityFinderManagerImpl.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/analysers/WhoIsAnalyser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/database/DbManager.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/MainWindow.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/Access.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/AccessBuilder.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/Device.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/DeviceBuilder.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/DeviceInformation.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/Fact.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/FoundInformation.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/Header.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/Impact.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/ImpactBuilder.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/Username.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/VulnerabilityDisclosure.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/model/VulnerabilityDisclosureBuilder.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/parser/DateUtil.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/parser/EmailParser.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/parser/StringChunker.java}
+\lstinputlisting[breaklines=true, flexiblecolumns=true, basicstyle=\ttfamily\small, language=java]{emailheaderinformation/src/main/java/emailheaderinformation/WebServer.java}
 
+\end{multicols}
+\end{landscape}
 \end{document}

@@ -79,7 +79,7 @@ hardware or software is highlighted in green, \colorbox{green!30}{like so}; and
 information gathered about intervening devices is highlighted in blue,
 \colorbox{blue!30}{like so}.
 
-\begin{lstlisting}
+\begin{example}[caption=Sample E-Mail]
 Delivered-To: |\colorbox{red!30}{joshuaclark94@gmail.com}|
 Received: by |\colorbox{blue!30}{10.25.150.146}| with |\colorbox{blue!30}{SMTP}| id y140csp543137lfd;
 	Sat, 6 Feb 2016 08:49:56 -0800 (PST)
@@ -91,20 +91,20 @@ Received: from |\colorbox{blue!30}{smtpo75.poczta.onet.pl}| (smtpo75.poczta.onet
 	for <joshuaclark94@gmail.com>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
 	Sat, 06 Feb 2016 08:49:56 -0800 (PST)
-Received-SPF: pass (google.com: domain of agatabor@poczta.onet.pl designates
+Received-SPF: pass (google.com: domain of ********@poczta.onet.pl designates
 		141.105.16.25 as permitted sender) client-ip=141.105.16.25;
 Authentication-Results: mx.google.com;
-spf=pass (google.com: domain of agatabor@poczta.onet.pl designates 141.105.16.25
+spf=pass (google.com: domain of ********@poczta.onet.pl designates 141.105.16.25
 		as permitted sender) smtp.mailfrom=agatabor@poczta.onet.pl
 Received: from |\colorbox{green!30}{[10.26.196.156]}| (|\colorbox{green!30}{client-8-32.eduroam.oxuni.org.uk}| [|\colorbox{green!30}{192.76.8.32}|])
-(Authenticated sender: |\colorbox{green!30}{agatabor@poczta.onet.pl}|)
+(Authenticated sender: |\colorbox{green!30}{********@poczta.onet.pl}|)
 by |\colorbox{blue!30}{smtp.poczta.onet.pl}| (Onet) with |\colorbox{blue!30}{ESMTPA}| id 3pyKNH4ffyzT6tkv8
 for <joshuaclark94@gmail.com>; Sat,  6 Feb 2016 17:49:50 +0100 (CET)
 Date: Sat, 06 Feb 2016 16:49:07 +0000
 Subject: Test e-mail
 Message-ID: <j66i9tkyhy3l4v77erlw1gne.1454777347191@email.android.com>
 Importance: normal
-From: Agata <agatabor@poczta.onet.pl>
+From: ***** <********@poczta.onet.pl>
 To: Joshua Clark <joshuaclark94@gmail.com>
 MIME-Version: 1.0
 Content-Type: multipart/alternative;
@@ -116,7 +116,7 @@ Content-Transfer-Encoding: base64
 
 CgoKClNlbnQgZnJvbSBteSBTYW1zdW5nIEdhbGF4eSBzbWFydHBob25lLg==
 
-----_com.android.email_1892258509098440
+----_|\colorbox{green!30}{com.android.email}|_1892258509098440
 Content-Type: text/html; charset=utf-8
 Content-Transfer-Encoding: base64
 
@@ -126,7 +126,7 @@ O2tlZXAtYWxsOyI+PGJyPjxicj48YnI+PGJyPlNlbnQgZnJvbSBteSBTYW1zdW5nIEdhbGF4eSBz
 bWFydHBob25lLjxicj48L2Rpdj48L2JvZHk+PC9odG1sPg==
 
 ----_com.android.email_1892258509098440--
-\end{lstlisting}
+\end{example}
 
 The particularly interesting portions of the e-mail header include the IP
 addresses of the various servers the message has travelled through, allowing
@@ -210,20 +210,19 @@ One of the most useful features from the Google Apps Toolbox is the information
 provided about the servers the message travelled through.  This tool shows the
 details of the time taken for each hop, and the protocol used.
 
-\begin{figure}
-	
-	\centering
-	\includegraphics[width=0.9\linewidth]{google-header}
-
-	\caption{Google Apps Toolbox E-mail header output} \label{fig:goo}\end{figure}
+\begin{figure}[ht] \centering
+\includegraphics[width=0.9\linewidth]{google-header}
+\caption{Google Apps Toolbox E-mail header output} \label{fig:goo}\end{figure}
 
 \subsection{Microsoft}\label{sec:mic}
 
 The Microsoft Message Header Analyser\footnote{Fount at
-	\url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and
-showing sample results in Figure~\ref{fig:mic} is of a similar nature to the Google tool, discussed in Subsection~\ref{sec:goo}.  
-
-In addition to the information presented by Google, this tool also produces a set of ``Other Headers'', highlighting fields that may be of interest.  However, little additional context is provided as to their relevance.
+\url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and showing
+sample results in Figure~\ref{fig:mic} is of a similar nature to the Google
+tool, discussed in Subsection~\ref{sec:goo}.  In addition to the information
+presented by Google, this tool also produces a set of ``Other Headers'',
+highlighting fields that may be of interest.  However, little additional context
+is provided as to their relevance.
 
 \begin{figure}
 
@@ -233,12 +232,13 @@ In addition to the information presented by Google, this tool also produces a se
 
 \section{Vulnerabilities}
 
-\epigraph{Beware of bugs in the above code; I have only proved it correct, not tried it.}{Donald Knuth}
+\epigraph{Beware of bugs in the above code; I have only proved it correct, not
+tried it.}{Donald Knuth}
 
 Problems in software are nothing new, and seeking to exploit these issues is
-almost as old.   As the security implications behind flawed software became more
-widely recognised, reducing their impact wherever possible became the next most
-important step.  The MITRE Corporation operates the National Cybersecurity
+almost as old.   As the security implications behind flawed software became
+more widely recognised, reducing their impact wherever possible became the next
+most important step.  The MITRE Corporation operates the National Cybersecurity
 Federally Funded Research and Development Centre, which exists to maintain a
 database of these vulnerabilities, which are referred to as Common
 Vulnerabilities and Exposures (CVE).
@@ -246,9 +246,9 @@ Vulnerabilities and Exposures (CVE).
 \subsection{MITRE CVE Lookup}\label{sec:mit}
 
 There are a number of tools to look up CVEs\footnote{Fount at
-	\url{https://www.cve.mitre.org/find/index.html}} and showing sample
-results in Figure~\ref{fig:cve}.  There are a number of limitations to the
-results returned by the CVE Mitre tool.  Firstly, little context is returned:
+\url{https://www.cve.mitre.org/find/index.html}} and showing sample results in
+Figure~\ref{fig:cve}.  There are a number of limitations to the results
+returned by the CVE Mitre tool.  Firstly, little context is returned:
 information about scores, the impact and access information are omitted, for
 example.  Additionally, the process of finding relevant vulnerabilities is
 further slowed down by the necessity to search for specific terms one at a
@@ -256,7 +256,8 @@ time.  Additionally, automated tools exist at a consumer and enterprise level
 that will automatically scan a computer or network to detect installed software
 configurations and show the results.
 
-\begin{figure} \centering \includegraphics[width=0.9\linewidth]{cve-lookup} \caption{CVE Search Results}\label{fig:cve} \end{figure}
+\begin{figure} \centering \includegraphics[width=0.9\linewidth]{cve-lookup}
+\caption{CVE Search Results}\label{fig:cve} \end{figure}
 
 \subsection{Norton Vulnerability Protection}\label{sec:nor}
 
@@ -269,7 +270,7 @@ user to update their vulnerable applications, however it does not allow for
 more fine-grained information.
 
 
-\begin{figure}  \centering \includegraphics[width=0.9\linewidth]{norton-cve}
+\begin{figure}[h!t]  \centering \includegraphics[width=0.9\linewidth]{norton-cve}
 
 	 \caption{Norton Vulnerability Protection Results}\label{fig:nort}
 \end{figure}

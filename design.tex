@@ -52,13 +52,13 @@ presents each of these stages in detail.
 	\centering
 \resizebox{0.9\textwidth}{!}{
 \begin{tikzpicture}
-	\draw [->] (-3,1.5) -- (0,1.5) node [above, text width=2.5cm, align=center, midway] { Plaintext Header };
+	\draw [-{Latex[length=3mm]}] (-3,1.5) -- (0,1.5) node [above, text width=2.5cm, align=center, midway] { Plaintext Header };
 	\draw (0,0) rectangle node {Parsing} (4,3);
-	\draw [->] (4,1.5) -- (7,1.5) node [above, text width=2.5cm, align=center, midway] { Header Representation };
+	\draw [-{Latex[length=3mm]}] (4,1.5) -- (7,1.5) node [above, text width=2.5cm, align=center, midway] { Header Representation };
 	\draw (7,0) rectangle node {Analysis} (11,3);
-	\draw [->] (11,1.5) -- (14,1.5) node [above, text width=2.5cm, align=center, midway] { Device/User Representation };
+	\draw [-{Latex[length=3mm]}] (11,1.5) -- (14,1.5) node [above, text width=2.5cm, align=center, midway] { Device/User Representation };
 	\draw (14,0) rectangle node {Visualisation} (18,3);
-	\draw [->] (18,1.5) -- (21,1.5) node [above, text width=2.5cm, align=center, midway] { Visualisation as web page };
+	\draw [-{Latex[length=3mm]}] (18,1.5) -- (21,1.5) node [above, text width=2.5cm, align=center, midway] { Visualisation as web page };
 \end{tikzpicture}}
 \caption{Simplified Control Flow of Application}
 \label{fig:con}
@@ -128,12 +128,10 @@ different demographics.  The MITRE CVE Lookup is designed for IT professionals
 and system administrators wishing to gather more information about specific
 vulnerabilities and software, requiring knowledge of the software present on a
 network or device.  The information presented is also not structured or sorted
-in a clear fashion.
-
-Norton's tool, on the other hand, is focused on individual users who administer
-their own systems.  The information is presented in such a way as to warn them
-as to which software needs updating or patching against a vulnerability, but
-provides few details on the nature of the vulnerabilities.
+in a clear fashion.  Norton's tool, on the other hand, is focused on individual
+users who administer their own systems.  The information is presented in such a
+way as to warn them as to which software needs updating or patching against a
+vulnerability, but provides few details on the nature of the vulnerabilities.
 
 The tool that is described in this report ought to be able to bridge the gap
 between these two tools, providing a useful and relevant list of
@@ -141,7 +139,6 @@ vulnerabilities, without overloading the information provided, or requiring
 complex search terms to be crafted. 
 
 \section{Typical Use}
-
 On starting the application, the user will provide an e-mail that they wish
 to have analysed.  This will then be parsed, and some relevant information
 presented in a table.
@@ -156,7 +153,7 @@ devices to find out more information.  It will also be possible to search
 within the vulnerability list to find more information, as well as filter by
 impact and availability details.
 
-  \begin{table}[] \centering \begin{tabular}{@{}clllll@{}} \toprule
+\begin{table}[h!t] \centering \begin{tabular}{|cccccc|} \toprule
     \multicolumn{6}{c}{Email Header Information}                                                                                                                                                                                                                                      \\
     \midrule \multicolumn{2}{l}{\begin{tabular}[c]{@{}l@{}}Sender Information\\
     (Name, originating domain)\end{tabular}} & \multicolumn{2}{l}{Sender

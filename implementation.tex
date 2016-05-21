@@ -244,9 +244,9 @@ analysis modules.
 		\draw (0,3) rectangle node [text width = 3.5cm, align=center] {Start Device\\Type: Device} (4,5);
 		\draw (5,0) rectangle node [text width = 3.5cm, align=center]
 		{Other fields\\String $\rightarrow$ String \\ \texttt{HashMap}} (9,2);
-		\draw [->] (2,2) -- (2,3);
-		\draw [->] (4,1) -- (5,1);
-		\draw [->] (4,4) -- (5,4) node [right, text width = 4cm,align=center] { Name, Software, Latitude, Longitude, Next Device (of type Device), Received Time, Owner};
+		\draw [-{Latex[length=3mm]}] (2,2) -- (2,3);
+		\draw [-{Latex[length=3mm]}] (4,1) -- (5,1);
+		\draw [-{Latex[length=3mm]}] (4,4) -- (5,4) node [right, text width = 4cm,align=center] { Name, Software, Latitude, Longitude, Next Device (of type Device), Received Time, Owner};
 		\draw [->, ultra thick] (0,1.5) -- (-1,1.5) node [left, text width = 2.5cm,align=center] { Getter/Setter for Device};
 		\draw [->, ultra thick] (0,0.5) -- (-1,0.5) node [left, text width = 2.5cm, align=center] { Getter/Setter for K/V Map};
 \end{tikzpicture}
@@ -371,23 +371,55 @@ them to return values to calling classes when side-effects are undesirable.
 
 \begin{description}
 	\item[HeaderAnalyser] --- the base interface for all analysis modules.
-	\item[ClientInferrer] --- as described in Algorithm~\ref{alg:inf}, this analyses the entire header, looking for specific indicators relating to e-mail clients.
-	\item[DeviceAnalyser] --- Extracts the hostname, and then IP address, or IP address for each device, allowing a lookup of its co-ordinates.
-	\item[ExchangeHeaderAnalyser] --- determines if a Microsoft Exchange server has handled the message.
-	\item[GeoIPAnalyser] --- Given an IP address, this module looks up the latitude and longitude for said IP address.  This search will fail for local IP addresses (commonly found in the 192.168.0.0/16 subnet).
-	\item[UsernameHeaderAnalyser] --- This module searches for the specific \texttt{X-Oxford-Username} field, one of the most common fields in my collection of e-mail headers, as well as a number of more generic username fields.
-	\item[SenderInformationExtractor] --- This is used to lookup an individual's name from the set of fields, if it is available.
-	\item[VulnerabilityAnalyser] --- For each entry from the database as a \texttt{String}, this analyser returns a \texttt{VulnerabilityDisclosure} object.
-	\item[VulnerabilityFinderManager] --- this is an interface for other classes to implement. A reference implementation is provided in \texttt{VulnerabilityFinderManagerImpl}, with a simple implementation found in \texttt{NoopVulnerabilityFinderManager} for systems that lack the CVE database.
-	\item[WhoIsAnalyser] --- Using a hostname, this looks up the relevant owning organisation for a server, if it is available.
+
+	\item[ClientInferrer] --- as described in Algorithm~\ref{alg:inf}, this
+		analyses the entire header, looking for specific indicators
+		relating to e-mail clients.
+		
+	\item[DeviceAnalyser] --- Extracts the hostname, and then IP address, or
+		IP address for each device, allowing a lookup of its
+		co-ordinates.
+
+	\item[ExchangeHeaderAnalyser] --- determines if a Microsoft Exchange
+		server has handled the message.
+
+	\item[GeoIPAnalyser] --- Given an IP address, this module looks up the
+		latitude and longitude for said IP address.  This search will
+		fail for local IP addresses (commonly found in the
+		192.168.0.0/16 subnet).
+
+	\item[UsernameHeaderAnalyser] --- This module searches for the specific
+		\texttt{X-Oxford-Username} field, one of the most common fields
+		in my collection of e-mail headers, as well as a number of more
+		generic username fields.
+
+	\item[SenderInformationExtractor] --- This is used to lookup an
+		individual's name from the set of fields, if it is available.
+
+	\item[VulnerabilityAnalyser] --- For each entry from the database as a
+		\texttt{String}, this analyser returns a
+		\texttt{VulnerabilityDisclosure} object.
+
+	\item[VulnerabilityFinderManager] --- this is an interface for other
+		classes to implement. A reference implementation is provided in
+		\texttt{VulnerabilityFinderManagerImpl}, with a simple
+		implementation found in \texttt{NoopVulnerabilityFinderManager}
+		for systems that lack the CVE database.
+
+	\item[WhoIsAnalyser] --- Using a hostname, this looks up the relevant
+		owning organisation for a server, if it is available.
+		
 \end{description}
 
-Figure~\ref{fig:flo} shows the direct interaction of the analysis modules.  Unless noted, if an arrow goes from $\alpha$ to $\beta$, it is used to indicate that $\alpha$ calls $\beta$, passing data from $\alpha$, and/or receiving data from $\beta$.
+Figure~\ref{fig:flo} shows the direct interaction of the analysis modules.
+Unless noted, if an arrow goes from $\alpha$ to $\beta$, it is used to indicate
+that $\alpha$ calls $\beta$, passing data from $\alpha$, and/or receiving data
+from $\beta$.
 
 Where possible, these requests are non-blocking, that is run asynchronously,
 while waiting for other results to be computed.  THe biggest delay is caused by
-the CVE Database lookup, followed by the WhoIs lookup and then the GeoIP
-lookup.  The CVE database lookups require the most time as they are often
+the CVE Database lookup, followed by the WhoIs lookup and then the GeoIP lookup.
+The CVE database lookups require the most time as they are often
 consuming large amounts of data, and searching over specific fields.  The WhoIs
 lookup takes place over the network, causing its response time to be
 unpredictable, however, its relatively small response size reduces the time
@@ -399,29 +431,29 @@ response, allowing it to complete quickly.
 \begin{tikzpicture}
 \tikzset{every node/.style={align=center, text width = 3.5cm, font = \ttfamily}}
 \draw (0,0) rectangle node {Main Window} (4,2);
-\draw [->] (4,1) -- (5,1);
+\draw [-{Latex[length=3mm]}] (4,1) -- (5,1);
 \draw (5,0) rectangle node {Username Analyser} (9,2);
-\draw [->] (4,2) -- (5,3);
+\draw [-{Latex[length=3mm]}] (4,2) -- (5,3);
 \draw (5,3) rectangle node {Client Inferrer} (9,5);
 \draw (0,-1) rectangle node {Exchange Header Analyser} (4,-3);
-\draw [->] (2,0) -- (2,-1);
+\draw [-{Latex[length=3mm]}] (2,0) -- (2,-1);
 \draw (0,3) rectangle node {Device Analyser} (4,5);
-\draw [->] (2,2) -- (2,3);
+\draw [-{Latex[length=3mm]}] (2,2) -- (2,3);
 \draw (5,6) rectangle node {Vulnerability Finder Manager} (9,8);
-\draw [->] (4,5) -- (5,6);
-\draw [->] (7,5) -- (7,6);
+\draw [-{Latex[length=3mm]}] (4,5) -- (5,6);
+\draw [-{Latex[length=3mm]}] (7,5) -- (7,6);
 \draw (10,6) rectangle node {Vulnerability Analyser} (14,8);
-\draw [->] (9,7)  -- (10,7);
+\draw [-{Latex[length=3mm]}] (9,7)  -- (10,7);
 \draw (0, 6) rectangle node {Geo-IP Analyser} (4,8);
-\draw [->] (2,5) -- (2,6);
+\draw [-{Latex[length=3mm]}] (2,5) -- (2,6);
 \draw (-5,0) rectangle  node {Sender Information Analyser} (-1,2);
-\draw [->] (0,1)  -- (-1,1);
+\draw [-{Latex[length=3mm]}] (0,1)  -- (-1,1);
 \draw (-1,6) rectangle node {Who-Is Analyser} (-5,8);
-\draw [->] (0,5) -- (-1,6);
-\draw [->] (-3,2) -- (-3,6);
-\draw [->] (-3,8) -- (-3,9);
-\draw [->] (2,8) -- (2,9);
-\draw [->] (7,8) -- (7,9);
+\draw [-{Latex[length=3mm]}] (0,5) -- (-1,6);
+\draw [-{Latex[length=3mm]}] (-3,2) -- (-3,6);
+\draw [-{Latex[length=3mm]}] (-3,8) -- (-3,9);
+\draw [-{Latex[length=3mm]}] (2,8) -- (2,9);
+\draw [-{Latex[length=3mm]}] (7,8) -- (7,9);
 \draw (-1,9) [dashed] rectangle node {External Lookup} (-5,11);
 \draw (0,9) [dashed] rectangle node {External Lookup} (4,11);
 \draw (5,9) [dashed] rectangle node {External Lookup} (9,11);
@@ -444,21 +476,21 @@ and other information that has been gathered from an e-mail.
 \draw [->, ultra thick] (0,0.5) -- (-1,-0.5) node [left, text width = 3cm, align=center] {Add Username (context, data) };
 \draw [->, ultra thick] (0,1) -- (-1,1) node [left, text width = 3cm, align=center] {Add Fact (class, context, data) };
 \draw [->, ultra thick] (0,1.5) -- (-1,2.5) node [left, text width = 3cm, align=center] {Add Device (IP, location, software) };
-\draw [->] (2,2) -- (2,3);
+\draw [-{Latex[length=3mm]}] (2,2) -- (2,3);
 \draw [fill=white] (-0.25, 3.25) rectangle  (-0.25+4, 3.25+2);
 \draw [fill=white] (-0, 3) rectangle node [text width = 3.5cm, align=center] {Fact List\\(Type: [(String, String, String)])} (-0+4, 3+2) ;
 \draw [fill=white] (-.25+5, 3.25) rectangle (-0.25+5+4, 3.25+2);
 \draw [fill=white] (5, 3) rectangle node [text width = 3.5cm, align=center] {User ID List (Type: \\{} [(String, String)])} (5+4, 3+2);
-\draw [->] (4,2) -> (5,3);
+\draw [-{Latex[length=3mm]}] (4,2) -> (5,3);
 \draw [fill=white] (-0.25+5, 0.25) rectangle (8.75, 2.25);
 \draw [fill=white] (5, 0) rectangle node [text width = 3.5cm, align = center] {Device List\\ Type: [DeviceInfo]} (9, 2);
-\draw [->] (4,1) -> (4.75,1);
+\draw [-{Latex[length=3mm]}] (4,1) -> (4.75,1);
 \draw [->, ultra thick] (2,0) -- (2,-1) node [below, text width = 4.75cm, align = center] {Getters for name, software, User ID, device, fact lists};
-\draw [->] (4,0) -> (5,-1);
+\draw [-{Latex[length=3mm]}] (4,0) -> (5,-1);
 \draw (5,-1) rectangle node [align=center] {User name,\\ software} (9,-3);
 \draw (1+10,0-1.5) rectangle node {Device Info} (1+14,2-1.5);
 \draw (1+10,3-1.5) rectangle node [align=center, text width = 3.5cm]{ID, IP Address, Latitude, Longitude, Software, Organisation} (1+14,5-1.5);
-\draw [->] (1+12,2-1.5) -- (1+12,3-1.5);
+\draw [-{Latex[length=3mm]}] (1+12,2-1.5) -- (1+12,3-1.5);
 \end{tikzpicture}}
 \caption{Found Information Data Structure Format}
 \label{fig:fou}
