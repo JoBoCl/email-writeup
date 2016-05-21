@@ -107,22 +107,21 @@ Computer Science}{\Large \par}
 
 After extensive public education, fewer people are now clicking on links in
 e-mails that are disguised as phishing attacks, though the threat still
-remains, and considerable amounts of work has gone into exploring the
-demographics most likely to be targeted.  As the number of technically
-literate people grows, this sort of attack is increasingly unlikely to be
-successful.  Therefore, malicious entities are more likely to attempt to
-attack people based on the information leaked in their emails, and more
-specifically, the header, which most people are less likely to have some
-degree of control over.
+remains, and a considerable amount of work has gone into exploring the
+demographics most likely to be targeted.  As the number of technically literate
+people grows, this sort of attack is less frequently successful.
+Therefore, malicious entities are more likely to attempt to attack people based
+on the information leaked in their emails, and more specifically, the header,
+which most people will not have a degree of control over.
 
-The risks are not just limited to individual users, and at a corporate
-level, the risks posed by leaking information through e-mails could be even
-greater: e-mail headers can reveal the internal network structure of a
-company's computer systems as well as the different pieces of software that
-are running inside the system.  Extracting the social information could be
-of great value for executing a phishing attack, however, there is also value
-in determining the specific weaknesses in a system.  This can be aided
-through the use of vulnerability databases.
+The risks are not just limited to individual users, and at a corporate level,
+the risks posed by leaking information through e-mails could be even greater:
+e-mail headers can reveal the internal network structure of a company's
+computer systems as well as the different pieces of software that are running
+inside the system.  Extracting the social information could be of great value
+for executing a phishing attack, however, there is also value in determining
+the specific weaknesses in a system.  This can be aided through the use of
+vulnerability databases.
 
 This report discusses the existing research into the information leaked by
 e-mail headers and presents a tool to extract such information.  The tool's
@@ -164,20 +163,21 @@ by~\cite{felix1987system}, with the first-real world use being against the
 customers of America Online, an ISP.\@  However, this still relies on the
 targets providing their data for malicious purposes. One of the first e-mail
 viruses to spread was the Happy99 virus, which, other than propagating itself,
-had no other effect on infected systems. Later viruses would target credit-card
-and banking information. However, all of these techniques rely on the malicious
+had no effect on infected systems. Later viruses would target credit-card and
+banking information. However, all of these techniques rely on the malicious
 email being received and its contents being opened.  There are fewer instances
 recorded, however, of the information flow being sent the other way.  A more
-subtle attack will focus on the information being sent from a legitimate user to
-an attacker. It is easy enough for an individual to read an e-mail header and
-identify interesting elements, however, on a large scale, this quickly becomes
-more difficult.
+subtle attack will focus on the information being sent from a legitimate user
+to an attacker. It is easy enough for an individual to read an e-mail header
+and identify interesting elements, however, on a large scale, this quickly
+becomes more difficult.
 
 \section{Aims and Objectives}
 
-This project aims to  support a better understanding of the data that may leaked
-when e-mails are sent, both from a personal perspective, as well as the corporate
-data that is leaked concern network configurations and software installations.
+This project aims to support a better understanding of the data that may be
+leaked when e-mails are sent, both from a personal perspective, as well as the
+corporate data that is disclosed concerning network configurations and software
+installations.
 
 To support this, I will develop a tool that can be used as described above to
 automatically extract information from e-mail headers and analyse its results to
@@ -210,7 +210,7 @@ Chapter~\ref{chap:imp}, and algorithms presented in pseudo-code where
 necessary.  A full listing will be presented at the end of this document in
 an appendix. The results of the analysis of the headers will be discussed in
 Chapter~\ref{chap:test}, beginning with the methodology used, and presenting
-a number of results, finishing with conclusions and areas of further improvement.
+a number of results, finishing with conclusions and areas for improvement.
 
 \cleardoublepage \include{existing-research} 
 \cleardoublepage \include{design} 
