@@ -176,4 +176,5 @@ TSWLatexianTemp*
 # Kile
 *.backup
 
-
+#Specifically
+data.csv
