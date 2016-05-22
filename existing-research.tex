@@ -156,12 +156,23 @@ Oxford.
 Received: from [10.26.196.156] (client-8-32.eduroam.oxuni.org.uk [192.76.8.32])
 \end{example}
 
-Further examples from headers that may be particularly interesting include the following examples.
+Further samples from headers that may be particularly interesting include the
+following examples.
 
-Many Apple iOS devices will include hardware and version names in the \texttt{X-Mailer} field.
+Many Apple iOS devices will include hardware and version names in the
+\texttt{X-Mailer} field.
 
 \begin{example}[caption=Apple iPhone version,label=eg:app]
 X-Mailer: Zimbra 8.6.0_GA_1153 (MobileSync - Apple-iPhone7C2/1305.238)
+\end{example}
+
+Alternatively, some versions of Mozilla Thunderbird include the software details
+in the \texttt{User-Agent} field, with the following example showing the currently
+running operating system type as well (64-bit Linux).
+
+\begin{example}[caption=Thunderbird Information]
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+ Thunderbird/45.1.0
 \end{example}
 
 \subsection{Existing Research}
@@ -285,9 +296,10 @@ available at \url{https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4065
 	as partial, however, no scope context is registered.
 
 \item[Vulnerable Software and Versions] ---
-	``cpe:/a:foxitsoftware:reader:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde windows\textasciitilde\textasciitilde{} and previous
-	versions; cpe:/a:foxitsoftware:phantompdf:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde windows\textasciitilde\textasciitilde and
-	previous versions'' 
+	``cpe:/a:foxitsoftware:reader:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde
+	windows\textasciitilde\textasciitilde{} and previous versions;
+	cpe:/a:foxitsoftware:phantompdf:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde
+	windows\textasciitilde\textasciitilde and previous versions'' 
 
 	Not shown in this example, but a tree structure using conjunctions
 	and disjunctions is used to represent the software that is required

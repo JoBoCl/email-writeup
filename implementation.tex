@@ -219,7 +219,7 @@ Received: from relay12.mail.ox.ac.uk (129.67.1.163)
     Sat, 14 Nov 2015 10:55:35 +0000
 \end{verbatim}
 
-Of particular interest is the pair of hostnames (both are needed as each line is analysed independently, therefore it is not necessary to treat the last line as a special case) and their associated IP addresses.  The hostname is of more interest, as performing an IP address lookup is less complicated than determining a hostname.  The software used is identified by the \texttt{with} field, and is also of interest, however, is insufficient in most cases to produce meaningful CVE data.
+Of particular interest is the pair of hostnames (both are needed as each line is analysed independently, therefore it is not necessary to treat the last line as a special case) and their associated IP addresses.  The hostname is of more interest, as performing an IP address lookup is less complicated than determining a hostname.  After determining the IP address, it is then often possible to perform a GeoIP lookup to determine an approximate location for the device. Sometimes, by determining the hostname, it is then possible to perform a WhoIs search for information about the owner of the domain. The software used is identified by the \texttt{with} field, and is also of interest, however, is insufficient in most cases to produce meaningful CVE data.
 
 \subsection{Other fields}
 
@@ -274,10 +274,11 @@ standard security procedure for an IT support technician, having access to this
 information could allow a phisher in a later stage of an attack to increase
 their credibility.
 
-In some cases, the likely keys that are being searched for are known in advance,
-and can then be checked against the hash-map of entries.
+In some cases, the likely keys that are being searched for are known in
+advance, and can then be checked against the hash-map of entries.
 
-An example of this approach is for the specific check for an Oxford username, as shown in Algorithm~\ref{alg:oxf}.
+An example of this approach is for the specific check for an Oxford username,
+as shown in Algorithm~\ref{alg:oxf}.
 
 \begin{algorithm}
 	\KwIn{Header}
@@ -306,7 +307,16 @@ Alternatively, we may be interested in properties of the keys, necessitating a s
 
 \subsection{Client Inference}
 
-In \cite{nurse2015investigating}, a number of different e-mail clients were identified based on the header tags that were present. By identifying these pieces of software likely to be found on a user's machine, we gain a significant amount of information from them, and should therefore devote some effort to correctly identifying them.  Using a number of e-mail samples provided, I have been able to extract examples for a number of different e-mail clients, and use them to infer the client being used.  Using a sample of e-mails, it is possible to find information for additional e-mail clients and senders, such as (but not limited to) PHPMailer and Foxmail.  A number of these approaches are shown in Algorithm~\ref{alg:inf}.
+In \cite{nurse2015investigating}, a number of different e-mail clients were
+identified based on the header tags that were present. By identifying these
+pieces of software likely to be found on a user's machine, we gain a
+significant amount of information from them, and should therefore devote some
+effort to correctly identifying them.  Using a number of e-mail samples
+provided, I have been able to extract examples for a number of different e-mail
+clients, and use them to infer the client being used.  Using a sample of
+e-mails, it is possible to find information for additional e-mail clients and
+senders, such as (but not limited to) PHPMailer and Foxmail.  A number of these
+approaches are shown in Algorithm~\ref{alg:inf}.
 
 \begin{algorithm}
 	\KwIn{Header}

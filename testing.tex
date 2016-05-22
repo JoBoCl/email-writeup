@@ -41,62 +41,67 @@ Thus giving a sorted list of the following e-mails: 1, 3, 8, 10, 11, 13, 17,
 
 \section{Sample Output}
 
-The following pages show the results of running the completed software on the
-e-mail labelled \texttt{11.txt}, the contents of which is listed in
-Fragment~\ref{eg:11}.  The full table of CVE entries is elided for brevity.  
-The entries in \colorbox{red!30}{this colour} are associated with points scored
-for $R$, and the entries in \colorbox{blue!30}{this colour} are associated with
-points scored for $F$.
+The following pages show the results of running the completed software on a
+sample e-mail sent from my own Oxford e-mail account to my G-Mail account, the
+contents of which is listed in Fragment~\ref{eg:11}.  The full table of CVE
+entries is elided for brevity.  The entries in \colorbox{red!30}{this colour}
+are associated with points scored for $R$, and the entries in
+\colorbox{blue!30}{this colour} are associated with points scored for $F$.
 
-\begin{example}[caption=Email \texttt{11.txt},label=eg:11]
-Received: from relay13.mail.ox.ac.uk (129.67.1.163) by HUB01.ad.oak.ox.ac.uk 
- (|\colorbox{red!30}{163.1.154.218}|) with |\colorbox{red!30}{Microsoft SMTP Server}| id 14.3.169.1; Wed, 1 Apr 2015 
- 11:06:18 +0100 
-Received: from postie2.cs.ox.ac.uk ([129.67.151.44])	by |\colorbox{red!30}{relay12.mail.ox.ac.uk }|
- with |\colorbox{red!30}{esmtp (Exim 4.80}|)	(envelope-from <ahayes@mays.tamu.edu>)	id 
- 1YdFXO-0008P8-de	for cccc1111@nexus.ox.ac.uk; Wed, 01 Apr 2015 11:06:18 +0100 
-Received: from mailer.cs.ox.ac.uk ([129.67.151.81]:36787)	by 
- |\colorbox{red!30}{postie2.cs.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.72)}|	(envelope-from 
- <ahayes@mays.tamu.edu>)	id 1YdFWT-0004Fk-DZ	for jason.nurse@cs.ox.ac.uk; Wed, 
- 01 Apr 2015 11:05:21 +0100 
-Received: from relay11.mail.ox.ac.uk ([129.67.1.162]:57950)	by 
-|\colorbox{red!30}{mailer.cs.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.72)}|	(envelope-from 
- <ahayes@mays.tamu.edu>)	id 1YdFWS-0003OY-6C	for jason.nurse@cs.ox.ac.uk; Wed, 
- 01 Apr 2015 11:05:20 +0100 
-Received: from mailbox2.mbs.tamu.edu ([128.194.216.125])	by 
-|\colorbox{red!30}{relay11.mail.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.80)}|	(envelope-from 
- <ahayes@mays.tamu.edu>)	id 1YdFWS-0000Ck-Zf	for jason.nurse@cs.ox.ac.uk; Wed, 
- 01 Apr 2015 11:05:20 +0100 
-Received: from MAILBOX1.mbs.tamu.edu ([|\colorbox{red!30}{169.254.2.132}|]) by
-MAILBOX2.mbs.tamu.edu ([|\colorbox{red!30}{169.254.1.80}|]) with |\colorbox{red!30}{mapi}| id 14.03.0224.002; Wed, 1
-Apr 2015 05:05:00 -0500
-From: |\colorbox{blue!30}{"Hayes, Allison" <ahayes@mays.tamu.edu>}|
-To: "Hayes, Allison" <ahayes@mays.tamu.edu>
-Subject: RE: ITS HELP DESK
-Thread-Topic: ITS HELP DESK
-Thread-Index: AdBsXNo2iPt2JIAvQzCkSflypfIvlgABOhlv
-Date: Wed, 1 Apr 2015 10:04:57 +0000 
-Message-ID: <3AC6BF6FEAFA734A8A0397E31CB7AD009B695F@MAILBOX1.mbs.tamu.edu> 
-References: <3AC6BF6FEAFA734A8A0397E31CB7AD009A5A35@MAILBOX1.mbs.tamu.edu> 
-In-Reply-To: <3AC6BF6FEAFA734A8A0397E31CB7AD009A5A35@MAILBOX1.mbs.tamu.edu> 
-|\colorbox{blue!30}{Accept-Language: en-US }|
-Content-Language: en-US 
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [208.76.111.246] 
-Content-Type: multipart/alternative; 
-	boundary="_000_3AC6BF6FEAFA734A8A0397E31CB7AD009B695FMAILBOX1mbstamued_" 
-MIME-Version: 1.0 
-X-Oxmail-Spam-Status: score=2.9 tests=HTML_MESSAGE,SUBJ_ALL_CAPS,T_RP_MATCHES_RCVD,URI_HEX 
-X-Oxmail-Spam-Level: ** 
-Return-Path: ahayes@mays.tamu.edu 
-|\colorbox{blue!30}{X-MS-Exchange-Organization-AuthSource: HUB01.ad.oak.ox.ac.uk }|
-|\colorbox{blue!30}{X-MS-Exchange-Organization-AuthAs: Anonymous }|
-|\colorbox{blue!30}{X-MS-Exchange-Organization-AVStamp-Mailbox: Sophos;-2052447998;0;PM }|
-|\colorbox{blue!30}{X-MS-Exchange-Organization-SCL: 2 }|
+\begin{example}[caption=Sample E-Mail,label=eg:11]
+Delivered-To: joshuaclark94@gmail.com
+Received: by |\colorbox{red!30}{10.28.1.200}| with |\colorbox{red!30}{SMTP}| id 191csp811296wmb;
+        Sun, 22 May 2016 09:55:48 -0700 (PDT)
+X-Received: by |\colorbox{red!30}{10.28.54.204}| with |\colorbox{red!30}{SMTP}| id y73mr6213044wmh.59.1463936148370;
+        Sun, 22 May 2016 09:55:48 -0700 (PDT)
+Return-Path: <joshua.clark@st-annes.ox.ac.uk>
+Received: from |\colorbox{red!30}{relay14.mail.ox.ac.uk}| (relay14.mail.ox.ac.uk. [|\colorbox{red!30}{163.1.2.162}|])
+        by |\colorbox{red!30}{mx.google.com}| with |\colorbox{red!30}{ESMTPS}| id mw4si38680863wjb.85.2016.05.22.09.55.48
+        for <joshuaclark94@gmail.com>
+        (version=TLS1_2 cipher=AES128-SHA bits=128/128);
+        Sun, 22 May 2016 09:55:48 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of joshua.clark@st-annes.ox.ac.uk designates 163.1.2.162 as permitted sender) client-ip=163.1.2.162;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: best guess record for domain of joshua.clark@st-annes.ox.ac.uk designates 163.1.2.162 as permitted sender) smtp.mailfrom=joshua.clark@st-annes.ox.ac.uk
+Received: from |\colorbox{red!30}{smtp4.mail.ox.ac.uk}| ([|\colorbox{red!30}{129.67.1.207}|])
+	by |\colorbox{red!30}{relay14.mail.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.80)}|
+	(envelope-from <joshua.clark@st-annes.ox.ac.uk>) id 1b4WfM-0003l5-jc
+	for joshuaclark94@gmail.com; Sun, 22 May 2016 17:55:48 +0100
+Received: from |\colorbox{red!30}{chap05.pmb.ox.ac.uk}| ([|\colorbox{red!30}{129.67.89.5}|])
+	by |\colorbox{red!30}{smtp4.mail.ox.ac.uk}| with |\colorbox{red!30}{esmtp (Exim 4.80)}|
+	(envelope-from <joshua.clark@st-annes.ox.ac.uk>) id 1b4WfM-0008Mz-D6
+	for joshuaclark94@gmail.com; Sun, 22 May 2016 17:55:48 +0100
+|\colorbox{blue!30}{X-Oxford-Username: sann4425}|
+To: joshuaclark94@gmail.com
+From: |\colorbox{blue!30}{Joshua Clark}| <joshua.clark@|\colorbox{blue!30}{st-annes.ox.ac.uk}|>
+Subject: Test
+Message-ID: <0d2bc153-4b20-8f0e-e137-804305c28527@st-annes.ox.ac.uk>
+Date: Sun, 22 May 2016 18:55:16 +0100
+|\colorbox{blue!30}{User-Agent}|: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+ Thunderbird/45.1.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Test
 \end{example}
 
-\includepdf[pages={1,2,3}]{11_results.pdf}
+\includepdf[pages={1,2}]{test_results.pdf}
+
+The servers highlighted in red, with the exception of the field labelled
+\texttt{X-Received} have all be parsed properly, and their details collected.
+
+No IP address is available for the \url{mx.google.com} server entry, and
+therefore no location data can be found, with later locations then being
+internal addresses, which also have no available location data.  However,
+all of the Oxford based entries have correctly been identified as shown 
+on the map.  Due to the limitations of the location data provided, it has 
+not been possible to position them accurately relative to each other.
+
+All the available software entries have been correctly detected (SMTP, ESMTP
+and Thunderbird), and CVE data has been found for these pieces of software.
+
+Lastly, my Oxford username has been correctly identified within the e-mail.
 
 \section{Results}
 
@@ -172,8 +177,18 @@ histogram in Figure~\ref{fig:dis} shows the distribution of scores from the
 e-mails, showing a skew towards higher scores.  This is a promising result,
 however, most of the score is contributed to by the trace-fields, with the 
 value of $R/4N$ being consistently around 0.85.  As the aim of this project
-jas both focused on the disclosure of individual's data and of network
+has both focused on the disclosure of individual's data and of network
 vulnerabilities, the high score from the trace-fields is a positive result.
+
+This would also imply that the other fields contributed a score of around 0.3,
+giving an estimated 3 pieces of information for every ten lines of header, also
+a promising result. Especially considering that the score for the information
+gathered from fields does not take into account the number of fields needed to
+determine or infer a piece of information. For example, the presence, or
+absence of multiple fields is required to determine a piece of information.
+Nor does it consider the relative value of a piece of information, failing to
+rate the presence of a username above the presence of a particular piece of
+software also giving false positives.
 
 During the testing, the following trends were noticed.  As many of the e-mails
 passed through the same set of servers, as they had been received by an Oxford
@@ -183,18 +198,18 @@ Microsoft SMTP Server) CVE data for the running software.  For an e-mail sent
 within the University Nexus system, this gives an inflated score, as very few
 of the servers are missing information.
 
-The score for the information gathered from fields does not take into account
-the number of fields needed to determine or infer a piece of information. For
-example, the presence, or absence of multiple fields is required to determine a
-piece of information.  Nor does it consider the relative value of a piece of
-information, failing to rate the presence of a username above the presence of a
-particular piece of software also giving false positives.
-
 However, very few e-mails in the testing population contained fields relating
 to usernames (for example, \texttt{X-}$\ldots$\texttt{-User}, \texttt{X-Oxford-Username},
 \texttt{X-Authenticated-User}) compared to the result
 in~\cite{nurse2015investigating}, which found 14\% of e-mails to contain
 usernames as opposed to the 8\% found in the population.
+
+The data that could be extracted from CVEs was notably frequently missing an
+entry for the Microsfot SMTP Server.  Given its freely within Microsoft server
+packages, its absence would be surprising, however, vulnerabilities for this
+piece of software were later found to refer to Microsoft Windows Server
+editions, rather than the SMTP Server software itself, making extracting
+relevant information even more difficult.
 
 \cleardoublepage \chapter{Conclusions}
 \section{Summary}
@@ -216,6 +231,15 @@ trace-fields.  The lower rate of information that has been extracted from
 the other fields, while less impressive, is still promising, given that all
 fields in an e-mail do not necessarily provide information about the sender
 themself, for example, the subject, CC, and BCC fields.
+
+However, as promising a result as this is, it does come with the caveat: more
+data is being leaked from e-mails than would have been previously believed, and
+given that limited awareness of the scope and sensitivity of the data that is
+released, it is not unreasonable to expect that attacks focusing on the data
+leaked in e-mails become more prevalent in the future.  These attacks may focus
+on individuals, based on the personal data that is leaked by individuals, or on
+corporations, as details their internal software and network configurations
+become more accessible.
 
 \section{Future Work}
 
