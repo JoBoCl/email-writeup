@@ -22,12 +22,12 @@ From a personal perspective, there are a number of risks.  There are a
 significant number of social networks available, with an estimated 1.65 billion
 monthly active users, with a significantly higher proportion used in developed
 countries.  \cite{irani2011modeling} showed the rate at which the information
-gathered from social networks can be used to uniquely identify an individual.
-
-\cite{irani2011modeling} defines the aggregate normalised attribute leakage as 
-\[\Psi(F_a,P)=\frac{\sum_{f_a\in F_a}\phi\left(f_a, P\right)}{|F_a|}
-\text{ where }\phi\left(f_a, P\right) = \left[f_a\in P\right]\]
-for a user's social footprint $P$, and attributes are referenced as $f_a$.
+gathered from social networks can be used to uniquely identify an individual by
+defining the aggregate normalised attribute leakage as
+\[\Psi(F_a,P)=\frac{\sum_{f_a\in F_a}\phi\left(f_a, P\right)}{|F_a|} \text{
+		where }\phi\left(f_a, P\right) = \left[f_a\in P\right]\] for a
+user's social footprint $P$, and attributes are referenced as $f_a$ which are
+members of $F_a$.
 
 Only 9 sites are required before there is approximately a 0.7 attribute
 leakage, corresponding to a 70\% probability that both a person's hometown and
@@ -67,9 +67,9 @@ the message that is currently being viewed, such as its original sender,
 reply-to addresses and the time it was sent.  Additional fields allow senders
 to authenticate themselves using public-key methods.
 
-The format of e-mail headers was first defined in RFC~822, and further refined
+The format of e-mail headers was first defined in RFC822, and further refined
 in subsequent RFCs.  The standard for e-mails was then formalised precisely in
-RFC~5322.
+RFC5322.
 
 \subsection{Example Header and Pertinent Data}
 
@@ -135,8 +135,8 @@ the protocol being used and the software being run allows for anyone with access
 to mail headers to find more information about the attacks a device and its
 software may be vulnerable to.
 
-In Example~\ref{eg:smtp}, indicates that a server with an internal IP address
-of \texttt{10.25.150.146} in the Pacific Seaboard Timezone received the e-mail
+Example~\ref{eg:smtp} show a server with an internal IP address of
+\texttt{10.25.150.146} in the Pacific Seaboard Timezone received the e-mail
 using the SMTP protocol.
 
 \begin{example}[caption=E-Mail Server configuration information,label=eg:smtp]
@@ -145,9 +145,12 @@ Received: by 10.25.150.146 with SMTP id y140csp543137lfd;
 \end{example}
 
 In Example~\ref{eg:ip}, a number of pieces of information can be extracted: the
-hostname of the sending device is \texttt{client-8-32.eduroam.oxuni.org.uk} with associated
-\texttt{192.76.8.32} is on the eduroam network, with a local IP address of
-\texttt{10.26.196.156}.
+hostname of the sending device is \texttt{client-8-32.eduroam.oxuni.org.uk}
+with associated \texttt{192.76.8.32} is on the eduroam network, with a local IP
+address of \texttt{10.26.196.156}.  By performing a GeoIP lookup\footnote{See
+	\url{https://geoiptool.com/en/?ip=192.76.8.32}} on this address, we
+find that it has a location of $(51.75, -1.25)$ positioning it somewhere within
+Oxford.
 
 \begin{example}[caption=Information revealed in Received field,label=eg:ip]
 Received: from [10.26.196.156] (client-8-32.eduroam.oxuni.org.uk [192.76.8.32])
@@ -195,10 +198,11 @@ forged e-mail addresses and legitimate messages are described.
 \section{Existing Tools}
 
 Several tools already exist online to display the information that is found in
-e-mail headers.  Tools from Microsoft and Google exist to analyse the contents
-of e-mail headers.  These tools clearly display the information displayed in
-the header, showing the key-value pairs, and the set of servers the message
-transferred through and the protocols used.
+e-mail headers, with tools from Microsoft and Google existing to analyse the
+contents of e-mail headers. Additionally, many e-mail clients will display some
+of the information found within headers to provide additional context for a
+message, however, this is rarely additional information about the parties
+involved in an exchange.
 
 \subsection{Google}\label{sec:goo}
 
@@ -216,7 +220,8 @@ details of the time taken for each hop, and the protocol used.
 
 \subsection{Microsoft}\label{sec:mic}
 
-The Microsoft Message Header Analyser\footnote{Fount at
+Microsoft has released its own e-mail message header analyser, the Microsoft
+Message Header Analyser\footnote{Found at
 	\url{https://testconnectivity.microsoft.com/MHA/Pages/mha.aspx}} and
 showing sample results in Figure~\ref{fig:mic} is of a similar nature to the
 Google tool, discussed in Subsection~\ref{sec:goo}.  In addition to the
@@ -243,16 +248,62 @@ Federally Funded Research and Development Centre, which exists to maintain a
 database of these vulnerabilities, which are referred to as Common
 Vulnerabilities and Exposures (CVE).
 
+\subsection{CVE Contents}
+
+This section uses CVE-2016-4065 as a reference, with the original version 
+available at \url{https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4065}.
+
+\begin{description}
+\item[Overview] --- ``The ConvertToPDF plugin in Foxit Reader and PhantomPDF
+	before 7.3.4 on Windows, when the gflags app is enabled, allows remote
+	attackers to cause a denial of service (out-of-bounds read and
+	application crash) via a crafted (1) JPEG, (2) GIF, or (3) BMP image.''
+
+	This is a free-text field typically containing the requirements and
+	methodology for an attack.
+
+\item[Impact] --- This is divided into two sections, the Common Vulnerability
+	Scoring System Version 2 and 3 results. These give a numerical value of
+	the severity of a vulnerability, based on a number of factors,
+	including how easy it is to take advantage of the vulnerability, and
+	the level of impact the attack would have on a given system.  Both
+	systems represent this as a vector.
+
+	The example entry has the following two vectors:
+	\[\text{CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H}\] and
+	\[\text{(AV:N/AC:M/Au:N/C:P/I:P/A:P)}\]  The first corresponds to a
+	locally available attack, with low complexity not needing privileges
+	but relying on user interaction.  Successfully completing this attack
+	gives no additional access outside of the scope of the attacked
+	application.  Within the application, it is possible to access any
+	information, modify it at will, or prevent access to the application,
+	all of which represent a high threat level.
+
+	The second attack vector represents an attack that can be completed
+	via the network, with medium complexity, requiring no authentication.
+	The confidentiality, integrity and availability metrics are all valued 
+	as partial, however, no scope context is registered.
+
+\item[Vulnerable Software and Versions] ---
+	``cpe:/a:foxitsoftware:reader:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde windows\textasciitilde\textasciitilde{} and previous
+	versions; cpe:/a:foxitsoftware:phantompdf:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde windows\textasciitilde\textasciitilde and
+	previous versions'' 
+
+	Not shown in this example, but a tree structure using conjunctions
+	and disjunctions is used to represent the software that is required
+	in order for the vulnerability to be exploited.
+\end{description}
+
 \subsection{MITRE CVE Lookup}\label{sec:mit}
 
-There are a number of tools to look up CVEs\footnote{Fount at
+There are a number of tools to look up CVEs\footnote{Found at
 	\url{https://www.cve.mitre.org/find/index.html}} and showing sample
 results in Figure~\ref{fig:cve}.  There are a number of limitations to the
 results returned by the CVE Mitre tool.  Firstly, little context is returned:
 information about scores, the impact and access information are omitted, for
 example.  Additionally, the process of finding relevant vulnerabilities is
 further slowed down by the necessity to search for specific terms one at a
-time.  Additionally, automated tools exist at a consumer and enterprise level
+time.  There are automated tools exist at a consumer and enterprise level
 that will automatically scan a computer or network to detect installed software
 configurations and show the results.
 

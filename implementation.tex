@@ -546,7 +546,7 @@ map, which are detailed in Algorithm~\ref{alg:vjs}
 		$\text{distributions}\left[c_\text{software}\right]\gets_\cup c_\text{score}$
 	}
 	\lForEach{$d\in\text{distributions}$}{draw histogram for $d$}
-	\lForEach{$s_i\in\text{servers}$}{project $s_i$ onto map}
+	\ForEach{$s_i\in\text{servers}$}{project $s_i$ onto map\;add $s_i$ to server table\;}
 	\lForEach{$s_i\in\text{servers}$}{draw link between $s_i$ and $s_{i+1}$ onto map}
 
 	\Return{webpage}\;
