@@ -52,7 +52,7 @@ characters, defined in~\cite{php_group_gutmans_lerdorf_suraski_boerger}.
 
 \item[upper] --- upper case letters
 
-\item[word] --- ``word'' characters (same
+\item[word] --- ``word'' characters
 
 \item[xdigit] --- hexadecimal digits
 
@@ -83,7 +83,7 @@ Regular languages are defined as follows:
 A context-free grammar $G$ is defined as $G=\left(V,\Sigma, R,S\right)$ where:
 \begin{multicols}{2}
 \begin{itemize}
-\item $V$ is a variable.
+\item $V$ is the set of variables or productions.
 \item $\Sigma$ is the alphabet of symbols.
 \item $R$ is a relation defined over $V\rightarrow \left(V\cup\Sigma\right)^*$
 \item $S$ is the start symbol
@@ -135,7 +135,7 @@ The $|$ is used to indicate a selection between a pair of elements.
 The following notations will be used for the CVE database queries.
 
 \paragraph{Set-Theoretic Operators}
-The operators $F\cup G$, $F \cap G$, $F\setminus G$ behave as is expected for
+The operators $f\in F, F\cup G$, $F \cap G$, $F\setminus G$ behave as is expected for
 these operators, resulting in the union, intersection and difference of the
 sets.  The only proviso being that the attribute names must match.
 
@@ -166,7 +166,7 @@ arrows being used to list relevant public methods.
 Where the type of an object can be expressed simply, the following conventions are used:
 \begin{description}
 	\item [Functions] --- $\alpha \rightarrow \beta \, \texttt{Str}$ is a function from $\alpha$ to $\beta$ stored using a \texttt{Str} object in Java.
-	\item [Tuples] --- $(\alpha, \beta)$ represents a two-tuple containing objects of type $\alpha$ and $\beta$, respectively.  This extends naturally for arbitrarily many objects.
+	\item [Tuples] --- $(\alpha, \beta)$ represents a two-tuple containing objects of type $\alpha$ and $\beta$.  This extends naturally for arbitrarily many objects.
 	\item [Lists] --- $[\alpha]$ represents a list or array of objects, all with type $\alpha$.
 \end{description}
 
@@ -210,7 +210,7 @@ as they are described by a non-trivial grammar, presented below.
 \bnfprod{date-time}{[ \bnftd{day,} ] \bnfsp \bnftd{date}\bnfsp \bnftd{time}}\\
 \bnfprod{atom}{1\!*\bnftd{any character excluding specials, SPACE and CTLs}}\\
 \end{bnf*}
-
+\clearpage
 An example field is as follows:
 \begin{verbatim}
 Received: from relay12.mail.ox.ac.uk (129.67.1.163)
@@ -219,7 +219,16 @@ Received: from relay12.mail.ox.ac.uk (129.67.1.163)
     Sat, 14 Nov 2015 10:55:35 +0000
 \end{verbatim}
 
-Of particular interest is the pair of hostnames (both are needed as each line is analysed independently, therefore it is not necessary to treat the last line as a special case) and their associated IP addresses.  The hostname is of more interest, as performing an IP address lookup is less complicated than determining a hostname.  After determining the IP address, it is then often possible to perform a GeoIP lookup to determine an approximate location for the device. Sometimes, by determining the hostname, it is then possible to perform a WhoIs search for information about the owner of the domain. The software used is identified by the \texttt{with} field, and is also of interest, however, is insufficient in most cases to produce meaningful CVE data.
+Of particular interest is the pair of hostnames (both are needed as each line
+is analysed independently, therefore it is not necessary to treat the last line
+as a special case) and their associated IP addresses.  The hostname is of more
+interest, as performing an IP address lookup is less complicated than
+determining a hostname.  After finding the IP address, it is then often
+possible to perform a GeoIP lookup to acquire an approximate location for the
+device. Sometimes, by determining the hostname, it is then possible to perform
+a WhoIs search for information about the owner of the domain. The software used
+is identified by the \texttt{with} field, and is also of interest, however, is
+insufficient in most cases to produce meaningful CVE data.
 
 \subsection{Other fields}
 
@@ -308,14 +317,12 @@ Alternatively, we may be interested in properties of the keys, necessitating a s
 \subsection{Client Inference}
 
 In \cite{nurse2015investigating}, a number of different e-mail clients were
-identified based on the header tags that were present. By identifying these
+identified based on the header tags that were present. By determining these
 pieces of software likely to be found on a user's machine, we gain a
 significant amount of information from them, and should therefore devote some
 effort to correctly identifying them.  Using a number of e-mail samples
 provided, I have been able to extract examples for a number of different e-mail
-clients, and use them to infer the client being used.  Using a sample of
-e-mails, it is possible to find information for additional e-mail clients and
-senders, such as (but not limited to) PHPMailer and Foxmail.  A number of these
+clients, and use them to infer the client being used.  A number of these
 approaches are shown in Algorithm~\ref{alg:inf}.
 
 \begin{algorithm}
@@ -354,7 +361,7 @@ received fields, relevant software configurations are extracted and queried
 against results in the CVE database.  These are then parsed and collated in
 preparation for displaying the outputs. Specifically, the queries are limited
 to those matching the product name, and vulnerabilities that can be remotely
-executed.
+executed.  This process is outlined in Algorithm~\ref{alg:db}.
 
 As more information is found, more details of products used will also become
 available.  These are added asynchronously.
@@ -371,6 +378,7 @@ available.  These are added asynchronously.
 	}
 	\Return{cve-list}\;
 	\caption{Extracting CVE entries}
+    \label{alg:db}
 \end{algorithm}
 
 \subsection{Analysis Modules and Data Flow}
@@ -427,7 +435,7 @@ that $\alpha$ calls $\beta$, passing data from $\alpha$, and/or receiving data
 from $\beta$.
 
 Where possible, these requests are non-blocking, that is run asynchronously,
-while waiting for other results to be computed.  THe biggest delay is caused by
+while waiting for other results to be computed.  The biggest delay is caused by
 the CVE Database lookup, followed by the WhoIs lookup and then the GeoIP lookup.
 The CVE database lookups require the most time as they are often
 consuming large amounts of data, and searching over specific fields.  The WhoIs

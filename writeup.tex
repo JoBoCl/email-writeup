@@ -123,10 +123,10 @@ After extensive public education, fewer people are now clicking on links in
 e-mails that are disguised as phishing attacks, though the threat still
 remains, and a considerable amount of work has gone into exploring the
 demographics most likely to be targeted.  As the number of technically literate
-people grows, this sort of attack is less frequently successful.
-Therefore, malicious entities are more likely to attempt to attack people based
-on the information leaked in their emails, and more specifically, the header,
-which most people will not have a degree of control over.
+people grows, this sort of attack is less frequently successful.  Therefore,
+malicious entities are more likely to attempt to attack people based on the
+information leaked in their emails, and more specifically, the header, which
+most people will not have a degree of control over.
 
 The risks are not just limited to individual users, and at a corporate level,
 the risks posed by leaking information through e-mails could be even greater:
@@ -139,17 +139,18 @@ vulnerability databases.
 
 This report discusses the existing research into the information leaked by
 e-mail headers and presents a tool to extract such information.  The tool's
-design and implementation is discussed, followed by the results of its testing.
+design and implementation is discussed, followed by the results of its testing,
+and the implications of these results.
 
 \cleardoublepage 
 \chapter*{Acknowledgements}
 
 I want to thank my supervisor, Dr Jason R.C. Nurse for his assistance
-throughout the year; my tutor, Professor Peter Jeavons, for his unfailing
-help and support throughout my time at Oxford.  I would like to thank the
-residents and chaplains of the Oxford University Catholic Chaplaincy.
-Finally, I would like to acknowledge the support from my family and
-partner, Agata Borkowska, for encouraging me.
+throughout the year; my tutor, Professor Peter Jeavons, for his unfailing help
+and support throughout my time at Oxford.  I would like to thank the residents
+and chaplains of the Oxford University Catholic Chaplaincy.  Finally, I would
+like to acknowledge the support from my family and partner, Agata Borkowska,
+for encouraging me.
 
 \cleardoublepage 
 \tableofcontents 
@@ -170,21 +171,22 @@ partner, Agata Borkowska, for encouraging me.
 \section{Motivation}
 
 E-mail systems are now so integrated into our modern lives that we struggle to
-cope without them.  E-mails ubiquity is also one of its largest weaknesses, a
+cope without them.  E-mail's ubiquity is also one of its largest weaknesses, a
 fact recognised very early on.  The first spam email was sent in 1978, as
 documented by~\cite{templeton}.  After spam came phishing, first described
 by~\cite{felix1987system}, with the first-real world use being against the
-customers of America Online, an ISP.\@  However, this still relies on the
-targets providing their data for malicious purposes. One of the first e-mail
-viruses to spread was the Happy99 virus, which, other than propagating itself,
-had no effect on infected systems. Later viruses would target credit-card and
-banking information. However, all of these techniques rely on the malicious
-email being received and its contents being opened.  There are fewer instances
-recorded, however, of the information flow being sent the other way.  A more
-subtle attack will focus on the information being sent from a legitimate user
-to an attacker. It is easy enough for an individual to read an e-mail header
-and identify interesting elements, however, on a large scale, this quickly
-becomes more difficult.
+customers of America Online, an Internet Service Provider.  However, this still
+relies on the targets providing their data for malicious purposes. One of the
+first e-mail viruses to spread was the Happy99 virus, which, other than
+propagating itself, had no effect on infected systems. Later viruses would
+target credit-card and banking information. However, all of these techniques
+rely on the malicious email being received and its contents being opened.
+There are fewer instances recorded of the information travelling in the other
+direction.  A more subtle attack will focus on the information being sent from
+a legitimate user to an attacker. It is easy enough for an individual to read
+an e-mail header and identify interesting elements, however, on a large scale,
+this quickly becomes more difficult.  This project will discuss a number of
+ways of considering and solving this problem.
 
 \section{Aims and Objectives}
 
@@ -224,7 +226,9 @@ Chapter~\ref{chap:imp}, and algorithms presented in pseudo-code where
 necessary.  A full listing will be presented at the end of this document in
 an appendix. The results of the analysis of the headers will be discussed in
 Chapter~\ref{chap:test}, beginning with the methodology used, and presenting
-a number of results, finishing with conclusions and areas for improvement.
+a number of results, finishing with conclusions and areas for improvement in
+Chapter~\ref{chap:conc}.
+
 
 \cleardoublepage \include{existing-research} 
 \cleardoublepage \include{design} 

@@ -6,15 +6,15 @@ posed by e-mail.
 
 \section{General Data Leakage}
 
-The importance of data leakage is gaining more importance as the amount of
-information stored about entities increases, and the risks are being considered
-more carefully.  From the obvious ramifications for businesses discussed in
-\cite{papadimitriou2011data}: the loss of trust and legal action resulting from
-the discovery of leaking data, to the more personal issues discussed in
-\cite{irani2011modeling}: the possibility of using the discovered data to
-discover passwords or to physically identify them.  53\% of Americans can be
-uniquely identified by their birth date, gender and location (city/town), with
-the number jumping 87\% when using birth date, gender and zip code.
+Understanding the importance of data leakage is gaining more urgency as the
+amount of information stored about entities increases.  From the obvious
+ramifications for businesses discussed in \cite{papadimitriou2011data}: the
+loss of trust and legal action resulting from the discovery of leaking data, to
+the more personal issues discussed in \cite{irani2011modeling}: the possibility
+of using the discovered data to discover passwords or to link their online
+details to the specific individual.  53\% of Americans can be uniquely
+identified by their birth date, gender and location (city/town), with the
+number jumping 87\% when using birth date, gender and zip code.
 
 \subsection{Personal Data Leakage}
 
@@ -42,14 +42,14 @@ that the data is protected and treated as confidential and sensitive.  When
 this trust is broken, there are often severe consequences, both from regulators
 and consumers moving their business to competitors.
 
-In addition to ensuring that human procedures are present to ensure the
-integrity and confidentiality of data, it is also necessary to ensure that
-robust technical measures are in place to prevent data breaches. 
+In addition to ensuring that human procedures are present to maintain the
+integrity and confidentiality of data, it is also necessary to put in place
+robust technical measures to prevent data breaches.
 \cite{2016_data_breach_category_summary_2016} lists a total of 12 million data
-records from 399 breaches as having been illegitimately accessed in 2016 to date.
-Two fifths of these data records are connected to government or military data breaches,
-with a third linked to medical and healthcare data, and a further fifth connected
-to business data.
+records from 399 breaches as having been illegitimately accessed in 2016 to
+date.  Two fifths of these data records are connected to government or military
+data breaches, with a third linked to medical and healthcare data, and a
+further fifth connected to business data.
 
 \cite{squicciarini2010preventing} considers one way that data may be leaked,
 despite care being taken to ensure that it is properly encrypted and stored: by
@@ -135,7 +135,7 @@ the protocol being used and the software being run allows for anyone with access
 to mail headers to find more information about the attacks a device and its
 software may be vulnerable to.
 
-Example~\ref{eg:smtp} show a server with an internal IP address of
+Example~\ref{eg:smtp} shows a server with an internal IP address of
 \texttt{10.25.150.146} in the Pacific Seaboard Timezone received the e-mail
 using the SMTP protocol.
 
@@ -218,12 +218,11 @@ involved in an exchange.
 \subsection{Google}\label{sec:goo}
 
 The Google Apps Toolbox features an e-mail header analyser\footnote{Found at
-	\url{https://toolbox.googleapps.com/apps/messageheader/}}. An example
-of the output of the utility is found in Figure~\ref{fig:goo}.
-
-One of the most useful features from the Google Apps Toolbox is the information
-provided about the servers the message travelled through.  This tool shows the
-details of the time taken for each hop, and the protocol used.
+    \url{https://toolbox.googleapps.com/apps/messageheader/}}. An example of
+the output of the utility is found in Figure~\ref{fig:goo}.  One of the most
+useful features from the Google Apps Toolbox is the information provided about
+the servers the message travelled through.  This tool shows the details of the
+time taken for each hop, and the protocol used.
 
 \begin{figure}[ht] \centering
 \includegraphics[width=0.9\linewidth]{google-header}
@@ -280,20 +279,21 @@ available at \url{https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4065
 	the level of impact the attack would have on a given system.  Both
 	systems represent this as a vector.
 
-	The example entry has the following two vectors:
-	\[\text{CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H}\] and
-	\[\text{(AV:N/AC:M/Au:N/C:P/I:P/A:P)}\]  The first corresponds to a
-	locally available attack, with low complexity not needing privileges
-	but relying on user interaction.  Successfully completing this attack
-	gives no additional access outside of the scope of the attacked
-	application.  Within the application, it is possible to access any
-	information, modify it at will, or prevent access to the application,
-	all of which represent a high threat level.
+    The example entry has the following two vectors:
+    \[\text{CVSS:3.0/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H}\] and
+    \[\text{(AV:N/AC:M/Au:N/C:P/I:P/A:P)}\]  The first corresponds to a locally
+    available attack, with low complexity not needing privileges but relying on
+    user interaction.  Successfully completing this attack gives no additional
+    access outside of the scope of the attacked application.  Within the
+    application, it is possible for the attacker to access any information,
+    modify it at will, or prevent access to the application for legitimate
+    users, all of which represent a high threat level.
 
-	The second attack vector represents an attack that can be completed
-	via the network, with medium complexity, requiring no authentication.
-	The confidentiality, integrity and availability metrics are all valued 
-	as partial, however, no scope context is registered.
+    The second attack vector represents an attack that, according to the CVSS
+    V2.0 specification, can be completed via the network, with medium
+    complexity, requiring no authentication.  The confidentiality, integrity
+    and availability metrics are all valued as partial, however, no scope
+    context is registered.
 
 \item[Vulnerable Software and Versions] ---
 	``cpe:/a:foxitsoftware:reader:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde
@@ -301,21 +301,22 @@ available at \url{https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-4065
 	cpe:/a:foxitsoftware:phantompdf:7.3.0.118::\textasciitilde\textasciitilde\textasciitilde
 	windows\textasciitilde\textasciitilde and previous versions'' 
 
-	Not shown in this example, but a tree structure using conjunctions
-	and disjunctions is used to represent the software that is required
-	in order for the vulnerability to be exploited.
+    A tree structure using conjunctions and disjunctions is used to represent
+    the software that is required in order for the vulnerability to be
+    exploited.
+
 \end{description}
 
 \subsection{MITRE CVE Lookup}\label{sec:mit}
 
 There are a number of tools to look up CVEs\footnote{Found at
-	\url{https://www.cve.mitre.org/find/index.html}} and showing sample
-results in Figure~\ref{fig:cve}.  There are a number of limitations to the
-results returned by the CVE Mitre tool.  Firstly, little context is returned:
+    \url{https://www.cve.mitre.org/find/index.html}} and showing sample results
+in Figure~\ref{fig:cve}.  There are a number of limitations to the results
+returned by the CVE Mitre tool.  Firstly, little context is returned:
 information about scores, the impact and access information are omitted, for
 example.  Additionally, the process of finding relevant vulnerabilities is
 further slowed down by the necessity to search for specific terms one at a
-time.  There are automated tools exist at a consumer and enterprise level
+time.  There are automated tools that exist at a consumer and enterprise level
 that will automatically scan a computer or network to detect installed software
 configurations and show the results.
 
@@ -340,7 +341,7 @@ more fine-grained information.
 
 \section{Summary}
 
-There breadth of research available indicates the importance that is placed on
+The breadth of research available indicates the importance that is placed on
 maintaining data security, as well as the attempts to track and report on
 breaches, allowing individuals and companies to track when their data may be
 exposed.  There is also a research available on the data that is willingly
